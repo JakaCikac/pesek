@@ -18,12 +18,9 @@ CatchMice.Game.prototype = {
 
       this.map.setCollisionBetween(0,100000,true, 'Tile Layer 1');
       
-      
-     // this.backgroundlayer.resizeWorld();
-      
       //set world dimensions
       this.game.world.setBounds(0, 0, 800, 600);
-     // this.background = this.game.add.tileSprite(0, 0, this.game.world.width, this.game.world.height, 'background');
+      this.backgroundlayer.resizeWorld();
       
       //create player
       this.player = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'player'); 
@@ -50,37 +47,6 @@ CatchMice.Game.prototype = {
       
       // create the ability to control our player with the keyboard
       this.cursor = this.game.input.keyboard.createCursorKeys();
-/*
-      // Create the left wall
-      this.leftWall = this.game.add.sprite(0, 0, 'wallV'); 
-
-      // Add Arcade physics to the wall
-      this.game.physics.arcade.enable(this.leftWall); 
-
-      // Set a property to make sure the wall won't move 
-      // We don't want to see the wall fall when the player touches it
-      this.leftWall.body.immovable = true;
-
-      // Do the same for the right wall
-      this.rightWall = this.game.add.sprite(480, 0, 'wallV'); 
-      this.game.physics.arcade.enable(this.rightWall); 
-      this.rightWall.body.immovable = true;
-      
-      
-      // Create a new group
-      this.walls = this.game.add.group();
-
-      // Add Arcade physics to the whole group
-      this.walls.enableBody = true;
-
-      // Create 2 walls in the group
-      this.game.add.sprite(0, 0, 'wallV', 0, this.walls); // Left wall
-      this.game.add.sprite(480, 0, 'wallV', 0, this.walls); // Right wall
-
-      // Set all the walls to be immovable
-      this.walls.setAll('body.immovable', true);*/
-      
-      //this.createWorld();
       
       //sounds
       //this.explosionSound = this.game.add.audio('explosion');
@@ -149,32 +115,7 @@ CatchMice.Game.prototype = {
       
   },
     
-    createWorld: function() {
-    // Create our wall group with Arcade physics
-    this.walls = this.game.add.group();
-    this.walls.enableBody = true;
-
-    // Create the 10 walls 
-    this.game.add.sprite(0, 0, 'wallV', 0, this.walls); // Left
-    this.game.add.sprite(480, 0, 'wallV', 0, this.walls); // Right
-
-    this.game.add.sprite(0, 0, 'wallH', 0, this.walls); // Top left
-    this.game.add.sprite(300, 0, 'wallH', 0, this.walls); // Top right
-    this.game.add.sprite(0, 320, 'wallH', 0, this.walls); // Bottom left
-    this.game.add.sprite(300, 320, 'wallH', 0, this.walls); // Bottom right
-
-    this.game.add.sprite(-100, 160, 'wallH', 0, this.walls); // Middle left
-    this.game.add.sprite(400, 160, 'wallH', 0, this.walls); // Middle right
-
-    this.middleTop = this.game.add.sprite(100, 80, 'wallH', 0, this.walls);
-    this.middleTop.scale.setTo(1.5, 1);
-    this.middleBottom = this.game.add.sprite(100, 240, 'wallH', 0, this.walls);
-    this.middleBottom.scale.setTo(1.5, 1);
-
-    // Set all the walls to be immovable
-    this.walls.setAll('body.immovable', true);
-},
-    
+   
  /* generateAsteriods: function() {
     this.asteroids = this.game.add.group();
 
@@ -255,7 +196,7 @@ hitAsteroid: function(player, asteroid) {
     showLabels: function() {
     //score text
     var text = "0";
-    var style = { font: "20px Arial", fill: "#fff", align: "center" };
+    var style = { font: "20px Arial", fill: "#000", align: "center" };
     this.scoreLabel = this.game.add.text(this.game.width-50, this.game.height - 50, text, style);
     this.scoreLabel.fixedToCamera = true;
 }

@@ -6,7 +6,7 @@ CatchMice.Preload = function(){};
 CatchMice.Preload.prototype = {
   preload: function() {
       
-      
+    //load 3 mazes and textures
     this.load.tilemap('map', 'assets/tilemaps/maps/labirint.json', null, Phaser.Tilemap.TILED_JSON);
     this.load.tilemap('map1', 'assets/tilemaps/maps/labirint1.json', null, Phaser.Tilemap.TILED_JSON);
     this.load.tilemap('map2', 'assets/tilemaps/maps/labirint2.json', null, Phaser.Tilemap.TILED_JSON);
