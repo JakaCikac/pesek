@@ -6,6 +6,14 @@ CatchMice.Preload = function(){};
 CatchMice.Preload.prototype = {
   preload: function() {
       
+      
+    this.load.tilemap('map', 'assets/tilemaps/maps/labirint.json', null, Phaser.Tilemap.TILED_JSON);
+    this.load.tilemap('map1', 'assets/tilemaps/maps/labirint1.json', null, Phaser.Tilemap.TILED_JSON);
+    this.load.tilemap('map2', 'assets/tilemaps/maps/labirint2.json', null, Phaser.Tilemap.TILED_JSON);
+      
+    this.load.image('wood', 'assets/images/wood.jpg');
+    this.load.image('wall', 'assets/images/wall.png');
+    
   	//show logo in loading screen
   	this.splash = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'logo');
     this.splash.anchor.setTo(0.5);

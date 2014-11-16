@@ -12,7 +12,7 @@ CatchMice.Boot.prototype = {
   },
   create: function() {
   	//loading screen will have a white background
-    this.game.stage.backgroundColor = '#3498db';
+    this.game.stage.backgroundColor = '#ffffff';
 
     //scaling options
 	this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;

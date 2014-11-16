@@ -1,4 +1,6 @@
 var CatchMice = CatchMice || {};
+var map;
+var layer;
 
 //title screen
 CatchMice.Game = function(){};
@@ -6,9 +8,22 @@ CatchMice.Game = function(){};
 CatchMice.Game.prototype = {
   create: function() {
       
+      this.map = this.game.add.tilemap('map');
+
+      this.map.addTilesetImage('wood');
+      this.map.addTilesetImage('wall');
+      
+      this.backgroundlayer = this.map.createLayer('backgroundLayer');
+      this.layer = this.map.createLayer('Tile Layer 1');
+
+      this.map.setCollisionBetween(0,100000,true, 'Tile Layer 1');
+      
+      
+     // this.backgroundlayer.resizeWorld();
+      
       //set world dimensions
       this.game.world.setBounds(0, 0, 800, 600);
-      this.background = this.game.add.tileSprite(0, 0, this.game.world.width, this.game.world.height, 'background');
+     // this.background = this.game.add.tileSprite(0, 0, this.game.world.width, this.game.world.height, 'background');
       
       //create player
       this.player = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'player'); 
@@ -35,7 +50,7 @@ CatchMice.Game.prototype = {
       
       // create the ability to control our player with the keyboard
       this.cursor = this.game.input.keyboard.createCursorKeys();
-
+/*
       // Create the left wall
       this.leftWall = this.game.add.sprite(0, 0, 'wallV'); 
 
@@ -63,9 +78,9 @@ CatchMice.Game.prototype = {
       this.game.add.sprite(480, 0, 'wallV', 0, this.walls); // Right wall
 
       // Set all the walls to be immovable
-      this.walls.setAll('body.immovable', true);
+      this.walls.setAll('body.immovable', true);*/
       
-      this.createWorld();
+      //this.createWorld();
       
       //sounds
       //this.explosionSound = this.game.add.audio('explosion');
@@ -105,7 +120,12 @@ CatchMice.Game.prototype = {
        } else if (this.cursor.down.isDown) {
            // Move player down
            this.player.body.velocity.y = +200;
-       }      
+       }  
+        
+        else {
+           // Stop the player
+           this.player.body.velocity.y = 0;
+       }
         
     },
     
@@ -116,6 +136,8 @@ CatchMice.Game.prototype = {
     }
       
     this.movePlayer();
+      
+      this.game.physics.arcade.collide(this.player, this.layer);
       
     // Tell Phaser that the player and the walls should collide
      this.game.physics.arcade.collide(this.player, this.walls);
