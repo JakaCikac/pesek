@@ -1,0 +1,13 @@
+****************
+	REQUIREMENTS
+****************
+
+------------
+	DEV
+------------
+- local server 
+- Phaser engine (put into htdocs)
+
+------------
+	USER
+------------
