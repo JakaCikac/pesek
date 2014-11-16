@@ -3,10 +3,10 @@ CatchMice.MainMenu = function(){};
 CatchMice.MainMenu.prototype = {
   create: function() {
   	//show the space tile, repeated
-    this.background = this.game.add.tileSprite(0, 0, this.game.width, this.game.height, 'space');
+    this.background = this.game.add.tileSprite(0, 0, this.game.width, this.game.height, 'background');
     
     //give it speed in x
-    this.background.autoScroll(-20, 0);
+    //this.background.autoScroll(-20, 0);
 
     //start game text
     var text = "Click to begin!";
@@ -22,16 +22,18 @@ CatchMice.MainMenu.prototype = {
     h.anchor.set(0.5);
   },
 
+    // Display highest score, if any
    init: function(score) {
-    var score = score || 0;
-    this.highestScore = this.highestScore || 0;
-
-    this.highestScore = Math.max(score, this.highestScore);
+       var score = score || 0;
+       this.highestScore = this.highestScore || 0;
+       this.highestScore = Math.max(score, this.highestScore);
    },
     
   update: function() {
-    if(this.game.input.activePointer.justPressed()) {
-      this.game.state.start('Game');
-    }
+      // what to do on click?
+      if(this.game.input.activePointer.justPressed()) {
+          this.game.state.start('Game');
+      }
   }
+
 };

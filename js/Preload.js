@@ -5,6 +5,7 @@ CatchMice.Preload = function(){};
 
 CatchMice.Preload.prototype = {
   preload: function() {
+      
   	//show logo in loading screen
   	this.splash = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'logo');
     this.splash.anchor.setTo(0.5);
@@ -15,7 +16,8 @@ CatchMice.Preload.prototype = {
     this.load.setPreloadSprite(this.preloadBar);
 
   	//load game assets
-  	this.load.image('space', 'assets/images/space.png');
+  	this.load.image('background', 'assets/images/background.png');
+    this.load.image('player', 'assets/images/player.png');
   	this.load.image('rock', 'assets/images/rock.png');
     this.load.spritesheet('playership', 'assets/images/player.png', 12, 12);
     this.load.spritesheet('power', 'assets/images/power.png', 12, 12);
