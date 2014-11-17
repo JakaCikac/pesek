@@ -24,7 +24,7 @@ CatchMice.Preload.prototype = {
     this.load.setPreloadSprite(this.preloadBar);
 
   	//load game assets
-  	this.load.image('background', 'assets/images/background.png');
+  	this.load.image('background', 'assets/images/background.jpg');
     this.load.image('player', 'assets/images/player.png');
     this.load.image('wallV', 'assets/images/wallVertical.png');
     this.load.image('wallH', 'assets/images/wallHorizontal.png');

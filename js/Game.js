@@ -26,7 +26,7 @@ CatchMice.Game.prototype = {
       this.player = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'player'); 
       this.player.scale.setTo(2);
       //this.player.animations.add('fly', [0, 1, 2, 3], 5, true);
-     // this.player.animations.play('fly');
+      // this.player.animations.play('fly');
       
       //the camera will follow the player in the world
       this.game.camera.follow(this.player);
@@ -88,7 +88,8 @@ CatchMice.Game.prototype = {
            this.player.body.velocity.y = +200;
        }  
         
-        else {
+       // If neither the up or down arrow key is pressed
+       else {
            // Stop the player
            this.player.body.velocity.y = 0;
        }
