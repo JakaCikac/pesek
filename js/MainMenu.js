@@ -20,7 +20,18 @@ CatchMice.MainMenu.prototype = {
   
     var h = this.game.add.text(this.game.width/2, this.game.height/2 + 50, text, style);
     h.anchor.set(0.5);
+      
+    var newButton = this.game.add.button(this.game.width/2, this.game.height/2, 'button', this.buttonCallback, this, 1, 0, 2);
+    //newButton.on = false;
+    
   },
+    
+
+    buttonCallback: function (btn){
+        this.btn.on = !this.btn.on;
+        this.btn.setFrames(1, (this.btn.on)?2:0, 2);
+        this.btn.frame = (this.btn.on)?2:0;
+    },
 
     // Display highest score, if any
    init: function(score) {

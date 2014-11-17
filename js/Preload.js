@@ -29,6 +29,7 @@ CatchMice.Preload.prototype = {
     this.load.image('wallV', 'assets/images/wallVertical.png');
     this.load.image('wallH', 'assets/images/wallHorizontal.png');
   	this.load.image('rock', 'assets/images/rock.png');
+    this.load.spritesheet('button', 'assets/images/button.png', 193, 71);
     this.load.spritesheet('playership', 'assets/images/player.png', 12, 12);
     this.load.spritesheet('power', 'assets/images/power.png', 12, 12);
   	this.load.image('playerParticle', 'assets/images/player-particle.png');
