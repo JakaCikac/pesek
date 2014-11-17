@@ -1,4 +1,5 @@
 var CatchMice = CatchMice || {};
+
 var map;
 var layer;
 
@@ -8,7 +9,7 @@ CatchMice.Game = function(){};
 CatchMice.Game.prototype = {
   create: function() {
       
-      this.map = this.game.add.tilemap('map');
+      this.map = this.game.add.tilemap(CatchMice.map);
 
       this.map.addTilesetImage('wood');
       this.map.addTilesetImage('wall');
@@ -24,7 +25,7 @@ CatchMice.Game.prototype = {
       
       //create player
       this.player = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'player'); 
-      this.player.scale.setTo(2);
+      this.player.scale.setTo(0.15);
       //this.player.animations.add('fly', [0, 1, 2, 3], 5, true);
       // this.player.animations.play('fly');
       
@@ -85,7 +86,7 @@ CatchMice.Game.prototype = {
        // If the down arrow key is pressed
        } else if (this.cursor.down.isDown) {
            // Move player down
-           this.player.body.velocity.y = +200;
+           this.player.body.velocity.y = 200;
        }  
         
        // If neither the up or down arrow key is pressed
@@ -100,19 +101,27 @@ CatchMice.Game.prototype = {
       if(this.game.input.activePointer.justPressed()) {
           //move on the direction of the input
           this.game.physics.arcade.moveToPointer(this.player, this.playerSpeed);
-    }
+      }
       
-    this.movePlayer();
+      this.movePlayer();
       
       this.game.physics.arcade.collide(this.player, this.layer);
       
-    // Tell Phaser that the player and the walls should collide
+      if(this.game.input.keyboard.justPressed(Phaser.Keyboard.P)){
+          this.managePause();
+      }
+      
+      if(this.game.input.keyboard.justPressed(Phaser.Keyboard.Q)){
+          this.state.start('MainMenu');
+      }
+      
+    /*// Tell Phaser that the player and the walls should collide
      this.game.physics.arcade.collide(this.player, this.walls);
     //collision between player and asteroids
      this.game.physics.arcade.collide(this.player, this.asteroids, this.hitAsteroid, null, this);
       
       //overlapping between player and collectables (not collision)
-      this.game.physics.arcade.overlap(this.player, this.collectables, this.collect, null, this); 
+      this.game.physics.arcade.overlap(this.player, this.collectables, this.collect, null, this); */
       
   },
     
@@ -193,6 +202,15 @@ hitAsteroid: function(player, asteroid) {
     //pass it the score as a parameter 
     this.game.state.start('MainMenu', true, false, this.playerScore);
 },
+    
+    managePause: function() {
+    this.game.paused = true;
+    var pausedText = this.add.text(100, 250, "Game paused.\nTap anywhere to continue.", this._fontStyle);
+    this.input.onDown.add(function(){
+        pausedText.destroy();
+        this.game.paused = false;
+    }, this);
+    },
     
     showLabels: function() {
     //score text

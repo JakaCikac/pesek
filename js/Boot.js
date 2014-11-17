@@ -15,7 +15,7 @@ CatchMice.Boot.prototype = {
     this.game.stage.backgroundColor = '#ffffff';
 
     //scaling options
-	this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+	/*this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 	this.scale.minWidth = 240;
 	this.scale.minHeight = 170;
 	this.scale.maxWidth = 2880;
@@ -25,10 +25,10 @@ CatchMice.Boot.prototype = {
 	this.scale.pageAlignHorizontally = true;
 
 	//screen size will be set automatically
-	this.scale.setScreenSize(true);
+	this.scale.setScreenSize(true);*/
 
 	//physics system for movement
-	this.game.physics.startSystem(Phaser.Physics.ARCADE);
+	this.game.physics.startSystem(Phaser.Physics.Arcade);
     
     this.state.start('Preload');
   }

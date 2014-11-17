@@ -9,3 +9,5 @@ CatchMice.game.state.add('MapMenu', CatchMice.MapMenu);
 CatchMice.game.state.add('Game', CatchMice.Game);
 
 CatchMice.game.state.start('Boot');
+
+CatchMice.map = 'map';

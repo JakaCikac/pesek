@@ -35,6 +35,7 @@ CatchMice.MapMenu.prototype = {
         btn.on = !btn.on;
         btn.setFrames(1, (btn.on)?0:2, 0);
         btn.frame = (btn.on)?0:2;
+        CatchMice.map = 'map';
     },
 
     buttonL2Event: function (btn){
@@ -43,6 +44,7 @@ CatchMice.MapMenu.prototype = {
         btn.on = !btn.on;
         btn.setFrames(1, (btn.on)?0:2, 0);
         btn.frame = (btn.on)?0:2;
+        CatchMice.map = 'map1';
     },
     
     buttonL3Event: function (btn){
@@ -51,6 +53,7 @@ CatchMice.MapMenu.prototype = {
         btn.on = !btn.on;
         btn.setFrames(1, (btn.on)?0:2, 0);
         btn.frame = (btn.on)?0:2;
+        CatchMice.map = 'map2';
     },
     
     buttonBackEvent: function (btn){
