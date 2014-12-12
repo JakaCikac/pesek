@@ -1,0 +1,5 @@
+TODO:
+------------------
+1. lokacije za hrano na zemljevidu (random permutacija / razporeditev njih)
+2. izračun razdalij od začetne postavitve mačke do hrane na zemljevidu
+3. 

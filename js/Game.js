@@ -7,6 +7,7 @@ var layer;
 CatchMice.Game = function(){};
 
 CatchMice.Game.prototype = {
+    
   create: function() {
       
       this.map = this.game.add.tilemap(CatchMice.map);
@@ -32,7 +33,7 @@ CatchMice.Game.prototype = {
       //the camera will follow the player in the world
       this.game.camera.follow(this.player);
       
-      //this.generateAsteriods();
+      this.generateFoods();
       //this.generateCollectables();
       
       //player initial score of zero
@@ -51,7 +52,7 @@ CatchMice.Game.prototype = {
       
       //sounds
       //this.explosionSound = this.game.add.audio('explosion');
-      //this.collectSound = this.game.add.audio('collect');
+      this.collectSound = this.game.add.audio('collect');
     
       
   },
@@ -65,30 +66,26 @@ CatchMice.Game.prototype = {
             // Move the player to the left
             this.player.body.velocity.x = -200;
        }
-
        // If the right arrow key is pressed
        else if (this.cursor.right.isDown) {
            // Move the player to the right
            this.player.body.velocity.x = 200;
        }
-
        // If neither the right or left arrow key is pressed
        else {
            // Stop the player
            this.player.body.velocity.x = 0;
        }
-
+        
        // If the up arrow key
        if (this.cursor.up.isDown) { 
            // Move player up
-           this.player.body.velocity.y = -200;
-           
+           this.player.body.velocity.y = -200;   
        // If the down arrow key is pressed
        } else if (this.cursor.down.isDown) {
            // Move player down
            this.player.body.velocity.y = 200;
        }  
-        
        // If neither the up or down arrow key is pressed
        else {
            // Stop the player
@@ -118,38 +115,38 @@ CatchMice.Game.prototype = {
     /*// Tell Phaser that the player and the walls should collide
      this.game.physics.arcade.collide(this.player, this.walls);
     //collision between player and asteroids
-     this.game.physics.arcade.collide(this.player, this.asteroids, this.hitAsteroid, null, this);
+     this.game.physics.arcade.collide(this.player, this.asteroids, this.hitAsteroid, null, this); */
       
       //overlapping between player and collectables (not collision)
-      this.game.physics.arcade.overlap(this.player, this.collectables, this.collect, null, this); */
+      this.game.physics.arcade.overlap(this.player, this.foods, this.collect, null, this); 
       
   },
     
    
- /* generateAsteriods: function() {
-    this.asteroids = this.game.add.group();
+  generateFoods: function() {
+    this.foods = this.game.add.group();
 
     //enable physics in them
-    this.asteroids.enableBody = true;
-    this.asteroids.physicsBodyType = Phaser.Physics.ARCADE;
+    this.foods.enableBody = true;
+    this.foods.physicsBodyType = Phaser.Physics.ARCADE;
 
     //phaser's random number generator
-    var numAsteroids = this.game.rnd.integerInRange(150, 200)
-    var asteriod;
+    var numOfFoods = 5;//this.game.rnd.integerInRange(150, 200)
+    var food;
 
-    for (var i = 0; i < numAsteroids; i++) {
+    for (var i = 0; i < numOfFoods; i++) {
       //add sprite
-      asteriod = this.asteroids.create(this.game.world.randomX, this.game.world.randomY, 'rock');
-      asteriod.scale.setTo(this.game.rnd.integerInRange(10, 40)/10);
+      food = this.foods.create(this.game.world.randomX, this.game.world.randomY, 'rock');
+      food.scale.setTo(this.game.rnd.integerInRange(10, 40)/10);
 
       //physics properties
-      asteriod.body.velocity.x = this.game.rnd.integerInRange(-20, 20);
-      asteriod.body.velocity.y = this.game.rnd.integerInRange(-20, 20);
-      asteriod.body.immovable = true;
-      asteriod.body.collideWorldBounds = true;
+      food.body.velocity.x = 0; //this.game.rnd.integerInRange(-20, 20);
+      food.body.velocity.y = 0; //this.game.rnd.integerInRange(-20, 20);
+      food.body.immovable = true;
+      food.body.collideWorldBounds = true;
     }
   },
-    
+ /*   
 hitAsteroid: function(player, asteroid) {
     //play explosion sound
     //this.explosionSound.play();
@@ -184,7 +181,7 @@ hitAsteroid: function(player, asteroid) {
       collectable.animations.add('fly', [0, 1, 2, 3], 5, true);
       collectable.animations.play('fly');
     }
-  },
+  }, */
     
     collect: function(player, collectable) {
     //play collect sound
@@ -192,11 +189,12 @@ hitAsteroid: function(player, asteroid) {
 
     //update score
     this.playerScore++;
-    //will add later: this.scoreLabel.text = this.playerScore;
+    //will add later: 
+    this.scoreLabel.text = this.playerScore;
 
     //remove sprite
     collectable.destroy();
-  }, */
+  },
     
     gameOver: function() {    
     //pass it the score as a parameter 
