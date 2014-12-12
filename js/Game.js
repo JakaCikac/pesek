@@ -2,6 +2,7 @@ var CatchMice = CatchMice || {};
 
 var map;
 var layer;
+var numOfFoods = 5;
 
 //title screen
 CatchMice.Game = function(){};
@@ -18,7 +19,7 @@ CatchMice.Game.prototype = {
       this.backgroundlayer = this.map.createLayer('backgroundLayer');
       this.layer = this.map.createLayer('Tile Layer 1');
 
-      this.map.setCollisionBetween(0,100000,true, 'Tile Layer 1');
+      this.map.setCollisionBetween(0, 100000, true, 'Tile Layer 1');
       
       //set world dimensions
       this.game.world.setBounds(0, 0, 800, 600);
@@ -27,14 +28,14 @@ CatchMice.Game.prototype = {
       //create player
       this.player = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'player'); 
       this.player.scale.setTo(0.15);
-      //this.player.animations.add('fly', [0, 1, 2, 3], 5, true);
-      // this.player.animations.play('fly');
       
       //the camera will follow the player in the world
       this.game.camera.follow(this.player);
       
+      // generate foods at possible positions
       this.generateFoods();
-      //this.generateCollectables();
+      // generate mouse holes at possible positions
+      this.generateMouseHoles();
       
       //player initial score of zero
       this.playerScore = 0;
@@ -51,10 +52,8 @@ CatchMice.Game.prototype = {
       this.cursor = this.game.input.keyboard.createCursorKeys();
       
       //sounds
-      //this.explosionSound = this.game.add.audio('explosion');
       this.collectSound = this.game.add.audio('collect');
-    
-      
+
   },
     
     // ----------------------------
@@ -113,39 +112,66 @@ CatchMice.Game.prototype = {
       }
       
     /*// Tell Phaser that the player and the walls should collide
-     this.game.physics.arcade.collide(this.player, this.walls);
-    //collision between player and asteroids
-     this.game.physics.arcade.collide(this.player, this.asteroids, this.hitAsteroid, null, this); */
+     this.game.physics.arcade.collide(this.player, this.walls); */
       
       //overlapping between player and collectables (not collision)
       this.game.physics.arcade.overlap(this.player, this.foods, this.collect, null, this); 
-      
   },
     
    
   generateFoods: function() {
+      
+    // for each map, we need to know where the possible food locations are
+    //this.foodLocations = ...
+ 
     this.foods = this.game.add.group();
 
     //enable physics in them
     this.foods.enableBody = true;
     this.foods.physicsBodyType = Phaser.Physics.ARCADE;
 
-    //phaser's random number generator
-    var numOfFoods = 5;//this.game.rnd.integerInRange(150, 200)
     var food;
 
     for (var i = 0; i < numOfFoods; i++) {
       //add sprite
-      food = this.foods.create(this.game.world.randomX, this.game.world.randomY, 'rock');
-      food.scale.setTo(this.game.rnd.integerInRange(10, 40)/10);
+      food = this.foods.create(this.game.world.randomX, this.game.world.randomY, 'food');
+      //food.scale.setTo(2/5);
 
       //physics properties
-      food.body.velocity.x = 0; //this.game.rnd.integerInRange(-20, 20);
-      food.body.velocity.y = 0; //this.game.rnd.integerInRange(-20, 20);
+      food.body.velocity.x = 0; 
+      food.body.velocity.y = 0;
       food.body.immovable = true;
       food.body.collideWorldBounds = true;
     }
   },
+    
+  generateMouseHoles: function() {
+      
+    // for each map, we need to know where the mouse holes are
+    //this.mouseHolesLocations = -...-
+    
+    this.mouseHoles = this.game.add.group();
+
+    //phaser's random number generator
+      // Has to be the same as the number of foods
+    var numOfHoles = numOfFoods;
+    var hole;
+      
+    
+
+    for (var i = 0; i < numOfHoles; i++) {
+      //add sprite
+      hole = this.foods.create(this.game.world.randomX, this.game.world.randomY, 'mouseHole');
+      //food.scale.setTo(2/5);
+
+      //physics properties
+      hole.body.velocity.x = 0;
+      hole.body.velocity.y = 0; 
+      hole.body.immovable = true;
+      hole.body.collideWorldBounds = true;
+    }
+  },
+    
  /*   
 hitAsteroid: function(player, asteroid) {
     //play explosion sound
@@ -162,25 +188,6 @@ hitAsteroid: function(player, asteroid) {
     
     //call the gameOver method in 800 milliseconds, we haven't created this method yet
     this.game.time.events.add(800, this.gameOver, this);
-  },
-    
-    generateCollectables: function() {
-    this.collectables = this.game.add.group();
-
-    //enable physics in them
-    this.collectables.enableBody = true;
-    this.collectables.physicsBodyType = Phaser.Physics.ARCADE;
-
-    //phaser's random number generator
-    var numCollectables = this.game.rnd.integerInRange(100, 150)
-    var collectable;
-
-    for (var i = 0; i < numCollectables; i++) {
-      //add sprite
-      collectable = this.collectables.create(this.game.world.randomX, this.game.world.randomY, 'power');
-      collectable.animations.add('fly', [0, 1, 2, 3], 5, true);
-      collectable.animations.play('fly');
-    }
   }, */
     
     collect: function(player, collectable) {
@@ -189,10 +196,10 @@ hitAsteroid: function(player, asteroid) {
 
     //update score
     this.playerScore++;
-    //will add later: 
     this.scoreLabel.text = this.playerScore;
 
     //remove sprite
+        // TODO: before remove add to collected set of food, so we can check for correctness of solution
     collectable.destroy();
   },
     
