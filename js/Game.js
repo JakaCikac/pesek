@@ -1,8 +1,16 @@
 var CatchMice = CatchMice || {};
 
-var map;
 var layer;
+var currentSpeed = 0;
 var numOfFoods = 5;
+//['jabolko', 'hruska', 'banana', 'jagoda', 'ananas'];
+var foodLocations = [[[670, 110], [480, 100], [30, 100], [30, 200], [640, 205]],
+                     [[640, 440], [220, 300], [140, 80], [80, 440], [540, 40]],
+                     [[340, 525], [625, 245], [380, 370], [100, 160], [25, 25]]];
+
+var mouseHolesLocations = [[[190, 340], [130, 340], [10, 510], [550, 430], [710,10]],
+                           [[10, 10], [370, 90], [700, 90], [450, 350], [320,490]],
+                           [[270, 100], [90, 310], [350, 10], [700, 310], [700,500]]];
 
 //title screen
 CatchMice.Game = function(){};
@@ -11,7 +19,10 @@ CatchMice.Game.prototype = {
     
   create: function() {
       
-      this.map = this.game.add.tilemap(CatchMice.map);
+      //player initial score of zero
+      this.playerScore = 0;
+      
+      this.map = this.game.add.tilemap('map'+CatchMice.level);
 
       this.map.addTilesetImage('wood');
       this.map.addTilesetImage('wall');
@@ -26,8 +37,14 @@ CatchMice.Game.prototype = {
       this.backgroundlayer.resizeWorld();
       
       //create player
-      this.player = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'player'); 
+      this.player = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY,'skupaj','player'); 
       this.player.scale.setTo(0.15);
+      this.player.anchor.setTo(0.5, 0.5);
+      
+      this.nosim = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY,'skupaj',CatchMice.foodsList[this.playerScore]);
+      this.nosim.scale.setTo(0.15);
+      this.nosim.anchor.setTo(0.5, 0.5);
+      
       
       //the camera will follow the player in the world
       this.game.camera.follow(this.player);
@@ -37,8 +54,6 @@ CatchMice.Game.prototype = {
       // generate mouse holes at possible positions
       this.generateMouseHoles();
       
-      //player initial score of zero
-      this.playerScore = 0;
       
       //show score
       this.showLabels();
@@ -63,33 +78,35 @@ CatchMice.Game.prototype = {
         // If the left arrow key is pressed
         if (this.cursor.left.isDown) {
             // Move the player to the left
-            this.player.body.velocity.x = -200;
+            this.player.angle -= 4;
        }
        // If the right arrow key is pressed
        else if (this.cursor.right.isDown) {
            // Move the player to the right
-           this.player.body.velocity.x = 200;
-       }
-       // If neither the right or left arrow key is pressed
-       else {
-           // Stop the player
+           this.player.angle += 4;
+       }else {
            this.player.body.velocity.x = 0;
        }
         
        // If the up arrow key
        if (this.cursor.up.isDown) { 
            // Move player up
-           this.player.body.velocity.y = -200;   
+           currentSpeed = 100;
        // If the down arrow key is pressed
-       } else if (this.cursor.down.isDown) {
+       } else if (currentSpeed > 0) {
            // Move player down
-           this.player.body.velocity.y = 200;
-       }  
-       // If neither the up or down arrow key is pressed
-       else {
-           // Stop the player
+           currentSpeed -= 4;
+       }  else {
            this.player.body.velocity.y = 0;
        }
+       
+        if (currentSpeed > 0)
+        {
+            this.game.physics.arcade.velocityFromRotation(this.player.rotation, currentSpeed, this.player.body.velocity);
+        }
+        this.nosim.x = this.player.x;
+        this.nosim.y = this.player.y;
+        this.nosim.rotation = this.player.rotation;
         
     },
     
@@ -100,7 +117,7 @@ CatchMice.Game.prototype = {
       }
       
       this.movePlayer();
-      
+      //console.log(this.player.x, this.player.y);
       this.game.physics.arcade.collide(this.player, this.layer);
       
       if(this.game.input.keyboard.justPressed(Phaser.Keyboard.P)){
@@ -111,19 +128,41 @@ CatchMice.Game.prototype = {
           this.state.start('MainMenu');
       }
       
+      if(this.game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR, 1)){
+          if(this.zadetek()){
+              //console.log("znotraj");
+              
+          }else{
+              //console.log("zunaj");
+          }
+              
+      }
+      
     /*// Tell Phaser that the player and the walls should collide
      this.game.physics.arcade.collide(this.player, this.walls); */
       
       //overlapping between player and collectables (not collision)
-      this.game.physics.arcade.overlap(this.player, this.foods, this.collect, null, this); 
+      
   },
     
+  zadetek: function(){
+      console.log(this.player.x + ", " + this.player.y);
+      for (var i = 0; i < foodLocations[CatchMice.level].length; i++){
+        if (this.player.x < foodLocations[CatchMice.level][i][0]+30 & this.player.x > foodLocations[CatchMice.level][i][0]-30 &
+            this.player.y < foodLocations[CatchMice.level][i][1]+30 & this.player.y > foodLocations[CatchMice.level][i][1]-30){
+            food = this.game.add.sprite(foodLocations[CatchMice.level][i][0], foodLocations[CatchMice.level][i][1], CatchMice.foodsList[this.playerScore]);
+            food.scale.set(0.5);
+            this.game.physics.arcade.overlap(this.player, this.foods, this.collect, null, this); 
+            return true;
+        }
+      }
+      return false;
+  },
    
   generateFoods: function() {
       
     // for each map, we need to know where the possible food locations are
-    //this.foodLocations = ...
- 
+    
     this.foods = this.game.add.group();
 
     //enable physics in them
@@ -134,7 +173,8 @@ CatchMice.Game.prototype = {
 
     for (var i = 0; i < numOfFoods; i++) {
       //add sprite
-      food = this.foods.create(this.game.world.randomX, this.game.world.randomY, 'food');
+      food = this.foods.create(foodLocations[CatchMice.level][i][0], foodLocations[CatchMice.level][i][1], CatchMice.foodsList[i]);
+      food.scale.setTo(0.25);
       //food.scale.setTo(2/5);
 
       //physics properties
@@ -147,10 +187,7 @@ CatchMice.Game.prototype = {
     
   generateMouseHoles: function() {
       
-    // for each map, we need to know where the mouse holes are
-    //this.mouseHolesLocations = -...-
-    
-    this.mouseHoles = this.game.add.group();
+     this.mouseHoles = this.game.add.group();
 
     //phaser's random number generator
       // Has to be the same as the number of foods
@@ -161,14 +198,14 @@ CatchMice.Game.prototype = {
 
     for (var i = 0; i < numOfHoles; i++) {
       //add sprite
-      hole = this.foods.create(this.game.world.randomX, this.game.world.randomY, 'mouseHole');
+      hole = this.mouseHoles.create(mouseHolesLocations[CatchMice.level][i][0], mouseHolesLocations[CatchMice.level][i][1], 'mouseHole');
       //food.scale.setTo(2/5);
 
       //physics properties
-      hole.body.velocity.x = 0;
+      /*hole.body.velocity.x = 0;
       hole.body.velocity.y = 0; 
       hole.body.immovable = true;
-      hole.body.collideWorldBounds = true;
+      hole.body.collideWorldBounds = true;*/
     }
   },
     

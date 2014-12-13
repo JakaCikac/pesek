@@ -10,4 +10,5 @@ CatchMice.game.state.add('Game', CatchMice.Game);
 
 CatchMice.game.state.start('Boot');
 
-CatchMice.map = 'map';
+CatchMice.level = 0;
+CatchMice.foodsList = ['jabolko', 'hruska', 'banana', 'jagoda', 'ananas'];

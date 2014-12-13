@@ -35,7 +35,7 @@ CatchMice.MapMenu.prototype = {
         btn.on = !btn.on;
         btn.setFrames(1, (btn.on)?0:2, 0);
         btn.frame = (btn.on)?0:2;
-        CatchMice.map = 'map';
+        CatchMice.level = 0;
     },
 
     buttonL2Event: function (btn){
@@ -44,7 +44,7 @@ CatchMice.MapMenu.prototype = {
         btn.on = !btn.on;
         btn.setFrames(1, (btn.on)?0:2, 0);
         btn.frame = (btn.on)?0:2;
-        CatchMice.map = 'map1';
+        CatchMice.level = 1;
     },
     
     buttonL3Event: function (btn){
@@ -53,7 +53,7 @@ CatchMice.MapMenu.prototype = {
         btn.on = !btn.on;
         btn.setFrames(1, (btn.on)?0:2, 0);
         btn.frame = (btn.on)?0:2;
-        CatchMice.map = 'map2';
+        CatchMice.level = 2;
     },
     
     buttonBackEvent: function (btn){
@@ -68,10 +68,7 @@ CatchMice.MapMenu.prototype = {
    },
     
   update: function() {
-      // what to do on click?
-      /*if(this.game.input.activePointer.justPressed()) {
-          this.game.state.start('Game');
-      }*/
+      
   }
 
 };
