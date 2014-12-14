@@ -2,75 +2,79 @@ var CatchMice = CatchMice || {};
 
 var layer;
 var currentSpeed = 0;
-var numOfFoods = 5;
-//['jabolko', 'hruska', 'banana', 'jagoda', 'ananas'];
-var foodLocations = [[[670, 110], [480, 100], [30, 100], [30, 200], [640, 205]],
-                     [[640, 440], [220, 300], [140, 80], [80, 440], [540, 40]],
-                     [[340, 525], [625, 245], [380, 370], [100, 160], [25, 25]]];
+var mouses = [];
+var foodDrop ;
+var foodPick ;
+var foodToDrop = [];
+var holeForMap = [];
+var foodList = ['jabolko', 'hruska', 'banana', 'jagoda', 'ananas'];
+var foodLocations = [[[690, 130, 'jabolko'], [510, 130, 'hruska'], [50, 120, 'banana'], [50, 220, 'jagoda'], [660, 225, 'ananas']],
+                     [[660, 460, 'jabolko'], [240, 320, 'hruska'], [160, 100, 'banana'], [100, 460, 'jagoda'], [560, 60, 'ananas']],
+                     [[360, 545, 'jabolko'], [645, 265, 'hruska'], [400, 390, 'banana'], [120, 180, 'jagoda'], [45, 45, 'ananas']]];
+//var foodLocations = [[[690, 130], [500, 120], [50, 120], [50, 220], [660, 225]],
+//                     [[660, 460], [240, 320], [160, 100], [100, 460], [560, 60]],
+//                     [[360, 545], [645, 265], [400, 390], [120, 180], [45, 45]]];
 
-var mouseHolesLocations = [[[190, 340], [130, 340], [10, 510], [550, 430], [710,10]],
-                           [[10, 10], [370, 90], [700, 90], [450, 350], [320,490]],
-                           [[270, 100], [90, 310], [350, 10], [700, 310], [700,500]]];
+var mouseHolesLocations = [[[230, 380], [170, 380], [50, 550], [590, 470], [750,50]],
+                           [[50, 50], [410, 130], [740, 130], [490, 390], [360,530]],
+                           [[310, 140], [130, 350], [390, 50], [740, 350], [740,540]]];
 
 //title screen
 CatchMice.Game = function(){};
 
 CatchMice.Game.prototype = {
     
-  create: function() {
-      
-      //player initial score of zero
-      this.playerScore = 0;
-      
-      this.map = this.game.add.tilemap('map'+CatchMice.level);
+    create: function() {
+        //player initial score of zero
+        this.playerScore = 0;
+        foodToDrop = foodLocations[CatchMice.level];
+        holeForMap = mouseHolesLocations[CatchMice.level];
+        
+        this.map = this.game.add.tilemap('map'+CatchMice.level);
 
-      this.map.addTilesetImage('wood');
-      this.map.addTilesetImage('wall');
-      
-      this.backgroundlayer = this.map.createLayer('backgroundLayer');
-      this.layer = this.map.createLayer('Tile Layer 1');
+        this.map.addTilesetImage('wood');
+        this.map.addTilesetImage('wall');
 
-      this.map.setCollisionBetween(0, 100000, true, 'Tile Layer 1');
-      
-      //set world dimensions
-      this.game.world.setBounds(0, 0, 800, 600);
-      this.backgroundlayer.resizeWorld();
-      
-      //create player
-      this.player = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY,'skupaj','player'); 
-      this.player.scale.setTo(0.15);
-      this.player.anchor.setTo(0.5, 0.5);
-      
-      this.nosim = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY,'skupaj',CatchMice.foodsList[this.playerScore]);
-      this.nosim.scale.setTo(0.15);
-      this.nosim.anchor.setTo(0.5, 0.5);
-      
-      
-      //the camera will follow the player in the world
-      this.game.camera.follow(this.player);
-      
-      // generate foods at possible positions
-      this.generateFoods();
-      // generate mouse holes at possible positions
-      this.generateMouseHoles();
-      
-      
-      //show score
-      this.showLabels();
-      
-      //enable player physics
-      this.game.physics.arcade.enable(this.player);
-      this.playerSpeed = 240;
-      this.player.body.collideWorldBounds = true;
-      
-      // create the ability to control our player with the keyboard
-      this.cursor = this.game.input.keyboard.createCursorKeys();
-      
-      //sounds
-      this.collectSound = this.game.add.audio('collect');
+        this.backgroundlayer = this.map.createLayer('backgroundLayer');
+        this.layer = this.map.createLayer('Tile Layer 1');
 
-  },
-    
+        this.map.setCollisionBetween(0, 100000, true, 'Tile Layer 1');
+
+        //set world dimensions
+        this.game.world.setBounds(0, 0, 800, 600);
+        this.backgroundlayer.resizeWorld();
+
+        // generate foods at possible positions
+        this.generateFoods();
+        // generate mouse holes at possible positions
+        this.generateMouseHoles();
+
+        //create player
+        this.player = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'player'); 
+        this.player.scale.setTo(0.15);
+        this.player.anchor.setTo(0.5, 0.5);
+
+        this.nosim = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, foodList[0]);
+        this.nosim.scale.setTo(0.25);
+        this.nosim.anchor.setTo(0.5, 0.5);
+
+        //the camera will follow the player in the world
+        this.game.camera.follow(this.player);
+
+        //show score
+        this.showLabels();
+
+        //enable player physics
+        this.game.physics.arcade.enable(this.player);
+        this.player.body.collideWorldBounds = true;
+
+        // create the ability to control our player with the keyboard
+        this.cursor = this.game.input.keyboard.createCursorKeys();
+
+        //sounds
+        this.collectSound = this.game.add.audio('collect');
+    },
+
     // ----------------------------
     // Moving our player with the keyboard
     // ----------------------------
@@ -79,186 +83,197 @@ CatchMice.Game.prototype = {
         if (this.cursor.left.isDown) {
             // Move the player to the left
             this.player.angle -= 4;
-       }
-       // If the right arrow key is pressed
-       else if (this.cursor.right.isDown) {
-           // Move the player to the right
-           this.player.angle += 4;
-       }else {
-           this.player.body.velocity.x = 0;
-       }
-        
-       // If the up arrow key
-       if (this.cursor.up.isDown) { 
-           // Move player up
-           currentSpeed = 100;
-       // If the down arrow key is pressed
-       } else if (currentSpeed > 0) {
-           // Move player down
-           currentSpeed -= 4;
-       }  else {
-           this.player.body.velocity.y = 0;
-       }
-       
-        if (currentSpeed > 0)
-        {
-            this.game.physics.arcade.velocityFromRotation(this.player.rotation, currentSpeed, this.player.body.velocity);
+        // If the right arrow key is pressed
+        } else if (this.cursor.right.isDown) {
+            // Move the player to the right
+            this.player.angle += 4;
         }
-        this.nosim.x = this.player.x;
-        this.nosim.y = this.player.y;
-        this.nosim.rotation = this.player.rotation;
+
+        // If the up arrow key
+        if (this.cursor.up.isDown) { 
+            // Move player up
+            currentSpeed = 200;
+        } else if (currentSpeed > 4) {
+            currentSpeed -= 4;
+        } else {
+            currentSpeed = 0;
+        }
+
+        this.game.physics.arcade.velocityFromRotation(this.player.rotation, currentSpeed, this.player.body.velocity);
+
+        if(this.nosim.alive) {
+            this.nosim.x = this.player.x;
+            this.nosim.y = this.player.y;
+            this.nosim.rotation = this.player.rotation;
+        }
+    },
+
+    update: function() {
         
+        this.movePlayer();
+        
+        this.game.physics.arcade.collide(this.player, this.layer);
+
+        if(this.game.input.keyboard.justPressed(Phaser.Keyboard.P)) {
+            this.managePause();
+        }
+
+        if(this.game.input.keyboard.justPressed(Phaser.Keyboard.Q)) {
+            this.state.start('MainMenu');
+        }
+
+        //overlapping between player and collectables (not collision)
+        if(this.game.input.keyboard.justPressed(Phaser.Keyboard.S, 1)) {
+            this.game.physics.arcade.overlap(this.player, foodDrop, this.dropFood, null, this);
+        }
+        if(this.game.input.keyboard.justPressed(Phaser.Keyboard.D, 1)) {
+            this.game.physics.arcade.overlap(this.player, foodPick, this.pickFood, null, this); 
+        }
+
+
+    },
+
+    generateFoods: function() {
+
+        foodPick = this.game.add.group();
+        foodPick.enableBody = true;
+        foodPick.physicsBodyType = Phaser.Physics.ARCADE;
+        
+        foodDrop = this.game.add.group();
+        //enable physics in them
+        foodDrop.enableBody = true;
+        foodDrop.physicsBodyType = Phaser.Physics.ARCADE;
+
+        var food;
+
+        for (var i = 0; i < foodToDrop.length; i++) {
+            //add sprite
+            food = foodDrop.create(foodToDrop[i][0], foodToDrop[i][1], foodList[i]);
+            food.scale.setTo(0.25);
+            food.anchor.setTo(0.5, 0.5);
+            
+            //physics properties
+            food.body.velocity.x = 0; 
+            food.body.velocity.y = 0;
+            food.body.immovable = true;
+            food.body.collideWorldBounds = true;
+        }
+    },
+
+    generateMouseHoles: function() {
+
+        this.mouseHoles = this.game.add.group();
+        //phaser's random number generator
+        // Has to be the same as the number of foods
+        var hole;
+        var mouse;
+
+        for (var i = 0; i < holeForMap.length; i++) {
+            //add sprite
+            hole = this.mouseHoles.create(holeForMap[i][0], holeForMap[i][1], 'mouseHole');
+            hole.anchor.setTo(0.5, 0.5);
+            
+            mouse = this.game.add.sprite(holeForMap[i][0], holeForMap[i][1], 'mouse')
+            mouse.scale.setTo(0.5);
+            mouse.anchor.setTo(0.5, 0.5);
+            mouses.push(mouse);
+            //food.scale.setTo(2/5);
+
+            //physics properties
+            /*hole.body.velocity.x = 0;
+            hole.body.velocity.y = 0; 
+            hole.body.immovable = true;
+            hole.body.collideWorldBounds = true;*/
+        }
+    },
+
+    dropFood: function(player, collectable) {
+
+        var food;
+        food = foodPick.create(collectable.x, collectable.y, this.nosim.key);
+        food.scale.setTo(0.5);
+        food.anchor.setTo(0.5, 0.5);
+
+        //physics properties
+        food.body.velocity.x = 0; 
+        food.body.velocity.y = 0;
+        food.body.immovable = true;
+        food.body.collideWorldBounds = true;
+        //play collect sound
+        this.collectSound.play();
+
+        //update score
+        this.playerScore++;
+        this.scoreLabel.text = this.playerScore;
+
+        foodList.splice(foodList.indexOf(this.nosim.key), 1);
+        
+        this.nosim.kill();
+        if (foodList.length != 0) {
+            this.player.bringToTop();
+            this.nosim = this.game.add.sprite(this.player.x, this.player.y, foodList[0]);
+            this.nosim.scale.setTo(0.25);
+            this.nosim.anchor.setTo(0.5, 0.5);
+        }
+        collectable.destroy();
+
     },
     
-  update: function() {
-      if(this.game.input.activePointer.justPressed()) {
-          //move on the direction of the input
-          this.game.physics.arcade.moveToPointer(this.player, this.playerSpeed);
-      }
-      
-      this.movePlayer();
-      //console.log(this.player.x, this.player.y);
-      this.game.physics.arcade.collide(this.player, this.layer);
-      
-      if(this.game.input.keyboard.justPressed(Phaser.Keyboard.P)){
-          this.managePause();
-      }
-      
-      if(this.game.input.keyboard.justPressed(Phaser.Keyboard.Q)){
-          this.state.start('MainMenu');
-      }
-      
-      if(this.game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR, 1)){
-          if(this.zadetek()){
-              //console.log("znotraj");
-              
-          }else{
-              //console.log("zunaj");
-          }
-              
-      }
-      
-    /*// Tell Phaser that the player and the walls should collide
-     this.game.physics.arcade.collide(this.player, this.walls); */
-      
-      //overlapping between player and collectables (not collision)
-      
-  },
-    
-  zadetek: function(){
-      console.log(this.player.x + ", " + this.player.y);
-      for (var i = 0; i < foodLocations[CatchMice.level].length; i++){
-        if (this.player.x < foodLocations[CatchMice.level][i][0]+30 & this.player.x > foodLocations[CatchMice.level][i][0]-30 &
-            this.player.y < foodLocations[CatchMice.level][i][1]+30 & this.player.y > foodLocations[CatchMice.level][i][1]-30){
-            food = this.game.add.sprite(foodLocations[CatchMice.level][i][0], foodLocations[CatchMice.level][i][1], CatchMice.foodsList[this.playerScore]);
-            food.scale.set(0.5);
-            this.game.physics.arcade.overlap(this.player, this.foods, this.collect, null, this); 
-            return true;
+    pickFood: function(player, collectable) {
+
+        var food;
+        for (var i = 0; i < foodToDrop.length; i++){
+            if(foodToDrop[i].indexOf(collectable.x)!=-1 & foodToDrop[i].indexOf(collectable.y)!=-1){
+                food = foodDrop.create(collectable.x, collectable.y, foodToDrop[i][2]);
+            }
         }
-      }
-      return false;
-  },
-   
-  generateFoods: function() {
-      
-    // for each map, we need to know where the possible food locations are
-    
-    this.foods = this.game.add.group();
+        food.scale.setTo(0.25);
+        food.anchor.setTo(0.5, 0.5);
 
-    //enable physics in them
-    this.foods.enableBody = true;
-    this.foods.physicsBodyType = Phaser.Physics.ARCADE;
+        //physics properties
+        food.body.velocity.x = 0; 
+        food.body.velocity.y = 0;
+        food.body.immovable = true;
+        food.body.collideWorldBounds = true;
+        //play collect sound
+        this.collectSound.play();
 
-    var food;
+        //update score
+        this.playerScore--;
+        this.scoreLabel.text = this.playerScore;
 
-    for (var i = 0; i < numOfFoods; i++) {
-      //add sprite
-      food = this.foods.create(foodLocations[CatchMice.level][i][0], foodLocations[CatchMice.level][i][1], CatchMice.foodsList[i]);
-      food.scale.setTo(0.25);
-      //food.scale.setTo(2/5);
+        foodList.push(collectable.key);
+        
+        this.nosim.kill();
+        if (foodList.length != 0) {
+            this.player.bringToTop();
+            this.nosim = this.game.add.sprite(this.player.x, this.player.y, collectable.key);
+            this.nosim.scale.setTo(0.25);
+            this.nosim.anchor.setTo(0.5, 0.5);
+        }
+        collectable.destroy();
 
-      //physics properties
-      food.body.velocity.x = 0; 
-      food.body.velocity.y = 0;
-      food.body.immovable = true;
-      food.body.collideWorldBounds = true;
-    }
-  },
-    
-  generateMouseHoles: function() {
-      
-     this.mouseHoles = this.game.add.group();
+    },
 
-    //phaser's random number generator
-      // Has to be the same as the number of foods
-    var numOfHoles = numOfFoods;
-    var hole;
-      
-    
-
-    for (var i = 0; i < numOfHoles; i++) {
-      //add sprite
-      hole = this.mouseHoles.create(mouseHolesLocations[CatchMice.level][i][0], mouseHolesLocations[CatchMice.level][i][1], 'mouseHole');
-      //food.scale.setTo(2/5);
-
-      //physics properties
-      /*hole.body.velocity.x = 0;
-      hole.body.velocity.y = 0; 
-      hole.body.immovable = true;
-      hole.body.collideWorldBounds = true;*/
-    }
-  },
-    
- /*   
-hitAsteroid: function(player, asteroid) {
-    //play explosion sound
-    //this.explosionSound.play();
-
-    //make the player explode
-    var emitter = this.game.add.emitter(this.player.x, this.player.y, 100);
-    emitter.makeParticles('playerParticle');
-    emitter.minParticleSpeed.setTo(-200, -200);
-    emitter.maxParticleSpeed.setTo(200, 200);
-    emitter.gravity = 0;
-    emitter.start(true, 1000, null, 100);
-    this.player.destroy();
-    
-    //call the gameOver method in 800 milliseconds, we haven't created this method yet
-    this.game.time.events.add(800, this.gameOver, this);
-  }, */
-    
-    collect: function(player, collectable) {
-    //play collect sound
-    this.collectSound.play();
-
-    //update score
-    this.playerScore++;
-    this.scoreLabel.text = this.playerScore;
-
-    //remove sprite
-        // TODO: before remove add to collected set of food, so we can check for correctness of solution
-    collectable.destroy();
-  },
-    
     gameOver: function() {    
-    //pass it the score as a parameter 
-    this.game.state.start('MainMenu', true, false, this.playerScore);
-},
-    
-    managePause: function() {
-    this.game.paused = true;
-    var pausedText = this.add.text(100, 250, "Game paused.\nTap anywhere to continue.", this._fontStyle);
-    this.input.onDown.add(function(){
-        pausedText.destroy();
-        this.game.paused = false;
-    }, this);
+        //pass it the score as a parameter 
+        this.game.state.start('MainMenu', true, false, this.playerScore);
     },
-    
+
+    managePause: function() {
+        this.game.paused = true;
+        var pausedText = this.add.text(100, 250, "Game paused.\nTap anywhere to continue.", this._fontStyle);
+        this.input.onDown.add(function(){
+                                        pausedText.destroy();
+                                        this.game.paused = false;
+                                        }, this);
+    },
+
     showLabels: function() {
-    //score text
-    var text = "0";
-    var style = { font: "20px Arial", fill: "#000", align: "center" };
-    this.scoreLabel = this.game.add.text(this.game.width-50, this.game.height - 50, text, style);
-    this.scoreLabel.fixedToCamera = true;
-}
+        //score text
+        var text = "0";
+        var style = { font: "20px Arial", fill: "#000", align: "center" };
+        this.scoreLabel = this.game.add.text(this.game.width-50, this.game.height - 50, text, style);
+        this.scoreLabel.fixedToCamera = true;
+    }
 };

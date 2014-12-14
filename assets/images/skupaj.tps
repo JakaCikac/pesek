@@ -189,9 +189,9 @@
         <key>fileList</key>
         <array>
             <filename>player.png</filename>
-            <filename>jabolko.png</filename>
-            <filename>hruska.png</filename>
             <filename>banana.png</filename>
+            <filename>hruska.png</filename>
+            <filename>jabolko.png</filename>
             <filename>jagoda.png</filename>
             <filename>ananas.png</filename>
         </array>
