@@ -3,8 +3,8 @@ var CatchMice = CatchMice || {};
 var layer;
 var currentSpeed = 0;
 var mouses = [];
-var foodDrop ;
-var foodPick ;
+var foodDrop;
+var foodPick;
 var foodToDrop = [];
 var holeForMap = [];
 var foodList = ['jabolko', 'hruska', 'banana', 'jagoda', 'ananas'];
@@ -15,9 +15,9 @@ var foodLocations = [[[690, 130, 'jabolko'], [510, 130, 'hruska'], [50, 120, 'ba
 //                     [[660, 460], [240, 320], [160, 100], [100, 460], [560, 60]],
 //                     [[360, 545], [645, 265], [400, 390], [120, 180], [45, 45]]];
 
-var mouseHolesLocations = [[[230, 380], [170, 380], [50, 550], [590, 470], [750,50]],
-                           [[50, 50], [410, 130], [740, 130], [490, 390], [360,530]],
-                           [[310, 140], [130, 350], [390, 50], [740, 350], [740,540]]];
+var mouseHolesLocations = [[[230, 380, 180], [170, 380, 180], [50, 550, -90], [590, 470, 0], [750, 50, 90]],
+                           [[50, 50, 0], [410, 130, 0], [740, 130, 0], [490, 390, -90], [360, 530, 0]],
+                           [[310, 140, -90], [130, 350, -90], [390, 50, 90], [740, 350, 90], [740, 540, 180]]];
 
 //title screen
 CatchMice.Game = function(){};
@@ -75,6 +75,31 @@ CatchMice.Game.prototype = {
         this.collectSound = this.game.add.audio('collect');
     },
 
+    update: function() {
+        
+        this.movePlayer();
+        
+        this.game.physics.arcade.collide(this.player, this.layer);
+
+        if(this.game.input.keyboard.justPressed(Phaser.Keyboard.P)) {
+            this.managePause();
+        }
+
+        if(this.game.input.keyboard.justPressed(Phaser.Keyboard.Q)) {
+            this.state.start('MainMenu');
+        }
+
+        //overlapping between player and collectables (not collision)
+        if(this.game.input.keyboard.justPressed(Phaser.Keyboard.S, 1)) {
+            this.game.physics.arcade.overlap(this.player, foodDrop, this.dropFood, null, this);
+        }
+        if(this.game.input.keyboard.justPressed(Phaser.Keyboard.D, 1)) {
+            this.game.physics.arcade.overlap(this.player, foodPick, this.pickFood, null, this); 
+        }
+
+
+    },
+
     // ----------------------------
     // Moving our player with the keyboard
     // ----------------------------
@@ -108,31 +133,6 @@ CatchMice.Game.prototype = {
         }
     },
 
-    update: function() {
-        
-        this.movePlayer();
-        
-        this.game.physics.arcade.collide(this.player, this.layer);
-
-        if(this.game.input.keyboard.justPressed(Phaser.Keyboard.P)) {
-            this.managePause();
-        }
-
-        if(this.game.input.keyboard.justPressed(Phaser.Keyboard.Q)) {
-            this.state.start('MainMenu');
-        }
-
-        //overlapping between player and collectables (not collision)
-        if(this.game.input.keyboard.justPressed(Phaser.Keyboard.S, 1)) {
-            this.game.physics.arcade.overlap(this.player, foodDrop, this.dropFood, null, this);
-        }
-        if(this.game.input.keyboard.justPressed(Phaser.Keyboard.D, 1)) {
-            this.game.physics.arcade.overlap(this.player, foodPick, this.pickFood, null, this); 
-        }
-
-
-    },
-
     generateFoods: function() {
 
         foodPick = this.game.add.group();
@@ -153,8 +153,6 @@ CatchMice.Game.prototype = {
             food.anchor.setTo(0.5, 0.5);
             
             //physics properties
-            food.body.velocity.x = 0; 
-            food.body.velocity.y = 0;
             food.body.immovable = true;
             food.body.collideWorldBounds = true;
         }
@@ -176,6 +174,8 @@ CatchMice.Game.prototype = {
             mouse = this.game.add.sprite(holeForMap[i][0], holeForMap[i][1], 'mouse')
             mouse.scale.setTo(0.5);
             mouse.anchor.setTo(0.5, 0.5);
+            mouse.name = foodList[i];
+            mouse.angle = holeForMap[i][2];
             mouses.push(mouse);
             //food.scale.setTo(2/5);
 
@@ -195,8 +195,6 @@ CatchMice.Game.prototype = {
         food.anchor.setTo(0.5, 0.5);
 
         //physics properties
-        food.body.velocity.x = 0; 
-        food.body.velocity.y = 0;
         food.body.immovable = true;
         food.body.collideWorldBounds = true;
         //play collect sound
@@ -231,8 +229,6 @@ CatchMice.Game.prototype = {
         food.anchor.setTo(0.5, 0.5);
 
         //physics properties
-        food.body.velocity.x = 0; 
-        food.body.velocity.y = 0;
         food.body.immovable = true;
         food.body.collideWorldBounds = true;
         //play collect sound
