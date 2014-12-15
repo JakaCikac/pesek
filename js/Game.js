@@ -81,19 +81,19 @@ CatchMice.Game.prototype = {
         
         this.game.physics.arcade.collide(this.player, this.layer);
 
-        if(this.game.input.keyboard.justPressed(Phaser.Keyboard.P)) {
+        if(this.game.input.keyboard.isDown(Phaser.Keyboard.P)) {
             this.managePause();
         }
 
-        if(this.game.input.keyboard.justPressed(Phaser.Keyboard.Q)) {
+        if(this.game.input.keyboard.isDown(Phaser.Keyboard.Q)) {
             this.state.start('MainMenu');
         }
 
         //overlapping between player and collectables (not collision)
-        if(this.game.input.keyboard.justPressed(Phaser.Keyboard.S, 1)) {
+        if(this.game.input.keyboard.isDown(Phaser.Keyboard.S, 1)) {
             this.game.physics.arcade.overlap(this.player, foodDrop, this.dropFood, null, this);
         }
-        if(this.game.input.keyboard.justPressed(Phaser.Keyboard.D, 1)) {
+        if(this.game.input.keyboard.isDown(Phaser.Keyboard.D, 1)) {
             this.game.physics.arcade.overlap(this.player, foodPick, this.pickFood, null, this); 
         }
 

@@ -1,6 +1,6 @@
 var CatchMice = CatchMice || {};
 
-CatchMice.game = new Phaser.Game(800, 600, Phaser.AUTO, 'main_div');
+CatchMice.game = new Phaser.Game(800, 600, Phaser.AUTO, 'game_canvas');
 
 CatchMice.game.state.add('Boot', CatchMice.Boot);
 CatchMice.game.state.add('Preload', CatchMice.Preload);
