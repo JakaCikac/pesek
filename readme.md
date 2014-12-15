@@ -45,3 +45,4 @@ Information about game resources. Use JSON format - see example below
 
 Dependency list and their respecful versions (jQuery, Node.js etc.). Please try to include a link to CDN hosting the libraries:
 - Phaser v2.2.1 - https://github.com/photonstorm/phaser
+- jQuery v2.1.1 - http://jquery.com/download/
