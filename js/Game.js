@@ -54,9 +54,9 @@ CatchMice.Game.prototype = {
         this.player.scale.setTo(0.15);
         this.player.anchor.setTo(0.5, 0.5);
 
-        this.nosim = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, foodList[0]);
-        this.nosim.scale.setTo(0.25);
-        this.nosim.anchor.setTo(0.5, 0.5);
+        this.carry = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, foodList[0]);
+        this.carry.scale.setTo(0.25);
+        this.carry.anchor.setTo(0.5, 0.5);
 
         //the camera will follow the player in the world
         this.game.camera.follow(this.player);
@@ -126,10 +126,10 @@ CatchMice.Game.prototype = {
 
         this.game.physics.arcade.velocityFromRotation(this.player.rotation, currentSpeed, this.player.body.velocity);
 
-        if(this.nosim.alive) {
-            this.nosim.x = this.player.x;
-            this.nosim.y = this.player.y;
-            this.nosim.rotation = this.player.rotation;
+        if(this.carry.alive) {
+            this.carry.x = this.player.x;
+            this.carry.y = this.player.y;
+            this.carry.rotation = this.player.rotation;
         }
     },
 
@@ -190,7 +190,7 @@ CatchMice.Game.prototype = {
     dropFood: function(player, collectable) {
 
         var food;
-        food = foodPick.create(collectable.x, collectable.y, this.nosim.key);
+        food = foodPick.create(collectable.x, collectable.y, this.carry.key);
         food.scale.setTo(0.5);
         food.anchor.setTo(0.5, 0.5);
 
@@ -204,14 +204,14 @@ CatchMice.Game.prototype = {
         this.playerScore++;
         this.scoreLabel.text = this.playerScore;
 
-        foodList.splice(foodList.indexOf(this.nosim.key), 1);
+        foodList.splice(foodList.indexOf(this.carry.key), 1);
         
-        this.nosim.kill();
+        this.carry.kill();
         if (foodList.length != 0) {
             this.player.bringToTop();
-            this.nosim = this.game.add.sprite(this.player.x, this.player.y, foodList[0]);
-            this.nosim.scale.setTo(0.25);
-            this.nosim.anchor.setTo(0.5, 0.5);
+            this.carry = this.game.add.sprite(this.player.x, this.player.y, foodList[0]);
+            this.carry.scale.setTo(0.25);
+            this.carry.anchor.setTo(0.5, 0.5);
         }
         collectable.destroy();
 
@@ -240,12 +240,12 @@ CatchMice.Game.prototype = {
 
         foodList.push(collectable.key);
         
-        this.nosim.kill();
+        this.carry.kill();
         if (foodList.length != 0) {
             this.player.bringToTop();
-            this.nosim = this.game.add.sprite(this.player.x, this.player.y, collectable.key);
-            this.nosim.scale.setTo(0.25);
-            this.nosim.anchor.setTo(0.5, 0.5);
+            this.carry = this.game.add.sprite(this.player.x, this.player.y, collectable.key);
+            this.carry.scale.setTo(0.25);
+            this.carry.anchor.setTo(0.5, 0.5);
         }
         collectable.destroy();
 
