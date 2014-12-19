@@ -35,6 +35,49 @@ var mouseHolesLocations = [[[230, 380, 180], [170, 380, 180], [50, 550, -90], [5
 //setting game configuration and loading the assets for the loading screen
 CatchMice.Boot.prototype = {
     preload: function() {
+        
+           
+//        // Retrieve game properties
+//        var xhr = new XMLHttpRequest();
+//        xhr.open("GET", "http://private-anon-019bb2358-elearningapi.apiary-mock.com/api/v1/classroom/1/game/15/");
+//        xhr.onreadystatechange = function () {
+//          if (this.readyState == 4) {
+//            alert('Status: '+this.status+'\nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'\nBody: '+this.responseText);
+//          }
+//        };
+//        xhr.send(null);
+//        
+//        // Retrieve highscore table
+//        var xhr = new XMLHttpRequest();
+//        xhr.open("GET", "http://private-anon-298012bef-elearningapi.apiary-mock.com/api/v1/classroom/1/game/15/highscores/");
+//        xhr.onreadystatechange = function () {
+//            if (this.readyState == 4) {
+//                alert('Status: '+this.status+'\nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'\nBody: '+this.responseText);
+//            }
+//        };
+//        xhr.send(null);
+//        
+//        // Report user score
+//        var xhr = new XMLHttpRequest();
+//        xhr.open("POST", "http://private-anon-019bb2358-elearningapi.apiary-mock.com/api/v1/classroom/1/game/15/score/");
+//        xhr.setRequestHeader("Content-Type", "application/json");
+//        xhr.onreadystatechange = function () {
+//          if (this.readyState == 4) {
+//            alert('Status: '+this.status+'\nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'\nBody: '+this.responseText);
+//          }
+//        };
+//        xhr.send("{\n    \"score\": 12\n}");
+//        
+//        // Retrieve current user
+//        var xhr = new XMLHttpRequest();
+//        xhr.open("GET", "http://private-anon-019bb2358-elearningapi.apiary-mock.com/api/v1/users/me/");
+//        xhr.onreadystatechange = function () {
+//          if (this.readyState == 4) {
+//            alert('Status: '+this.status+'\nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'\nBody: '+this.responseText);
+//          }
+//        };
+//        xhr.send(null);
+        
         //assets we'll use in the loading screen
         this.load.image('logo', 'assets/images/logo.png');
         this.load.image('preloadbar', 'assets/images/preloader-bar.png');
@@ -67,7 +110,7 @@ CatchMice.Boot.prototype = {
 CatchMice.Preload.prototype = {
     preload: function() {
 
-        //load 3 mazes and textures
+         //load 3 mazes and textures
         this.load.tilemap('map0', 'assets/tilemaps/maps/labirint.json', null, Phaser.Tilemap.TILED_JSON);
         this.load.tilemap('map1', 'assets/tilemaps/maps/labirint1.json', null, Phaser.Tilemap.TILED_JSON);
         this.load.tilemap('map2', 'assets/tilemaps/maps/labirint2.json', null, Phaser.Tilemap.TILED_JSON);
@@ -113,7 +156,7 @@ CatchMice.Preload.prototype = {
 };
 
 CatchMice.MainMenu.prototype = {
-    create: function() {
+   create: function() {
         //show the space tile, repeated
         this.background = this.game.add.tileSprite(0, 0, 800, 600, 'background_main');
 
@@ -257,9 +300,9 @@ CatchMice.Game.prototype = {
         this.player.scale.setTo(0.15);
         this.player.anchor.setTo(0.5, 0.5);
 
-        this.nosim = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, foodList[0]);
-        this.nosim.scale.setTo(0.25);
-        this.nosim.anchor.setTo(0.5, 0.5);
+        this.carry = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, foodList[0]);
+        this.carry.scale.setTo(0.25);
+        this.carry.anchor.setTo(0.5, 0.5);
 
         //the camera will follow the player in the world
         this.game.camera.follow(this.player);
@@ -329,10 +372,10 @@ CatchMice.Game.prototype = {
 
         this.game.physics.arcade.velocityFromRotation(this.player.rotation, currentSpeed, this.player.body.velocity);
 
-        if(this.nosim.alive) {
-            this.nosim.x = this.player.x;
-            this.nosim.y = this.player.y;
-            this.nosim.rotation = this.player.rotation;
+        if(this.carry.alive) {
+            this.carry.x = this.player.x;
+            this.carry.y = this.player.y;
+            this.carry.rotation = this.player.rotation;
         }
     },
 
@@ -393,7 +436,7 @@ CatchMice.Game.prototype = {
     dropFood: function(player, collectable) {
 
         var food;
-        food = foodPick.create(collectable.x, collectable.y, this.nosim.key);
+        food = foodPick.create(collectable.x, collectable.y, this.carry.key);
         food.scale.setTo(0.5);
         food.anchor.setTo(0.5, 0.5);
 
@@ -407,14 +450,14 @@ CatchMice.Game.prototype = {
         this.playerScore++;
         this.scoreLabel.text = this.playerScore;
 
-        foodList.splice(foodList.indexOf(this.nosim.key), 1);
+        foodList.splice(foodList.indexOf(this.carry.key), 1);
         
-        this.nosim.kill();
+        this.carry.kill();
         if (foodList.length != 0) {
             this.player.bringToTop();
-            this.nosim = this.game.add.sprite(this.player.x, this.player.y, foodList[0]);
-            this.nosim.scale.setTo(0.25);
-            this.nosim.anchor.setTo(0.5, 0.5);
+            this.carry = this.game.add.sprite(this.player.x, this.player.y, foodList[0]);
+            this.carry.scale.setTo(0.25);
+            this.carry.anchor.setTo(0.5, 0.5);
         }
         collectable.destroy();
 
@@ -443,12 +486,12 @@ CatchMice.Game.prototype = {
 
         foodList.push(collectable.key);
         
-        this.nosim.kill();
+        this.carry.kill();
         if (foodList.length != 0) {
             this.player.bringToTop();
-            this.nosim = this.game.add.sprite(this.player.x, this.player.y, collectable.key);
-            this.nosim.scale.setTo(0.25);
-            this.nosim.anchor.setTo(0.5, 0.5);
+            this.carry = this.game.add.sprite(this.player.x, this.player.y, collectable.key);
+            this.carry.scale.setTo(0.25);
+            this.carry.anchor.setTo(0.5, 0.5);
         }
         collectable.destroy();
 
@@ -482,7 +525,7 @@ CatchMice.game.state.add('Preload', CatchMice.Preload);
 CatchMice.game.state.add('MainMenu', CatchMice.MainMenu);
 CatchMice.game.state.add('MapMenu', CatchMice.MapMenu);
 CatchMice.game.state.add('Game', CatchMice.Game);
-CatchMice.game.state.start('Boot');
 
 CatchMice.level = 0;
-CatchMice.foodsList = ['jabolko', 'hruska', 'banana', 'jagoda', 'ananas'];
+
+CatchMice.game.state.start('Boot')
