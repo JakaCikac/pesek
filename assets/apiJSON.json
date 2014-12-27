@@ -1,0 +1,158 @@
+var generatedJSON = {
+    "id": 96,
+    "name": "50",
+    "difficulty": "ESY",
+    "time_limit": 999,
+    "levels": 3,
+    "retries_available": 3,
+    "lang_code": "sl",
+    "resources": [
+	{
+            "id": 0,
+            "machine_name": "ananas",
+            "friendly_name": "Ananas",
+            "value": "u\/content\/25\/ananas.png",
+            "parent": null
+        },
+	{
+            "id": 1,
+            "machine_name": "banana",
+            "friendly_name": "Banana",
+            "value": "u\/content\/26\/banana.png",
+            "parent": null
+        },
+	{
+            "id": 3,
+            "machine_name": "button_back",
+            "friendly_name": "Button_back",
+            "value": "u\/content\/28\/button_back.png",
+            "parent": null
+        },
+	{
+            "id": 4,
+            "machine_name": "jabolko",
+            "friendly_name": "Jabolko",
+            "value": "u\/content\/29\/jabolko.png",
+            "parent": null
+        },
+	{
+            "id": 5,
+            "machine_name": "button_play",
+            "friendly_name": "Button_play",
+            "value": "u\/content\/30\/button_play.png",
+            "parent": null
+        },
+	{
+            "id": 6,
+            "machine_name": "background_main",
+            "friendly_name": "BackgroundMain",
+            "value": "u\/content\/31\/backgroundMain.png",
+            "parent": null
+        },
+	{
+            "id": 7,
+            "machine_name": "logo",
+            "friendly_name": "Logo",
+            "value": "u\/content\/32\/logo.png",
+            "parent": null
+        },
+	{
+            "id": 8,
+            "machine_name": "preloadbar",
+            "friendly_name": "Preloader-bar",
+            "value": "u\/content\/33\/preloader-bar.png",
+            "parent": null
+        },
+	{
+            "id": 9,
+            "machine_name": "mouseHole",
+            "friendly_name": "MouseHole",
+            "value": "u\/content\/34\/mouseHole.png",
+            "parent": null
+        },
+	{
+            "id": 10,
+            "machine_name": "wood",
+            "friendly_name": "Wood",
+            "value": "u\/content\/35\/wood.jpg",
+            "parent": null
+        },
+	{
+            "id": 11,
+            "machine_name": "button_level1",
+            "friendly_name": "Button_level1",
+            "value": "u\/content\/36\/button_level1.png",
+            "parent": null
+        },
+	{
+            "id": 12,
+            "machine_name": "jagoda",
+            "friendly_name": "Jagoda",
+            "value": "u\/content\/37\/jagoda.png",
+            "parent": null
+        },
+	{
+            "id": 13,
+            "machine_name": "button_map",
+            "friendly_name": "Button_map",
+            "value": "u\/content\/38\/button_map.png",
+            "parent": null
+        },
+	{
+            "id": 14,
+            "machine_name": "button_level3",
+            "friendly_name": "Button_level3",
+            "value": "u\/content\/39\/button_level3.png",
+            "parent": null
+        },
+	{
+            "id": 15,
+            "machine_name": "background_map",
+            "friendly_name": "BackgroundMap",
+            "value": "u\/content\/40\/backgroundMap.png",
+            "parent": null
+        },
+	{
+            "id": 16,
+            "machine_name": "player",
+            "friendly_name": "Player",
+            "value": "u\/content\/41\/player.png",
+            "parent": null
+        },
+	{
+            "id": 17,
+            "machine_name": "mouse",
+            "friendly_name": "Mouse",
+            "value": "u\/content\/42\/mouse.png",
+            "parent": null
+        },
+	{
+            "id": 18,
+            "machine_name": "hruska",
+            "friendly_name": "Hruska",
+            "value": "u\/content\/43\/hruska.png",
+            "parent": null
+        },
+	{
+            "id": 19,
+            "machine_name": "button_level2",
+            "friendly_name": "Button_level2",
+            "value": "u\/content\/44\/button_level2.png",
+            "parent": null
+        },
+	{
+            "id": 20,
+            "machine_name": "wall",
+            "friendly_name": "Wall",
+            "value": "u\/content\/45\/wall.png",
+            "parent": null
+        },
+	{
+            "id": 21,
+            "machine_name": "collect",
+            "friendly_name": "Collect",
+            "value": "u\/content\/46\/collect.mp3",
+            "parent": null
+        }
+    ]
+};

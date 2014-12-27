@@ -644,13 +644,6 @@ var generatedJSON = {
             "parent": null
         },
 	{
-            "id": 2,
-            "machine_name": "button_brez",
-            "friendly_name": "Button_brez",
-            "value": "u\/content\/27\/button_brez.png",
-            "parent": null
-        },
-	{
             "id": 3,
             "machine_name": "button_back",
             "friendly_name": "Button_back",
@@ -673,7 +666,7 @@ var generatedJSON = {
         },
 	{
             "id": 6,
-            "machine_name": "backgroundMain",
+            "machine_name": "background_main",
             "friendly_name": "BackgroundMain",
             "value": "u\/content\/31\/backgroundMain.png",
             "parent": null
@@ -687,7 +680,7 @@ var generatedJSON = {
         },
 	{
             "id": 8,
-            "machine_name": "preloader-bar",
+            "machine_name": "preloadbar",
             "friendly_name": "Preloader-bar",
             "value": "u\/content\/33\/preloader-bar.png",
             "parent": null
@@ -736,7 +729,7 @@ var generatedJSON = {
         },
 	{
             "id": 15,
-            "machine_name": "backgroundMap",
+            "machine_name": "background_map",
             "friendly_name": "BackgroundMap",
             "value": "u\/content\/40\/backgroundMap.png",
             "parent": null
@@ -886,9 +879,14 @@ CatchMice.Boot.prototype = {
 //        };
 //        xhr.send(null);
         
-        //assets we'll use in the loading screen
-        this.load.image('logo', 'u/content/32/logo.png');
-        this.load.image('preloadbar', 'u/content/33/preloader-bar.png');
+        obj = JSON.parse(JSON.stringify(generatedJSON));
+        
+        resource = obj.resources;
+        for (x in resource){
+            if (resource[x].machine_name == 'logo' || resource[x].machine_name == 'preloadbar'){
+                this.load.image(resource[x].machine_name, resource[x].value);
+            }
+        }
     },
     
     create: function() {
@@ -924,9 +922,6 @@ CatchMice.Preload.prototype = {
         this.load.tilemap('map1', null, labirintJSON1, Phaser.Tilemap.TILED_JSON);
         this.load.tilemap('map2', null, labirintJSON2, Phaser.Tilemap.TILED_JSON);
 
-        this.load.image('wood', 'u/content/35/wood.jpg');
-        this.load.image('wall', 'u/content/45/wall.png');
-
         //show logo in loading screen
         this.splash = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'logo');
         this.splash.anchor.setTo(0.5);
@@ -936,27 +931,33 @@ CatchMice.Preload.prototype = {
 
         this.load.setPreloadSprite(this.preloadBar);
 
-        //load game assets
-        this.load.image('background_main', 'u/content/31/backgroundMain.png');
-        this.load.image('background_map', 'u/content/40/backgroundMap.png');
-        this.load.image('player', 'u/content/41/player.png');
-        this.load.image('mouse', 'u/content/42/mouse.png');
-        this.load.spritesheet('button_play', 'u/content/30/button_play.png', 193, 71);
-        this.load.spritesheet('button_back', 'u/content/28/button_back.png', 193, 71);
-        this.load.spritesheet('button_map', 'u/content/38/button_map.png', 193, 71);
-        this.load.spritesheet('button_level1', 'u/content/36/button_level1.png', 193, 71);
-        this.load.spritesheet('button_level2', 'u/content/44/button_level2.png', 193, 71);
-        this.load.spritesheet('button_level3', 'u/content/39/button_level3.png', 193, 71);
-        this.load.audio('collect', 'u/content/46/collect.mp3');
-
-        //this.game.load.atlas('skupaj', 'assets/images/skupaj.png', 'assets/images/skupaj.json');
-
-        this.load.image('mouseHole', 'u/content/34/mouseHole.png');
-        this.load.image('jabolko', 'u/content/29/jabolko.png');
-        this.load.image('hruska', 'u/content/43/hruska.png');
-        this.load.image('banana', 'u/content/26/banana.png');
-        this.load.image('jagoda', 'u/content/37/jagoda.png');
-        this.load.image('ananas', 'u/content/25/ananas.png');
+         var imageList = ['wood', 'wall', 'background_main', 'background_map', 'player', 'mouse', 'mouseHole', 'jabolko', 'hruska', 'banana', 'jagoda', 'ananas'];
+        var spritesheetList = ['button_play', 'button_back', 'button_map', 'button_level1', 'button_level2', 'button_level3'];
+        for (x in resource){
+            var b = true;
+            
+            for (y in imageList){
+                if (resource[x].machine_name == imageList[y]){
+                    this.load.image(resource[x].machine_name, resource[x].value);
+                    b = false;
+                    break;
+                }
+            }
+            
+            if (b){
+                for (z in spritesheetList){
+                    if (resource[x].machine_name == spritesheetList[z]){
+                        this.load.spritesheet(resource[x].machine_name, resource[x].value, 193, 71);
+                        b = false;
+                        break;
+                    }
+                }
+            }
+            
+            if(resource[x].machine_name == 'collect'){
+                this.load.audio(resource[x].machine_name, resource[x].value);
+            }
+        }
     },
     
     create: function() {

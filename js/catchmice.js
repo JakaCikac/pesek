@@ -620,6 +620,165 @@ var labirintJSON2 = { "height":30,
  "width":40
 };
 
+var generatedJSON = {
+    "id": 96,
+    "name": "50",
+    "difficulty": "ESY",
+    "time_limit": 999,
+    "levels": 3,
+    "retries_available": 3,
+    "lang_code": "sl",
+    "resources": [
+	{
+            "id": 0,
+            "machine_name": "ananas",
+            "friendly_name": "Ananas",
+            "value": "assets/images/ananas.png",
+            "parent": null
+        },
+	{
+            "id": 1,
+            "machine_name": "banana",
+            "friendly_name": "Banana",
+            "value": "assets/images/banana.png",
+            "parent": null
+        },
+	{
+            "id": 3,
+            "machine_name": "button_back",
+            "friendly_name": "Button_back",
+            "value": "assets/images/button_back.png",
+            "parent": null
+        },
+	{
+            "id": 4,
+            "machine_name": "jabolko",
+            "friendly_name": "Jabolko",
+            "value": "assets/images/jabolko.png",
+            "parent": null
+        },
+	{
+            "id": 5,
+            "machine_name": "button_play",
+            "friendly_name": "Button_play",
+            "value": "assets/images/button_play.png",
+            "parent": null
+        },
+	{
+            "id": 6,
+            "machine_name": "background_main",
+            "friendly_name": "BackgroundMain",
+            "value": "assets/images/backgroundMain.png",
+            "parent": null
+        },
+	{
+            "id": 7,
+            "machine_name": "logo",
+            "friendly_name": "Logo",
+            "value": "assets/images/logo.png",
+            "parent": null
+        },
+	{
+            "id": 8,
+            "machine_name": "preloadbar",
+            "friendly_name": "Preloader-bar",
+            "value": "assets/images/preloader-bar.png",
+            "parent": null
+        },
+	{
+            "id": 9,
+            "machine_name": "mouseHole",
+            "friendly_name": "MouseHole",
+            "value": "assets/images/mouseHole.png",
+            "parent": null
+        },
+	{
+            "id": 10,
+            "machine_name": "wood",
+            "friendly_name": "Wood",
+            "value": "assets/images/wood.jpg",
+            "parent": null
+        },
+	{
+            "id": 11,
+            "machine_name": "button_level1",
+            "friendly_name": "Button_level1",
+            "value": "assets/images/button_level1.png",
+            "parent": null
+        },
+	{
+            "id": 12,
+            "machine_name": "jagoda",
+            "friendly_name": "Jagoda",
+            "value": "assets/images/jagoda.png",
+            "parent": null
+        },
+	{
+            "id": 13,
+            "machine_name": "button_map",
+            "friendly_name": "Button_map",
+            "value": "assets/images/button_map.png",
+            "parent": null
+        },
+	{
+            "id": 14,
+            "machine_name": "button_level3",
+            "friendly_name": "Button_level3",
+            "value": "assets/images/button_level3.png",
+            "parent": null
+        },
+	{
+            "id": 15,
+            "machine_name": "background_map",
+            "friendly_name": "BackgroundMap",
+            "value": "assets/images/backgroundMap.png",
+            "parent": null
+        },
+	{
+            "id": 16,
+            "machine_name": "player",
+            "friendly_name": "Player",
+            "value": "assets/images/player.png",
+            "parent": null
+        },
+	{
+            "id": 17,
+            "machine_name": "mouse",
+            "friendly_name": "Mouse",
+            "value": "assets/images/mouse.png",
+            "parent": null
+        },
+	{
+            "id": 18,
+            "machine_name": "hruska",
+            "friendly_name": "Hruska",
+            "value": "assets/images/hruska.png",
+            "parent": null
+        },
+	{
+            "id": 19,
+            "machine_name": "button_level2",
+            "friendly_name": "Button_level2",
+            "value": "assets/images/button_level2.png",
+            "parent": null
+        },
+	{
+            "id": 20,
+            "machine_name": "wall",
+            "friendly_name": "Wall",
+            "value": "assets/images/wall.png",
+            "parent": null
+        },
+	{
+            "id": 21,
+            "machine_name": "collect",
+            "friendly_name": "Collect",
+            "value": "assets/audio/collect.mp3",
+            "parent": null
+        }
+    ]
+};
+
 // GAME CODE ------------GAME CODE------------GAME CODE--------------GAME CODE-------GAME CODE-----------------GAME CODE----------------------
 // GAME CODE ------------GAME CODE------------GAME CODE--------------GAME CODE-------GAME CODE-----------------GAME CODE----------------------
 // GAME CODE ------------GAME CODE------------GAME CODE--------------GAME CODE-------GAME CODE-----------------GAME CODE----------------------
@@ -653,6 +812,8 @@ CatchMice.MapMenu = function(){};
 CatchMice.Game = function(){};
 
 // Global variables
+var obj;
+var resource;
 var buttonL1, buttonL2, buttonL3;
 var layer;
 var currentSpeed = 0;
@@ -720,9 +881,15 @@ CatchMice.Boot.prototype = {
 //        };
 //        xhr.send(null);
         
-        //assets we'll use in the loading screen
-        this.load.image('logo', 'assets/images/logo.png');
-        this.load.image('preloadbar', 'assets/images/preloader-bar.png');
+        obj = JSON.parse(JSON.stringify(generatedJSON));
+        
+        resource = obj.resources;
+        for (x in resource){
+            if (resource[x].machine_name == 'logo' || resource[x].machine_name == 'preloadbar'){
+                this.load.image(resource[x].machine_name, resource[x].value);
+            }
+        }
+        
     },
     
     create: function() {
@@ -758,9 +925,6 @@ CatchMice.Preload.prototype = {
         this.load.tilemap('map1', null, labirintJSON1, Phaser.Tilemap.TILED_JSON);
         this.load.tilemap('map2', null, labirintJSON2, Phaser.Tilemap.TILED_JSON);
 
-        this.load.image('wood', 'assets/images/wood.jpg');
-        this.load.image('wall', 'assets/images/wall.png');
-
         //show logo in loading screen
         this.splash = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'logo');
         this.splash.anchor.setTo(0.5);
@@ -770,27 +934,34 @@ CatchMice.Preload.prototype = {
 
         this.load.setPreloadSprite(this.preloadBar);
 
-        //load game assets
-        this.load.image('background_main', 'assets/images/backgroundMain.png');
-        this.load.image('background_map', 'assets/images/backgroundMap.png');
-        this.load.image('player', 'assets/images/player.png');
-        this.load.image('mouse', 'assets/images/mouse.png');
-        this.load.spritesheet('button_play', 'assets/images/button_play.png', 193, 71);
-        this.load.spritesheet('button_back', 'assets/images/button_back.png', 193, 71);
-        this.load.spritesheet('button_map', 'assets/images/button_map.png', 193, 71);
-        this.load.spritesheet('button_level1', 'assets/images/button_level1.png', 193, 71);
-        this.load.spritesheet('button_level2', 'assets/images/button_level2.png', 193, 71);
-        this.load.spritesheet('button_level3', 'assets/images/button_level3.png', 193, 71);
-        this.load.audio('collect', 'assets/audio/collect.mp3');
-
-        //this.game.load.atlas('skupaj', 'assets/images/skupaj.png', 'assets/images/skupaj.json');
-
-        this.load.image('mouseHole', 'assets/images/mouseHole.png');
-        this.load.image('jabolko', 'assets/images/jabolko.png');
-        this.load.image('hruska', 'assets/images/hruska.png');
-        this.load.image('banana', 'assets/images/banana.png');
-        this.load.image('jagoda', 'assets/images/jagoda.png');
-        this.load.image('ananas', 'assets/images/ananas.png');
+        var imageList = ['wood', 'wall', 'background_main', 'background_map', 'player', 'mouse', 'mouseHole', 'jabolko', 'hruska', 'banana', 'jagoda', 'ananas'];
+        var spritesheetList = ['button_play', 'button_back', 'button_map', 'button_level1', 'button_level2', 'button_level3'];
+        for (x in resource){
+            var b = true;
+            
+            for (y in imageList){
+                if (resource[x].machine_name == imageList[y]){
+                    this.load.image(resource[x].machine_name, resource[x].value);
+                    b = false;
+                    break;
+                }
+            }
+            
+            if (b){
+                for (z in spritesheetList){
+                    if (resource[x].machine_name == spritesheetList[z]){
+                        this.load.spritesheet(resource[x].machine_name, resource[x].value, 193, 71);
+                        b = false;
+                        break;
+                    }
+                }
+            }
+            
+            if(resource[x].machine_name == 'collect'){
+                this.load.audio(resource[x].machine_name, resource[x].value);
+            }
+        }
+        
     },
     
     create: function() {
