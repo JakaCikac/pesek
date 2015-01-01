@@ -818,6 +818,7 @@ var buttonL1, buttonL2, buttonL3;
 var layer;
 var currentSpeed = 0;
 var mouses = [];
+var mouses_tweens = [];
 var foodDrop;
 var foodPick;
 var foodToDrop = [];
@@ -830,8 +831,6 @@ var foodLocations = [[[690, 130, 'jabolko'], [510, 130, 'hruska'], [50, 120, 'ba
 //                     [[660, 460], [240, 320], [160, 100], [100, 460], [560, 60]],
 //                     [[360, 545], [645, 265], [400, 390], [120, 180], [45, 45]]];
 
-
-
 var mouseHolesLocations = [[[230, 380, 180], [170, 380, 180], [50, 550, -90], [590, 470, 0], [750, 50, 90]],
                            [[50, 50, 0], [410, 130, 0], [740, 130, 0], [490, 390, -90], [360, 530, 0]],
                            [[310, 140, -90], [130, 350, -90], [390, 50, 90], [740, 350, 90], [740, 540, 180]]];
@@ -841,7 +840,15 @@ var mouseHolesLocations = [[[230, 380, 180], [170, 380, 180], [50, 550, -90], [5
 // Kar rabimo je hardcoded pot od vsake izmed mouseHolesLokactions na vsako foodLocations (5 x 5 = 25)
 // Torej za vsako popisemo vmesne korake tako da uporabimo Phaser debug na macki in se pac sprehodimo do mesnih lokacij,
 // nato naredimo animacije z sprite animate. Animate se zgodi, ko uporabnik odda zadnji item na zadnjo lokacijo.
+// Macek se postavi na zacetno pozicijo in je prav tako zanimiran, če je hrana prav postavljena, 
+// se bosta mis in macek nekje srecala -> Macek poje mis (collision).
+// Ce hrana ni prav postavljena se ob macku izpise vprasaj, ker se ne sreca z misjo 
+// (mis gre na svojo hrano, macek pa ne gre na postavljeno hrano -> se zgresita in macek se vrne na zacetno pozicijo)
+// ok, zgleda bo treba še miši poindeksirat, ne morejo bit kar v for zanki..
 
+// Primer za premikanje: (pride prej se init)
+// sprite_tween.to({x: this.world.width, y: this.world.height}, 1000 /*duration of the tween (in ms)*/, 
+//        Phaser.Easing.Linear.None /*easing type*/, true /*autostart?*/, 100 /*delay*/, false /*yoyo?*/);
 
 //setting game configuration and loading the assets for the loading screen
 CatchMice.Boot.prototype = {
@@ -1116,6 +1123,8 @@ CatchMice.Game.prototype = {
         this.generateFoods();
         // generate mouse holes at possible positions
         this.generateMouseHoles();
+        // generate animations for mice, after the first round
+        this.generateMouseAnimations();
 
         //create player
         this.player = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'player'); 
@@ -1192,7 +1201,7 @@ CatchMice.Game.prototype = {
         // If the up arrow key
         if (this.cursor.up.isDown) { 
             // Move player up
-            currentSpeed = 200;
+            currentSpeed = 140;
         } else if (currentSpeed > 4) {
             currentSpeed -= 4;
         } else {
@@ -1246,20 +1255,38 @@ CatchMice.Game.prototype = {
             hole = this.mouseHoles.create(holeForMap[i][0], holeForMap[i][1], 'mouseHole');
             hole.anchor.setTo(0.5, 0.5);
             
-            mouse = this.game.add.sprite(holeForMap[i][0], holeForMap[i][1], 'mouse')
+            mouse = this.game.add.sprite(holeForMap[i][0], holeForMap[i][1], 'mouse');
+            mouse_tween = this.add.tween(mouse); // init tween for mousey
+
             mouse.scale.setTo(0.5);
             mouse.anchor.setTo(0.5, 0.5);
             mouse.name = foodList[i];
             mouse.angle = holeForMap[i][2];
             mouses.push(mouse);
-            //food.scale.setTo(2/5);
-
+            mouses_tweens.push(mouse_tween);
+            
             //physics properties
             /*hole.body.velocity.x = 0;
             hole.body.velocity.y = 0; 
             hole.body.immovable = true;
             hole.body.collideWorldBounds = true;*/
         }
+    },
+    
+    generateMouseAnimations: function() {
+        
+        // LEVEL 1, MOUSE 2
+        // -------------------------------------------
+        var mouse2toApple = this.game.add.tween(mouses[2]).to({x: 510, y: 545}, 4000, Phaser.Easing.Linear.None)
+            .to({x: 510, y: 471}, 4000, Phaser.Easing.Linear.None) // going to another coordinate
+            .to({x: 400, y: 461}, 4000, Phaser.Easing.Linear.None) // changing place again
+            .to({x: 392, y: 369}, 4000, Phaser.Easing.Linear.None)
+            .to({x: 648, y: 375}, 4000, Phaser.Easing.Linear.None)
+            .to({x: 643, y: 524}, 4000, Phaser.Easing.Linear.None)
+            .to({x: 725, y: 526}, 4000, Phaser.Easing.Linear.None)
+            .to({x: 731, y: 117}, 4000, Phaser.Easing.Linear.None)
+            .to({x: 678, y: 110}, 4000, Phaser.Easing.Linear.None).start();
+        
     },
 
     dropFood: function(player, collectable) {
