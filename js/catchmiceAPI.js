@@ -824,6 +824,9 @@ var foodList = ['jabolko', 'hruska', 'banana', 'jagoda', 'ananas'];
 var foodLocations = [[[690, 130, 'jabolko'], [510, 130, 'hruska'], [50, 120, 'banana'], [50, 220, 'jagoda'], [660, 225, 'ananas']],
                      [[660, 460, 'jabolko'], [240, 320, 'hruska'], [160, 100, 'banana'], [100, 460, 'jagoda'], [560, 60, 'ananas']],
                      [[360, 545, 'jabolko'], [645, 265, 'hruska'], [400, 390, 'banana'], [120, 180, 'jagoda'], [45, 45, 'ananas']]];
+
+
+
 //var foodLocations = [[[690, 130], [500, 120], [50, 120], [50, 220], [660, 225]],
 //                     [[660, 460], [240, 320], [160, 100], [100, 460], [560, 60]],
 //                     [[360, 545], [645, 265], [400, 390], [120, 180], [45, 45]]];
@@ -831,6 +834,13 @@ var foodLocations = [[[690, 130, 'jabolko'], [510, 130, 'hruska'], [50, 120, 'ba
 var mouseHolesLocations = [[[230, 380, 180], [170, 380, 180], [50, 550, -90], [590, 470, 0], [750, 50, 90]],
                            [[50, 50, 0], [410, 130, 0], [740, 130, 0], [490, 390, -90], [360, 530, 0]],
                            [[310, 140, -90], [130, 350, -90], [390, 50, 90], [740, 350, 90], [740, 540, 180]]];
+
+// FoodLocations: prvi nivo = level, drugi nivo = item, tretji nivo (prvi in drugi element) = koordinate
+// MouseHolesLocations: prvi nivo = level, drugi nivo = prvi element x, drugi element y, tretji element rotacija
+// Kar rabimo je hardcoded pot od vsake izmed mouseHolesLokactions na vsako foodLocations (5 x 5 = 25)
+// Torej za vsako popisemo vmesne korake tako da uporabimo Phaser debug na macki in se pac sprehodimo do mesnih lokacij,
+// nato naredimo animacije z sprite animate. Animate se zgodi, ko uporabnik odda zadnji item na zadnjo lokacijo.
+
 
 
 //setting game configuration and loading the assets for the loading screen
@@ -1157,7 +1167,13 @@ CatchMice.Game.prototype = {
             this.game.physics.arcade.overlap(this.player, foodPick, this.pickFood, null, this); 
         }
 
-
+    },
+    
+    // ----------------------------
+    // Enable for sprite debug information (location mappings)
+    // ----------------------------
+    render: function() {
+        this.game.debug.spriteInfo(this.player, 32,32);
     },
 
     // ----------------------------
