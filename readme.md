@@ -4,7 +4,7 @@ Name of the developer:
 - Anže Schwarzmann
 
 Name of the game:
-- Catch the mice
+- CatchMice
 
 Information about game resources. Use JSON format - see example below
 - Human friendly name of the resource
@@ -43,6 +43,8 @@ Information about game resources. Use JSON format - see example below
         }
     ]
 
-Dependency list and their respecful versions (jQuery, Node.js etc.). Please try to include a link to CDN hosting the libraries:
+Dependency list and their respecful versions:
 - Phaser v2.2.1 - https://github.com/photonstorm/phaser
-- jQuery v2.1.1 - http://jquery.com/download/
+    CDNJS: //cdnjs.cloudflare.com/ajax/libs/phaser/2.2.1/phaser.min.js
+- jQuery v2.1.3 - http://jquery.com/download/
+    CDN:   //code.jquery.com/jquery-2.1.3.min.js
