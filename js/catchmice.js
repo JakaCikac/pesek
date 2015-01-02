@@ -1277,7 +1277,8 @@ CatchMice.Game.prototype = {
         
         // LEVEL 1, MOUSE 2
         // -------------------------------------------
-        var mouse2toApple = this.game.add.tween(mouses[2]).to({x: 510, y: 545}, 4000, Phaser.Easing.Linear.None)
+        var mouse2toApple = this.game.add.tween(mouses[2])
+            .to({x: 510, y: 545}, 4000, Phaser.Easing.Linear.None)
             .to({x: 510, y: 471}, 4000, Phaser.Easing.Linear.None) // going to another coordinate
             .to({x: 400, y: 461}, 4000, Phaser.Easing.Linear.None) // changing place again
             .to({x: 392, y: 369}, 4000, Phaser.Easing.Linear.None)
@@ -1285,7 +1286,7 @@ CatchMice.Game.prototype = {
             .to({x: 643, y: 524}, 4000, Phaser.Easing.Linear.None)
             .to({x: 725, y: 526}, 4000, Phaser.Easing.Linear.None)
             .to({x: 731, y: 117}, 4000, Phaser.Easing.Linear.None)
-            .to({x: 678, y: 110}, 4000, Phaser.Easing.Linear.None).start();
+            .to({x: 678, y: 110}, 4000, Phaser.Easing.Linear.None);
         
     },
 
