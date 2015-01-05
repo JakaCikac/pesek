@@ -1,0 +1,9 @@
+LEVEL:1 MOUSEHOLE: 2 FOOD: Apple
+
+----------- GENERATED CODE ------------------
+
+this.game.add.tween(mouses[2])
+.to({x: 1, y: 1, angle: 1}, 4000, Phaser.Easing.Linear.None)
+.to({x: 2, y: 2, angle: 2}, 4000, Phaser.Easing.Linear.None)
+.to({x: 3, y: 3, angle: 3}, 4000, Phaser.Easing.Linear.None)
+;
