@@ -1,7 +1,44 @@
 import sys
-
 coordinates = []
 
+def parse():
+    f2 = open("coordinates.txt", "r")
+    stVrstic =  0
+    for line in f2:
+        coordinateThris = [] 
+        stVrstic += 1
+        stStolpcev = 0
+        for x in line.split(" "):
+            if stVrstic == 1: 
+                if stStolpcev == 0:
+                    #pripnemo x koordinato
+                    x = x.strip()
+                    x = int(float(x))
+                    coordinateThris.append(x)
+                if stStolpcev == 1:
+                    x = x.strip()
+                    x = int(float(x))
+                    coordinateThris.append(x)
+                if stStolpcev == 2:
+                    x = x.strip()
+                    x = int(float(x))
+                    coordinateThris.append(x)
+            if stVrstic > 1: 
+                if stStolpcev == 1:
+                    x = x.strip()
+                    x = int(float(x))
+                    coordinateThris.append(x)
+                if stStolpcev == 2:
+                    x = x.strip()
+                    x = int(float(x))
+                    coordinateThris.append(x)
+                if stStolpcev == 3:
+                    x = x.strip()
+                    x = int(float(x))
+                    coordinateThris.append(x)
+            stStolpcev +=1
+        coordinates.append(coordinateThris)
+    return coordinates
         
 def generateScript():
     print coordinates
@@ -83,18 +120,21 @@ else:
     level = sys.argv[1]
     mouseHole = sys.argv[2]
     food = sys.argv[3]
+    # parse document containing coordinates eg. x y angle direction
+    
     movingOn = True
-    while movingOn:
-        coordinateThris = []
-        
-        print "-------- NEXT ENTRY -----------"
-        x = enterX()
-        coordinateThris.append(x)
-        y = enterY()
-        coordinateThris.append(y)
-        angle = enterAngle()
-        coordinateThris.append(angle)
-        
-        coordinates.append(coordinateThris)
-        print "Coordinates added: "
-        print coordinateThris
+    #while movingOn:
+        # UNCOMMENT FOR MANUAL ADDING
+        #coordinateThris = []
+        #print "-------- NEXT ENTRY -----------"
+        #x = enterX()
+        #coordinateThris.append(x)
+        #y = enterY()
+        #coordinateThris.append(y)
+        #angle = enterAngle()
+        #coordinateThris.append(angle)
+        #coordinates.append(coordinateThris)
+        #print "Coordinates added: "
+        #print coordinateThris
+    coordinates = parse()
+    generateScript()
