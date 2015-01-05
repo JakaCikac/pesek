@@ -1,14 +1,12 @@
-var CatchMice = CatchMice || {};
+var SortingGame = SortingGame || {};
 
-CatchMice.game = new Phaser.Game(800, 600, Phaser.AUTO, 'game_canvas');
+SortingGame.game = new Phaser.Game(800, 600, Phaser.AUTO, 'main_div');
 
-CatchMice.game.state.add('Boot', CatchMice.Boot);
-CatchMice.game.state.add('Preload', CatchMice.Preload);
-CatchMice.game.state.add('MainMenu', CatchMice.MainMenu);
-CatchMice.game.state.add('MapMenu', CatchMice.MapMenu);
-CatchMice.game.state.add('Game', CatchMice.Game);
+SortingGame.game.state.add('Boot', SortingGame.Boot);
+SortingGame.game.state.add('Preload', SortingGame.Preload);
+SortingGame.game.state.add('MainMenu', SortingGame.MainMenu);
+SortingGame.game.state.add('LevelsMenu', SortingGame.LevelsMenu);
+SortingGame.game.state.add('PointsMenu', SortingGame.PointsMenu);
+SortingGame.game.state.add('Game', SortingGame.Game);
 
-CatchMice.level = 0;
-
-
-CatchMice.game.state.start('Boot');
+SortingGame.game.state.start('Boot');
