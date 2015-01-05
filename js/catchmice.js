@@ -831,9 +831,9 @@ var foodLocations = [[[690, 130, 'jabolko'], [510, 130, 'hruska'], [50, 120, 'ba
 //                     [[660, 460], [240, 320], [160, 100], [100, 460], [560, 60]],
 //                     [[360, 545], [645, 265], [400, 390], [120, 180], [45, 45]]];
 
-var mouseHolesLocations = [[[230, 380, 180], [170, 380, 180], [50, 550, -90], [590, 470, 0], [750, 50, 90]],
-                           [[50, 50, 0], [410, 130, 0], [740, 130, 0], [490, 390, -90], [360, 530, 0]],
-                           [[310, 140, -90], [130, 350, -90], [390, 50, 90], [740, 350, 90], [740, 540, 180]]];
+var mouseHolesLocations = [[[230, 380, -90], [170, 380, -90], [50, 550, 0], [590, 470, 90], [750, 50, 180]],
+                           [[50, 50, 90], [410, 130, 90], [740, 130, 90], [490, 390, 0], [360, 530, 90]],
+                           [[310, 140, 0], [130, 350, 0], [390, 50, 180], [740, 350, 180], [740, 540, -90]]];
 
 // FoodLocations: prvi nivo = level, drugi nivo = item, tretji nivo (prvi in drugi element) = koordinate
 // MouseHolesLocations: prvi nivo = level, drugi nivo = prvi element x, drugi element y, tretji element rotacija
@@ -1096,7 +1096,7 @@ CatchMice.MapMenu.prototype = {
     }
 
 };
-
+var mis = 0;
 CatchMice.Game.prototype = {
     
     create: function() {
@@ -1136,14 +1136,19 @@ CatchMice.Game.prototype = {
         this.carry.anchor.setTo(0.5, 0.5);
 
         //the camera will follow the player in the world
-        this.game.camera.follow(this.player);
+        //this.game.camera.follow(this.player);
+        
+        this.game.camera.follow(mouses[mis]);
 
         //show score
         this.showLabels();
 
         //enable player physics
-        this.game.physics.arcade.enable(this.player);
-        this.player.body.collideWorldBounds = true;
+        //this.game.physics.arcade.enable(this.player);
+        //this.player.body.collideWorldBounds = true;
+        
+        this.game.physics.arcade.enable(mouses[mis]);
+        mouses[mis].body.collideWorldBounds = true;
 
         // create the ability to control our player with the keyboard
         this.cursor = this.game.input.keyboard.createCursorKeys();
@@ -1156,7 +1161,8 @@ CatchMice.Game.prototype = {
         
         this.movePlayer();
         
-        this.game.physics.arcade.collide(this.player, this.layer);
+        //this.game.physics.arcade.collide(this.player, this.layer);
+        this.game.physics.arcade.collide(mouses[mis], this.layer);
 
         if(this.game.input.keyboard.isDown(Phaser.Keyboard.P)) {
             this.managePause();
@@ -1174,7 +1180,10 @@ CatchMice.Game.prototype = {
             this.game.physics.arcade.overlap(this.player, foodPick, this.pickFood, null, this); 
         }
 
-
+        if(this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR , 1)) {
+            console.log(mouses[mis].x+" "+mouses[mis].y+" "+mouses[mis].angle);
+        }
+        
     },
     
     // ----------------------------
@@ -1187,7 +1196,7 @@ CatchMice.Game.prototype = {
     // ----------------------------
     // Moving our player with the keyboard
     // ----------------------------
-    movePlayer: function() {
+    /*movePlayer: function() {
         // If the left arrow key is pressed
         if (this.cursor.left.isDown) {
             // Move the player to the left
@@ -1214,6 +1223,36 @@ CatchMice.Game.prototype = {
             this.carry.x = this.player.x;
             this.carry.y = this.player.y;
             this.carry.rotation = this.player.rotation;
+        }
+    },*/
+    
+    movePlayer: function() {
+        // If the left arrow key is pressed
+        if (this.cursor.left.isDown) {
+            // Move the player to the left
+            mouses[mis].angle -= 4;
+        // If the right arrow key is pressed
+        } else if (this.cursor.right.isDown) {
+            // Move the player to the right
+            mouses[mis].angle += 4;
+        }
+
+        // If the up arrow key
+        if (this.cursor.up.isDown) { 
+            // Move player up
+            currentSpeed = 140;
+        } else if (currentSpeed > 4) {
+            currentSpeed = 0;
+        } else {
+            currentSpeed = 0;
+        }
+
+        this.game.physics.arcade.velocityFromRotation(mouses[mis].rotation, currentSpeed, mouses[mis].body.velocity);
+
+        if(this.carry.alive) {
+            this.carry.x = mouses[mis].x;
+            this.carry.y = mouses[mis].y;
+            this.carry.rotation = mouses[mis].rotation;
         }
     },
 
@@ -1276,7 +1315,7 @@ CatchMice.Game.prototype = {
     generateMouseAnimations: function() {
         
         // LEVEL 1, MOUSE 2
-        // -------------------------------------------
+        // ------------------------------------------
         var mouse2toApple = this.game.add.tween(mouses[2])
             .to({x: 510, y: 545}, 4000, Phaser.Easing.Linear.None)
             .to({x: 510, y: 471}, 4000, Phaser.Easing.Linear.None) // going to another coordinate
