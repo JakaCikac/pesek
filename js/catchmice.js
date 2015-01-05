@@ -1288,7 +1288,6 @@ CatchMice.Game.prototype = {
             .to({x: 731, y: 117}, 4000, Phaser.Easing.Linear.None)
             .to({x: 678, y: 110}, 4000, Phaser.Easing.Linear.None);
         
-        
     },
 
     dropFood: function(player, collectable) {
