@@ -1387,47 +1387,66 @@ CatchMice.Game.prototype = {
         
         
         var level1Mouse1ToAnanas = this.game.add.tween(mouses[1])
-.to({x: 52, y: 50, angle: -180}, 4000, Phaser.Easing.Linear.None)
-.to({x: 49, y: 122, angle: 92}, 4000, Phaser.Easing.Linear.None)
-.to({x: 424, y: 129, angle: 88}, 4000, Phaser.Easing.Linear.None)
-.to({x: 430, y: 308, angle: 88}, 4000, Phaser.Easing.Linear.None)
-.to({x: 520, y: 310, angle: -20}, 4000, Phaser.Easing.Linear.None)
-.to({x: 510, y: 129, angle: -68}, 4000, Phaser.Easing.Linear.None)
-.to({x: 608, y: 131, angle: 12}, 4000, Phaser.Easing.Linear.None)
-.to({x: 611, y: 228, angle: 92}, 4000, Phaser.Easing.Linear.None)
-.to({x: 664, y: 229, angle: 4}, 4000, Phaser.Easing.Linear.None)
+.to({x: 170, y: 305, angle: -90}, 4000, Phaser.Easing.Linear.None)
+.to({x: 60, y: 312, angle: 94}, 4000, Phaser.Easing.Linear.None)
+.to({x: 49, y: 466, angle: 94}, 4000, Phaser.Easing.Linear.None)
+.to({x: 312, y: 467, angle: 6}, 4000, Phaser.Easing.Linear.None)
+.to({x: 322, y: 228, angle: -86}, 4000, Phaser.Easing.Linear.None)
+.to({x: 420, y: 229, angle: 18}, 4000, Phaser.Easing.Linear.None)
+.to({x: 415, y: 309, angle: 94}, 4000, Phaser.Easing.Linear.None)
+.to({x: 519, y: 311, angle: -62}, 4000, Phaser.Easing.Linear.None)
+.to({x: 519, y: 134, angle: -90}, 4000, Phaser.Easing.Linear.None)
+.to({x: 608, y: 133, angle: -178}, 4000, Phaser.Easing.Linear.None)
+.to({x: 615, y: 224, angle: 86}, 4000, Phaser.Easing.Linear.None)
+.to({x: 666, y: 229, angle: 6}, 4000, Phaser.Easing.Linear.None)
 ;
         
         var level1Mouse1ToBanana = this.game.add.tween(mouses[1])
-.to({x: 52, y: 50, angle: -180}, 4000, Phaser.Easing.Linear.None)
-.to({x: 49, y: 122, angle: 92}, 4000, Phaser.Easing.Linear.None)
+.to({x: 170, y: 307, angle: -90}, 4000, Phaser.Easing.Linear.None)
+.to({x: 77, y: 306, angle: -178}, 4000, Phaser.Easing.Linear.None)
+.to({x: 73, y: 468, angle: 86}, 4000, Phaser.Easing.Linear.None)
+.to({x: 311, y: 470, angle: 2}, 4000, Phaser.Easing.Linear.None)
+.to({x: 323, y: 217, angle: -86}, 4000, Phaser.Easing.Linear.None)
+.to({x: 416, y: 213, angle: 10}, 4000, Phaser.Easing.Linear.None)
+.to({x: 416, y: 126, angle: -90}, 4000, Phaser.Easing.Linear.None)
+.to({x: 54, y: 114, angle: -178}, 4000, Phaser.Easing.Linear.None)
 ;
         
         var level1Mouse1ToHruska = this.game.add.tween(mouses[1])
-.to({x: 52, y: 50, angle: -180}, 4000, Phaser.Easing.Linear.None)
-.to({x: 49, y: 122, angle: 92}, 4000, Phaser.Easing.Linear.None)
-.to({x: 424, y: 129, angle: 88}, 4000, Phaser.Easing.Linear.None)
-.to({x: 430, y: 308, angle: 88}, 4000, Phaser.Easing.Linear.None)
-.to({x: 520, y: 310, angle: -20}, 4000, Phaser.Easing.Linear.None)
-.to({x: 510, y: 129, angle: -68}, 4000, Phaser.Easing.Linear.None)
+.to({x: 170, y: 305, angle: -90}, 4000, Phaser.Easing.Linear.None)
+.to({x: 63, y: 309, angle: 178}, 4000, Phaser.Easing.Linear.None)
+.to({x: 75, y: 475, angle: 86}, 4000, Phaser.Easing.Linear.None)
+.to({x: 318, y: 468, angle: -86}, 4000, Phaser.Easing.Linear.None)
+.to({x: 335, y: 221, angle: -86}, 4000, Phaser.Easing.Linear.None)
+.to({x: 419, y: 218, angle: -2}, 4000, Phaser.Easing.Linear.None)
+.to({x: 419, y: 306, angle: 98}, 4000, Phaser.Easing.Linear.None)
+.to({x: 510, y: 310, angle: 2}, 4000, Phaser.Easing.Linear.None)
+.to({x: 508, y: 127, angle: -86}, 4000, Phaser.Easing.Linear.None)
 ;
         
         var level1Mouse1ToJabolko = this.game.add.tween(mouses[1])
-.to({x: 56, y: 50, angle: -180}, 4000, Phaser.Easing.Linear.None)
-.to({x: 54, y: 119, angle: 92}, 4000, Phaser.Easing.Linear.None)
-.to({x: 407, y: 127, angle: 3}, 4000, Phaser.Easing.Linear.None)
-.to({x: 408, y: 309, angle: 84}, 4000, Phaser.Easing.Linear.None)
-.to({x: 667, y: 308, angle: 4}, 4000, Phaser.Easing.Linear.None)
-.to({x: 664, y: 536, angle: -8}, 4000, Phaser.Easing.Linear.None)
-.to({x: 691, y: 135, angle: 179}, 4000, Phaser.Easing.Linear.None)
+.to({x: 170, y: 312, angle: -90}, 4000, Phaser.Easing.Linear.None)
+.to({x: 65, y: 310, angle: 2}, 4000, Phaser.Easing.Linear.None)
+.to({x: 75, y: 463, angle: 86}, 4000, Phaser.Easing.Linear.None)
+.to({x: 310, y: 470, angle: -2}, 4000, Phaser.Easing.Linear.None)
+.to({x: 322, y: 221, angle: -78}, 4000, Phaser.Easing.Linear.None)
+.to({x: 426, y: 221, angle: -86}, 4000, Phaser.Easing.Linear.None)
+.to({x: 426, y: 303, angle: 89}, 4000, Phaser.Easing.Linear.None)
+.to({x: 516, y: 305, angle: -2}, 4000, Phaser.Easing.Linear.None)
+.to({x: 669, y: 306, angle: 113}, 4000, Phaser.Easing.Linear.None)
+.to({x: 673, y: 546, angle: -34}, 4000, Phaser.Easing.Linear.None)
+.to({x: 755, y: 546, angle: -106}, 4000, Phaser.Easing.Linear.None)
+.to({x: 746, y: 141, angle: -98}, 4000, Phaser.Easing.Linear.None)
+.to({x: 688, y: 130, angle: -166}, 4000, Phaser.Easing.Linear.None)
 ;
         
         var level1Mouse1ToJagoda = this.game.add.tween(mouses[1])
-.to({x: 61, y: 50, angle: -180}, 4000, Phaser.Easing.Linear.None)
-.to({x: 64, y: 131, angle: 88}, 4000, Phaser.Easing.Linear.None)
-.to({x: 433, y: 131, angle: 92}, 4000, Phaser.Easing.Linear.None)
-.to({x: 430, y: 220, angle: 92}, 4000, Phaser.Easing.Linear.None)
-.to({x: 51, y: 220, angle: -168}, 4000, Phaser.Easing.Linear.None)
+.to({x: 171, y: 305, angle: -90}, 4000, Phaser.Easing.Linear.None)
+.to({x: 61, y: 305, angle: 85}, 4000, Phaser.Easing.Linear.None)
+.to({x: 72, y: 466, angle: 85}, 4000, Phaser.Easing.Linear.None)
+.to({x: 319, y: 475, angle: 1}, 4000, Phaser.Easing.Linear.None)
+.to({x: 323, y: 223, angle: -98}, 4000, Phaser.Easing.Linear.None)
+.to({x: 52, y: 218, angle: 177}, 4000, Phaser.Easing.Linear.None)
 ;
         
         var level1Mouse1To = [level1Mouse1ToJabolko, level1Mouse1ToHruska, level1Mouse1ToBanana, level1Mouse1ToJagoda, level1Mouse1ToAnanas];
@@ -1905,13 +1924,401 @@ CatchMice.Game.prototype = {
 .to({x: 98, y: 464, angle: -8}, 4000, Phaser.Easing.Linear.None)
 ;
         
-        var level2Mouse2To = [level2Mouse2ToJabolko, level2Mouse2ToHruska, level2Mouse2ToBanana, level2Mouse2ToJagoda, level2Mouse2ToAnanas];
+        var level2Mouse3To = [level2Mouse3ToJabolko, level2Mouse3ToHruska, level2Mouse3ToBanana, level2Mouse3ToJagoda, level2Mouse3ToAnanas];
         
         
+        var level2Mouse4ToAnanas = this.game.add.tween(mouses[4])
+.to({x: 360, y: 530, angle: 90}, 4000, Phaser.Easing.Linear.None)
+.to({x: 360, y: 563, angle: 2}, 4000, Phaser.Easing.Linear.None)
+.to({x: 464, y: 563, angle: -86}, 4000, Phaser.Easing.Linear.None)
+.to({x: 473, y: 456, angle: 178}, 4000, Phaser.Easing.Linear.None)
+.to({x: 268, y: 463, angle: 90}, 4000, Phaser.Easing.Linear.None)
+.to({x: 268, y: 563, angle: -178}, 4000, Phaser.Easing.Linear.None)
+.to({x: 186, y: 560, angle: -90}, 4000, Phaser.Easing.Linear.None)
+.to({x: 186, y: 396, angle: -6}, 4000, Phaser.Easing.Linear.None)
+.to({x: 328, y: 395, angle: -94}, 4000, Phaser.Easing.Linear.None)
+.to({x: 323, y: 56, angle: -6}, 4000, Phaser.Easing.Linear.None)
+.to({x: 488, y: 39, angle: 93}, 4000, Phaser.Easing.Linear.None)
+.to({x: 480, y: 153, angle: 5}, 4000, Phaser.Easing.Linear.None)
+.to({x: 647, y: 156, angle: -90}, 4000, Phaser.Easing.Linear.None)
+.to({x: 647, y: 36, angle: -178}, 4000, Phaser.Easing.Linear.None)
+.to({x: 556, y: 36, angle: 81}, 4000, Phaser.Easing.Linear.None)
+.to({x: 559, y: 57, angle: 81}, 4000, Phaser.Easing.Linear.None)
+;
+        
+        var level2Mouse4ToBanana = this.game.add.tween(mouses[4])
+.to({x: 360, y: 530, angle: 90}, 4000, Phaser.Easing.Linear.None)
+.to({x: 360, y: 563, angle: -6}, 4000, Phaser.Easing.Linear.None)
+.to({x: 469, y: 555, angle: -98}, 4000, Phaser.Easing.Linear.None)
+.to({x: 475, y: 457, angle: -178}, 4000, Phaser.Easing.Linear.None)
+.to({x: 266, y: 456, angle: 90}, 4000, Phaser.Easing.Linear.None)
+.to({x: 266, y: 563, angle: -162}, 4000, Phaser.Easing.Linear.None)
+.to({x: 183, y: 536, angle: -94}, 4000, Phaser.Easing.Linear.None)
+.to({x: 175, y: 396, angle: -178}, 4000, Phaser.Easing.Linear.None)
+.to({x: 44, y: 395, angle: -90}, 4000, Phaser.Easing.Linear.None)
+.to({x: 44, y: 188, angle: -6}, 4000, Phaser.Easing.Linear.None)
+.to({x: 248, y: 189, angle: -98}, 4000, Phaser.Easing.Linear.None)
+.to({x: 235, y: 59, angle: -166}, 4000, Phaser.Easing.Linear.None)
+.to({x: 168, y: 42, angle: 89}, 4000, Phaser.Easing.Linear.None)
+.to({x: 168, y: 101, angle: 89}, 4000, Phaser.Easing.Linear.None)
+;
+        
+        var level2Mouse4ToHruska = this.game.add.tween(mouses[4])
+.to({x: 360, y: 530, angle: 90}, 4000, Phaser.Easing.Linear.None)
+.to({x: 360, y: 563, angle: 6}, 4000, Phaser.Easing.Linear.None)
+.to({x: 466, y: 563, angle: -90}, 4000, Phaser.Easing.Linear.None)
+.to({x: 466, y: 456, angle: -174}, 4000, Phaser.Easing.Linear.None)
+.to({x: 266, y: 462, angle: 94}, 4000, Phaser.Easing.Linear.None)
+.to({x: 259, y: 563, angle: -178}, 4000, Phaser.Easing.Linear.None)
+.to({x: 205, y: 396, angle: 5}, 4000, Phaser.Easing.Linear.None)
+.to({x: 336, y: 259, angle: 177}, 4000, Phaser.Easing.Linear.None)
+.to({x: 128, y: 263, angle: 93}, 4000, Phaser.Easing.Linear.None)
+.to({x: 124, y: 329, angle: -6}, 4000, Phaser.Easing.Linear.None)
+.to({x: 235, y: 317, angle: -6}, 4000, Phaser.Easing.Linear.None)
+;
+        
+        var level2Mouse4ToJabolko = this.game.add.tween(mouses[4])
+.to({x: 360, y: 530, angle: 90}, 4000, Phaser.Easing.Linear.None)
+.to({x: 360, y: 563, angle: -2}, 4000, Phaser.Easing.Linear.None)
+.to({x: 474, y: 563, angle: -98}, 4000, Phaser.Easing.Linear.None)
+.to({x: 458, y: 456, angle: -174}, 4000, Phaser.Easing.Linear.None)
+.to({x: 268, y: 456, angle: 102}, 4000, Phaser.Easing.Linear.None)
+.to({x: 247, y: 563, angle: 178}, 4000, Phaser.Easing.Linear.None)
+.to({x: 187, y: 563, angle: -94}, 4000, Phaser.Easing.Linear.None)
+.to({x: 175, y: 396, angle: 9}, 4000, Phaser.Easing.Linear.None)
+.to({x: 327, y: 401, angle: -90}, 4000, Phaser.Easing.Linear.None)
+.to({x: 327, y: 40, angle: 1}, 4000, Phaser.Easing.Linear.None)
+.to({x: 485, y: 45, angle: 89}, 4000, Phaser.Easing.Linear.None)
+.to({x: 485, y: 150, angle: -6}, 4000, Phaser.Easing.Linear.None)
+.to({x: 644, y: 153, angle: 93}, 4000, Phaser.Easing.Linear.None)
+.to({x: 639, y: 220, angle: 169}, 4000, Phaser.Easing.Linear.None)
+.to({x: 573, y: 232, angle: 89}, 4000, Phaser.Easing.Linear.None)
+.to({x: 573, y: 300, angle: 13}, 4000, Phaser.Easing.Linear.None)
+.to({x: 629, y: 314, angle: 89}, 4000, Phaser.Easing.Linear.None)
+.to({x: 629, y: 459, angle: 1}, 4000, Phaser.Easing.Linear.None)
+.to({x: 664, y: 460, angle: 1}, 4000, Phaser.Easing.Linear.None)
+;
+        
+        var level2Mouse4ToJagoda = this.game.add.tween(mouses[4])
+.to({x: 360, y: 530, angle: 90}, 4000, Phaser.Easing.Linear.None)
+.to({x: 360, y: 563, angle: 6}, 4000, Phaser.Easing.Linear.None)
+.to({x: 469, y: 563, angle: -86}, 4000, Phaser.Easing.Linear.None)
+.to({x: 476, y: 456, angle: 178}, 4000, Phaser.Easing.Linear.None)
+.to({x: 257, y: 464, angle: 86}, 4000, Phaser.Easing.Linear.None)
+.to({x: 265, y: 563, angle: -174}, 4000, Phaser.Easing.Linear.None)
+.to({x: 40, y: 539, angle: -90}, 4000, Phaser.Easing.Linear.None)
+.to({x: 40, y: 456, angle: -2}, 4000, Phaser.Easing.Linear.None)
+.to({x: 108, y: 456, angle: -2}, 4000, Phaser.Easing.Linear.None)
+; 
+        
+        var level2Mouse4To = [level2Mouse4ToJabolko, level2Mouse4ToHruska, level2Mouse4ToBanana, level2Mouse4ToJagoda, level2Mouse4ToAnanas];
         
         
+        var level3Mouse0ToAnanas = this.game.add.tween(mouses[0])
+.to({x: 477, y: 140, angle: 0}, 4000, Phaser.Easing.Linear.None)
+.to({x: 481, y: 46, angle: -88}, 4000, Phaser.Easing.Linear.None)
+.to({x: 648, y: 52, angle: 4}, 4000, Phaser.Easing.Linear.None)
+.to({x: 652, y: 185, angle: 88}, 4000, Phaser.Easing.Linear.None)
+.to({x: 577, y: 190, angle: 175}, 4000, Phaser.Easing.Linear.None)
+.to({x: 570, y: 231, angle: 99}, 4000, Phaser.Easing.Linear.None)
+.to({x: 215, y: 231, angle: 179}, 4000, Phaser.Easing.Linear.None)
+.to({x: 221, y: 52, angle: -96}, 4000, Phaser.Easing.Linear.None)
+.to({x: 49, y: 40, angle: -176}, 4000, Phaser.Easing.Linear.None)
+;
+        
+        var level3Mouse0ToBanana = this.game.add.tween(mouses[0])
+.to({x: 482, y: 140, angle: 0}, 4000, Phaser.Easing.Linear.None)
+.to({x: 485, y: 46, angle: -88}, 4000, Phaser.Easing.Linear.None)
+.to({x: 644, y: 46, angle: 0}, 4000, Phaser.Easing.Linear.None)
+.to({x: 648, y: 183, angle: 92}, 4000, Phaser.Easing.Linear.None)
+.to({x: 564, y: 183, angle: -180}, 4000, Phaser.Easing.Linear.None)
+.to({x: 568, y: 232, angle: 88}, 4000, Phaser.Easing.Linear.None)
+.to({x: 269, y: 232, angle: -180}, 4000, Phaser.Easing.Linear.None)
+.to({x: 273, y: 306, angle: 15}, 4000, Phaser.Easing.Linear.None)
+.to({x: 487, y: 307, angle: 11}, 4000, Phaser.Easing.Linear.None)
+.to({x: 493, y: 471, angle: 87}, 4000, Phaser.Easing.Linear.None)
+.to({x: 347, y: 470, angle: -92}, 4000, Phaser.Easing.Linear.None)
+.to({x: 344, y: 388, angle: -92}, 4000, Phaser.Easing.Linear.None)
+.to({x: 408, y: 392, angle: 0}, 4000, Phaser.Easing.Linear.None)
+;
+        
+        var level3Mouse0ToHruska = this.game.add.tween(mouses[0])
+.to({x: 484, y: 140, angle: 0}, 4000, Phaser.Easing.Linear.None)
+.to({x: 481, y: 51, angle: -92}, 4000, Phaser.Easing.Linear.None)
+.to({x: 737, y: 50, angle: 3}, 4000, Phaser.Easing.Linear.None)
+.to({x: 737, y: 263, angle: -92}, 4000, Phaser.Easing.Linear.None)
+.to({x: 647, y: 265, angle: 24}, 4000, Phaser.Easing.Linear.None)
+;
+        
+        var level3Mouse0ToJabolko = this.game.add.tween(mouses[0])
+.to({x: 480, y: 140, angle: 0}, 4000, Phaser.Easing.Linear.None)
+.to({x: 483, y: 53, angle: -88}, 4000, Phaser.Easing.Linear.None)
+.to({x: 650, y: 52, angle: 84}, 4000, Phaser.Easing.Linear.None)
+.to({x: 646, y: 189, angle: 96}, 4000, Phaser.Easing.Linear.None)
+.to({x: 572, y: 196, angle: 96}, 4000, Phaser.Easing.Linear.None)
+.to({x: 568, y: 226, angle: -176}, 4000, Phaser.Easing.Linear.None)
+.to({x: 267, y: 225, angle: 140}, 4000, Phaser.Easing.Linear.None)
+.to({x: 275, y: 492, angle: 140}, 4000, Phaser.Easing.Linear.None)
+.to({x: 50, y: 499, angle: 176}, 4000, Phaser.Easing.Linear.None)
+.to({x: 44, y: 557, angle: 12}, 4000, Phaser.Easing.Linear.None)
+.to({x: 349, y: 559, angle: -40}, 4000, Phaser.Easing.Linear.None)
+;
+        
+        var level3Mouse0ToJagoda = this.game.add.tween(mouses[0])
+.to({x: 473, y: 140, angle: 0}, 4000, Phaser.Easing.Linear.None)
+.to({x: 482, y: 51, angle: -84}, 4000, Phaser.Easing.Linear.None)
+.to({x: 651, y: 45, angle: 12}, 4000, Phaser.Easing.Linear.None)
+.to({x: 644, y: 191, angle: 88}, 4000, Phaser.Easing.Linear.None)
+.to({x: 568, y: 197, angle: 84}, 4000, Phaser.Easing.Linear.None)
+.to({x: 569, y: 229, angle: 100}, 4000, Phaser.Easing.Linear.None)
+.to({x: 209, y: 230, angle: 108}, 4000, Phaser.Easing.Linear.None)
+.to({x: 197, y: 270, angle: 108}, 4000, Phaser.Easing.Linear.None)
+.to({x: 48, y: 270, angle: -168}, 4000, Phaser.Easing.Linear.None)
+.to({x: 55, y: 130, angle: -84}, 4000, Phaser.Easing.Linear.None)
+.to({x: 127, y: 128, angle: 3}, 4000, Phaser.Easing.Linear.None)
+.to({x: 128, y: 184, angle: 88}, 4000, Phaser.Easing.Linear.None)
+;
+        
+        var level3Mouse0To = [level3Mouse0ToJabolko, level3Mouse0ToHruska, level3Mouse0ToBanana, level3Mouse0ToJagoda, level3Mouse0ToAnanas];
         
         
+        var level3Mouse1ToAnanas = this.game.add.tween(mouses[1])
+.to({x: 195, y: 350, angle: 0}, 4000, Phaser.Easing.Linear.None)
+.to({x: 192, y: 431, angle: 92}, 4000, Phaser.Easing.Linear.None)
+.to({x: 52, y: 428, angle: -88}, 4000, Phaser.Easing.Linear.None)
+.to({x: 54, y: 263, angle: 11}, 4000, Phaser.Easing.Linear.None)
+.to({x: 220, y: 256, angle: -92}, 4000, Phaser.Easing.Linear.None)
+.to({x: 213, y: 49, angle: -92}, 4000, Phaser.Easing.Linear.None)
+.to({x: 45, y: 49, angle: 179}, 4000, Phaser.Easing.Linear.None)
+;
+        
+        var level3Mouse1ToBanana = this.game.add.tween(mouses[1])
+.to({x: 199, y: 350, angle: 0}, 4000, Phaser.Easing.Linear.None)
+.to({x: 184, y: 432, angle: 100}, 4000, Phaser.Easing.Linear.None)
+.to({x: 56, y: 423, angle: -176}, 4000, Phaser.Easing.Linear.None)
+.to({x: 52, y: 269, angle: -64}, 4000, Phaser.Easing.Linear.None)
+.to({x: 266, y: 277, angle: 3}, 4000, Phaser.Easing.Linear.None)
+.to({x: 278, y: 308, angle: 67}, 4000, Phaser.Easing.Linear.None)
+.to({x: 488, y: 313, angle: -4}, 4000, Phaser.Easing.Linear.None)
+.to({x: 485, y: 466, angle: 72}, 4000, Phaser.Easing.Linear.None)
+.to({x: 350, y: 466, angle: -180}, 4000, Phaser.Easing.Linear.None)
+.to({x: 348, y: 389, angle: -84}, 4000, Phaser.Easing.Linear.None)
+.to({x: 404, y: 389, angle: 0}, 4000, Phaser.Easing.Linear.None)
+;
+        
+        var level3Mouse1ToHruska = this.game.add.tween(mouses[1])
+.to({x: 193, y: 350, angle: 0}, 4000, Phaser.Easing.Linear.None)
+.to({x: 191, y: 429, angle: 84}, 4000, Phaser.Easing.Linear.None)
+.to({x: 44, y: 429, angle: -180}, 4000, Phaser.Easing.Linear.None)
+.to({x: 40, y: 265, angle: -92}, 4000, Phaser.Easing.Linear.None)
+.to({x: 269, y: 265, angle: 0}, 4000, Phaser.Easing.Linear.None)
+.to({x: 273, y: 231, angle: -92}, 4000, Phaser.Easing.Linear.None)
+.to({x: 563, y: 225, angle: 0}, 4000, Phaser.Easing.Linear.None)
+.to({x: 590, y: 163, angle: -40}, 4000, Phaser.Easing.Linear.None)
+.to({x: 645, y: 139, angle: -36}, 4000, Phaser.Easing.Linear.None)
+.to({x: 655, y: 97, angle: -92}, 4000, Phaser.Easing.Linear.None)
+.to({x: 654, y: 52, angle: -68}, 4000, Phaser.Easing.Linear.None)
+.to({x: 735, y: 54, angle: 43}, 4000, Phaser.Easing.Linear.None)
+.to({x: 737, y: 261, angle: 92}, 4000, Phaser.Easing.Linear.None)
+.to({x: 644, y: 264, angle: -168}, 4000, Phaser.Easing.Linear.None)
+;
+        
+        var level3Mouse1ToJabolko = this.game.add.tween(mouses[1])
+.to({x: 130, y: 350, angle: 0}, 4000, Phaser.Easing.Linear.None)
+.to({x: 188, y: 350, angle: 0}, 4000, Phaser.Easing.Linear.None)
+.to({x: 191, y: 429, angle: 88}, 4000, Phaser.Easing.Linear.None)
+.to({x: 49, y: 431, angle: -88}, 4000, Phaser.Easing.Linear.None)
+.to({x: 50, y: 270, angle: -16}, 4000, Phaser.Easing.Linear.None)
+.to({x: 272, y: 270, angle: 0}, 4000, Phaser.Easing.Linear.None)
+.to({x: 268, y: 499, angle: 96}, 4000, Phaser.Easing.Linear.None)
+.to({x: 48, y: 500, angle: -172}, 4000, Phaser.Easing.Linear.None)
+.to({x: 45, y: 559, angle: 92}, 4000, Phaser.Easing.Linear.None)
+.to({x: 363, y: 551, angle: -92}, 4000, Phaser.Easing.Linear.None)
+;
+        
+        var level3Mouse1ToJagoda = this.game.add.tween(mouses[1])
+.to({x: 193, y: 350, angle: 0}, 4000, Phaser.Easing.Linear.None)
+.to({x: 190, y: 429, angle: 92}, 4000, Phaser.Easing.Linear.None)
+.to({x: 48, y: 428, angle: -84}, 4000, Phaser.Easing.Linear.None)
+.to({x: 48, y: 127, angle: 47}, 4000, Phaser.Easing.Linear.None)
+.to({x: 128, y: 127, angle: 83}, 4000, Phaser.Easing.Linear.None)
+.to({x: 125, y: 182, angle: 83}, 4000, Phaser.Easing.Linear.None)
+;
+        
+        var level3Mouse1To = [level3Mouse1ToJabolko, level3Mouse1ToHruska, level3Mouse1ToBanana, level3Mouse1ToJagoda, level3Mouse1ToAnanas];
+        
+        
+        var level3Mouse2ToAnanas = this.game.add.tween(mouses[2])
+.to({x: 44, y: 50, angle: -180}, 4000, Phaser.Easing.Linear.None)
+;
+        
+        var level3Mouse2ToBanana = this.game.add.tween(mouses[2])
+.to({x: 217, y: 50, angle: -180}, 4000, Phaser.Easing.Linear.None)
+.to({x: 229, y: 228, angle: 92}, 4000, Phaser.Easing.Linear.None)
+.to({x: 270, y: 234, angle: -16}, 4000, Phaser.Easing.Linear.None)
+.to({x: 270, y: 316, angle: 84}, 4000, Phaser.Easing.Linear.None)
+.to({x: 487, y: 316, angle: 0}, 4000, Phaser.Easing.Linear.None)
+.to({x: 493, y: 474, angle: 88}, 4000, Phaser.Easing.Linear.None)
+.to({x: 346, y: 464, angle: -92}, 4000, Phaser.Easing.Linear.None)
+.to({x: 344, y: 392, angle: -92}, 4000, Phaser.Easing.Linear.None)
+.to({x: 404, y: 387, angle: -4}, 4000, Phaser.Easing.Linear.None)
+;
+        
+        var level3Mouse2ToHruska = this.game.add.tween(mouses[2])
+.to({x: 226, y: 50, angle: -180}, 4000, Phaser.Easing.Linear.None)
+.to({x: 208, y: 225, angle: 92}, 4000, Phaser.Easing.Linear.None)
+.to({x: 570, y: 230, angle: -4}, 4000, Phaser.Easing.Linear.None)
+.to({x: 567, y: 127, angle: -92}, 4000, Phaser.Easing.Linear.None)
+.to({x: 655, y: 127, angle: 0}, 4000, Phaser.Easing.Linear.None)
+.to({x: 648, y: 44, angle: -92}, 4000, Phaser.Easing.Linear.None)
+.to({x: 733, y: 51, angle: 15}, 4000, Phaser.Easing.Linear.None)
+.to({x: 740, y: 261, angle: 88}, 4000, Phaser.Easing.Linear.None)
+.to({x: 652, y: 264, angle: -180}, 4000, Phaser.Easing.Linear.None)
+;
+        
+        var level3Mouse2ToJabolko = this.game.add.tween(mouses[2])
+.to({x: 226, y: 50, angle: -180}, 4000, Phaser.Easing.Linear.None)
+.to({x: 220, y: 230, angle: 88}, 4000, Phaser.Easing.Linear.None)
+.to({x: 266, y: 236, angle: 8}, 4000, Phaser.Easing.Linear.None)
+.to({x: 265, y: 499, angle: 88}, 4000, Phaser.Easing.Linear.None)
+.to({x: 46, y: 500, angle: -168}, 4000, Phaser.Easing.Linear.None)
+.to({x: 52, y: 558, angle: 84}, 4000, Phaser.Easing.Linear.None)
+.to({x: 362, y: 552, angle: -20}, 4000, Phaser.Easing.Linear.None)
+;
+        
+        var level3Mouse2ToJagoda = this.game.add.tween(mouses[2])
+.to({x: 224, y: 50, angle: -180}, 4000, Phaser.Easing.Linear.None)
+.to({x: 232, y: 273, angle: 88}, 4000, Phaser.Easing.Linear.None)
+.to({x: 54, y: 262, angle: -168}, 4000, Phaser.Easing.Linear.None)
+.to({x: 57, y: 126, angle: -56}, 4000, Phaser.Easing.Linear.None)
+.to({x: 130, y: 126, angle: 0}, 4000, Phaser.Easing.Linear.None)
+.to({x: 127, y: 189, angle: 100}, 4000, Phaser.Easing.Linear.None)
+;
+        
+        var level3Mouse2To = [level3Mouse2ToJabolko, level3Mouse2ToHruska, level3Mouse2ToBanana, level3Mouse2ToJagoda, level3Mouse2ToAnanas];
+        
+        
+        var level3Mouse3ToAnanas = this.game.add.tween(mouses[3])
+.to({x: 566, y: 351, angle: -168}, 4000, Phaser.Easing.Linear.None)
+.to({x: 564, y: 229, angle: -112}, 4000, Phaser.Easing.Linear.None)
+.to({x: 214, y: 237, angle: -180}, 4000, Phaser.Easing.Linear.None)
+.to({x: 227, y: 256, angle: -100}, 4000, Phaser.Easing.Linear.None)
+.to({x: 220, y: 51, angle: -80}, 4000, Phaser.Easing.Linear.None)
+.to({x: 55, y: 51, angle: 175}, 4000, Phaser.Easing.Linear.None)
+;
+        
+        var level3Mouse3ToBanana = this.game.add.tween(mouses[3])
+.to({x: 576, y: 350, angle: -180}, 4000, Phaser.Easing.Linear.None)
+.to({x: 572, y: 228, angle: -92}, 4000, Phaser.Easing.Linear.None)
+.to({x: 266, y: 234, angle: 176}, 4000, Phaser.Easing.Linear.None)
+.to({x: 274, y: 310, angle: 84}, 4000, Phaser.Easing.Linear.None)
+.to({x: 482, y: 473, angle: 96}, 4000, Phaser.Easing.Linear.None)
+.to({x: 358, y: 464, angle: 176}, 4000, Phaser.Easing.Linear.None)
+.to({x: 355, y: 392, angle: -92}, 4000, Phaser.Easing.Linear.None)
+.to({x: 401, y: 385, angle: -8}, 4000, Phaser.Easing.Linear.None)
+;
+        
+        var level3Mouse3ToHruska = this.game.add.tween(mouses[3])
+.to({x: 571, y: 350, angle: -180}, 4000, Phaser.Easing.Linear.None)
+.to({x: 571, y: 140, angle: 84}, 4000, Phaser.Easing.Linear.None)
+.to({x: 645, y: 145, angle: 4}, 4000, Phaser.Easing.Linear.None)
+.to({x: 648, y: 48, angle: -92}, 4000, Phaser.Easing.Linear.None)
+.to({x: 737, y: 49, angle: -8}, 4000, Phaser.Easing.Linear.None)
+.to({x: 729, y: 259, angle: 92}, 4000, Phaser.Easing.Linear.None)
+.to({x: 648, y: 270, angle: 172}, 4000, Phaser.Easing.Linear.None)
+;
+        
+        var level3Mouse3ToJabolko = this.game.add.tween(mouses[3])
+.to({x: 567, y: 350, angle: -180}, 4000, Phaser.Easing.Linear.None)
+.to({x: 571, y: 228, angle: -88}, 4000, Phaser.Easing.Linear.None)
+.to({x: 265, y: 229, angle: 176}, 4000, Phaser.Easing.Linear.None)
+.to({x: 264, y: 492, angle: 112}, 4000, Phaser.Easing.Linear.None)
+.to({x: 50, y: 500, angle: -160}, 4000, Phaser.Easing.Linear.None)
+.to({x: 52, y: 559, angle: 88}, 4000, Phaser.Easing.Linear.None)
+.to({x: 359, y: 548, angle: -36}, 4000, Phaser.Easing.Linear.None)
+;
+        
+        var level3Mouse3ToJagoda = this.game.add.tween(mouses[3])
+.to({x: 574, y: 350, angle: -180}, 4000, Phaser.Easing.Linear.None)
+.to({x: 570, y: 228, angle: -92}, 4000, Phaser.Easing.Linear.None)
+.to({x: 264, y: 230, angle: 119}, 4000, Phaser.Easing.Linear.None)
+.to({x: 183, y: 271, angle: -164}, 4000, Phaser.Easing.Linear.None)
+.to({x: 57, y: 260, angle: -164}, 4000, Phaser.Easing.Linear.None)
+.to({x: 48, y: 139, angle: -84}, 4000, Phaser.Easing.Linear.None)
+.to({x: 124, y: 128, angle: -8}, 4000, Phaser.Easing.Linear.None)
+.to({x: 125, y: 178, angle: 79}, 4000, Phaser.Easing.Linear.None)
+;
+        
+        var level3Mouse3To = [level3Mouse3ToJabolko, level3Mouse3ToHruska, level3Mouse3ToBanana, level3Mouse3ToJagoda, level3Mouse3ToAnanas];
+        
+        var level3Mouse4ToAnanas = this.game.add.tween(mouses[4])
+.to({x: 740, y: 425, angle: -90}, 4000, Phaser.Easing.Linear.None)
+.to({x: 649, y: 428, angle: -178}, 4000, Phaser.Easing.Linear.None)
+.to({x: 640, y: 541, angle: 106}, 4000, Phaser.Easing.Linear.None)
+.to({x: 476, y: 540, angle: -82}, 4000, Phaser.Easing.Linear.None)
+.to({x: 486, y: 308, angle: -94}, 4000, Phaser.Easing.Linear.None)
+.to({x: 271, y: 316, angle: -170}, 4000, Phaser.Easing.Linear.None)
+.to({x: 247, y: 234, angle: -106}, 4000, Phaser.Easing.Linear.None)
+.to({x: 209, y: 224, angle: -166}, 4000, Phaser.Easing.Linear.None)
+.to({x: 229, y: 51, angle: -86}, 4000, Phaser.Easing.Linear.None)
+.to({x: 46, y: 50, angle: 173}, 4000, Phaser.Easing.Linear.None)
+;
+        
+        var level3Mouse4ToBanana = this.game.add.tween(mouses[3])
+.to({x: 740, y: 430, angle: -90}, 4000, Phaser.Easing.Linear.None)
+.to({x: 645, y: 434, angle: 109}, 4000, Phaser.Easing.Linear.None)
+.to({x: 652, y: 542, angle: 105}, 4000, Phaser.Easing.Linear.None)
+.to({x: 472, y: 543, angle: -150}, 4000, Phaser.Easing.Linear.None)
+.to({x: 477, y: 476, angle: -86}, 4000, Phaser.Easing.Linear.None)
+.to({x: 350, y: 393, angle: -90}, 4000, Phaser.Easing.Linear.None)
+.to({x: 396, y: 392, angle: -2}, 4000, Phaser.Easing.Linear.None)
+;
+        
+        var level3Mouse4ToHruska = this.game.add.tween(mouses[4])
+.to({x: 740, y: 428, angle: -90}, 4000, Phaser.Easing.Linear.None)
+.to({x: 655, y: 424, angle: 122}, 4000, Phaser.Easing.Linear.None)
+.to({x: 640, y: 542, angle: 90}, 4000, Phaser.Easing.Linear.None)
+.to({x: 489, y: 537, angle: -158}, 4000, Phaser.Easing.Linear.None)
+.to({x: 493, y: 306, angle: -170}, 4000, Phaser.Easing.Linear.None)
+.to({x: 273, y: 300, angle: -174}, 4000, Phaser.Easing.Linear.None)
+.to({x: 263, y: 230, angle: -66}, 4000, Phaser.Easing.Linear.None)
+.to({x: 569, y: 238, angle: -2}, 4000, Phaser.Easing.Linear.None)
+.to({x: 570, y: 133, angle: -46}, 4000, Phaser.Easing.Linear.None)
+.to({x: 656, y: 116, angle: -14}, 4000, Phaser.Easing.Linear.None)
+.to({x: 661, y: 52, angle: -70}, 4000, Phaser.Easing.Linear.None)
+.to({x: 735, y: 59, angle: 61}, 4000, Phaser.Easing.Linear.None)
+.to({x: 730, y: 267, angle: 97}, 4000, Phaser.Easing.Linear.None)
+.to({x: 651, y: 270, angle: 177}, 4000, Phaser.Easing.Linear.None)
+;
+        
+        var level3Mouse4ToJabolko = this.game.add.tween(mouses[3])
+.to({x: 740, y: 425, angle: -90}, 4000, Phaser.Easing.Linear.None)
+.to({x: 656, y: 425, angle: 178}, 4000, Phaser.Easing.Linear.None)
+.to({x: 648, y: 548, angle: -158}, 4000, Phaser.Easing.Linear.None)
+.to({x: 484, y: 540, angle: -154}, 4000, Phaser.Easing.Linear.None)
+.to({x: 493, y: 310, angle: -94}, 4000, Phaser.Easing.Linear.None)
+.to({x: 292, y: 306, angle: 177}, 4000, Phaser.Easing.Linear.None)
+.to({x: 261, y: 498, angle: 113}, 4000, Phaser.Easing.Linear.None)
+.to({x: 40, y: 500, angle: -166}, 4000, Phaser.Easing.Linear.None)
+.to({x: 59, y: 559, angle: 57}, 4000, Phaser.Easing.Linear.None)
+.to({x: 360, y: 545, angle: -46}, 4000, Phaser.Easing.Linear.None)
+;
+        
+        var level3Mouse4ToJagoda = this.game.add.tween(mouses[4])
+.to({x: 743, y: 426, angle: -90}, 4000, Phaser.Easing.Linear.None)
+.to({x: 643, y: 423, angle: -178}, 4000, Phaser.Easing.Linear.None)
+.to({x: 642, y: 536, angle: 97}, 4000, Phaser.Easing.Linear.None)
+.to({x: 485, y: 555, angle: -94}, 4000, Phaser.Easing.Linear.None)
+.to({x: 483, y: 304, angle: 165}, 4000, Phaser.Easing.Linear.None)
+.to({x: 275, y: 311, angle: -178}, 4000, Phaser.Easing.Linear.None)
+.to({x: 272, y: 255, angle: -130}, 4000, Phaser.Easing.Linear.None)
+.to({x: 68, y: 275, angle: -162}, 4000, Phaser.Easing.Linear.None)
+.to({x: 51, y: 127, angle: -74}, 4000, Phaser.Easing.Linear.None)
+.to({x: 127, y: 127, angle: 89}, 4000, Phaser.Easing.Linear.None)
+.to({x: 127, y: 183, angle: 89}, 4000, Phaser.Easing.Linear.None)
+;
+        
+        var level3Mouse4To = [level3Mouse4ToJabolko, level3Mouse4ToHruska, level3Mouse4ToBanana, level3Mouse4ToJagoda, level3Mouse4ToAnanas];
         
     },
     
