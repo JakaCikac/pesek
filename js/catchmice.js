@@ -1096,12 +1096,15 @@ CatchMice.MapMenu.prototype = {
     }
 
 };
-var mis = 0;
+var mis = 4;
 CatchMice.Game.prototype = {
     
     create: function() {
         //player initial score of zero
         this.playerScore = 0;
+        //show score
+        this.showLabels();
+
         foodToDrop = foodLocations[CatchMice.level];
         holeForMap = mouseHolesLocations[CatchMice.level];
         
@@ -1136,19 +1139,15 @@ CatchMice.Game.prototype = {
         this.carry.anchor.setTo(0.5, 0.5);
 
         //the camera will follow the player in the world
-        //this.game.camera.follow(this.player);
+        this.game.camera.follow(this.player);
         
-        this.game.camera.follow(mouses[mis]);
-
-        //show score
-        this.showLabels();
-
         //enable player physics
-        //this.game.physics.arcade.enable(this.player);
-        //this.player.body.collideWorldBounds = true;
+        this.game.physics.arcade.enable(this.player);
+        this.player.body.collideWorldBounds = true;
         
-        this.game.physics.arcade.enable(mouses[mis]);
-        mouses[mis].body.collideWorldBounds = true;
+        //this.game.camera.follow(mouses[mis]);
+        //this.game.physics.arcade.enable(mouses[mis]);
+        //mouses[mis].body.collideWorldBounds = true;
 
         // create the ability to control our player with the keyboard
         this.cursor = this.game.input.keyboard.createCursorKeys();
@@ -1161,8 +1160,8 @@ CatchMice.Game.prototype = {
         
         this.movePlayer();
         
-        //this.game.physics.arcade.collide(this.player, this.layer);
-        this.game.physics.arcade.collide(mouses[mis], this.layer);
+        this.game.physics.arcade.collide(this.player, this.layer);
+        //this.game.physics.arcade.collide(mouses[mis], this.layer);
 
         if(this.game.input.keyboard.isDown(Phaser.Keyboard.P)) {
             this.managePause();
@@ -1196,7 +1195,7 @@ CatchMice.Game.prototype = {
     // ----------------------------
     // Moving our player with the keyboard
     // ----------------------------
-    /*movePlayer: function() {
+    movePlayer: function() {
         // If the left arrow key is pressed
         if (this.cursor.left.isDown) {
             // Move the player to the left
@@ -1224,9 +1223,10 @@ CatchMice.Game.prototype = {
             this.carry.y = this.player.y;
             this.carry.rotation = this.player.rotation;
         }
-    },*/
+    },
     
-    movePlayer: function() {
+    // Koda za premikanje miši
+    /* movePlayer: function() {
         // If the left arrow key is pressed
         if (this.cursor.left.isDown) {
             // Move the player to the left
@@ -1254,7 +1254,7 @@ CatchMice.Game.prototype = {
             this.carry.y = mouses[mis].y;
             this.carry.rotation = mouses[mis].rotation;
         }
-    },
+    },*/
 
     generateFoods: function() {
 
@@ -1297,7 +1297,7 @@ CatchMice.Game.prototype = {
             mouse = this.game.add.sprite(holeForMap[i][0], holeForMap[i][1], 'mouse');
             mouse_tween = this.add.tween(mouse); // init tween for mousey
 
-            mouse.scale.setTo(0.5);
+            mouse.scale.setTo(0.4);
             mouse.anchor.setTo(0.5, 0.5);
             mouse.name = foodList[i];
             mouse.angle = holeForMap[i][2];
