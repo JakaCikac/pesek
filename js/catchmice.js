@@ -819,8 +819,21 @@ CatchMice.MapMenu = function(){};
 CatchMice.Game = function(){};
 
 // Global variables
+var username;
+var first_name;
+var last_name;
+var score;
+var highScore;
+
+var name;
+var difficulty;
+var time_limit;
+var levels;
+var retries_available;
+var lang_code;
+var resources;
+
 var obj;
-var resource;
 var buttonL1, buttonL2, buttonL3;
 var layer;
 var currentSpeed = 0;
@@ -862,53 +875,88 @@ CatchMice.Boot.prototype = {
     preload: function() {
         
            
-//        // Retrieve game properties
-//        var xhr = new XMLHttpRequest();
-//        xhr.open("GET", "http://private-anon-019bb2358-elearningapi.apiary-mock.com/api/v1/classroom/1/game/15/");
-//        xhr.onreadystatechange = function () {
-//          if (this.readyState == 4) {
-//            alert('Status: '+this.status+'\nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'\nBody: '+this.responseText);
-//          }
-//        };
-//        xhr.send(null);
-//        
-//        // Retrieve highscore table
-//        var xhr = new XMLHttpRequest();
-//        xhr.open("GET", "http://private-anon-298012bef-elearningapi.apiary-mock.com/api/v1/classroom/1/game/15/highscores/");
-//        xhr.onreadystatechange = function () {
-//            if (this.readyState == 4) {
-//                alert('Status: '+this.status+'\nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'\nBody: '+this.responseText);
-//            }
-//        };
-//        xhr.send(null);
-//        
-//        // Report user score
-//        var xhr = new XMLHttpRequest();
-//        xhr.open("POST", "http://private-anon-019bb2358-elearningapi.apiary-mock.com/api/v1/classroom/1/game/15/score/");
-//        xhr.setRequestHeader("Content-Type", "application/json");
-//        xhr.onreadystatechange = function () {
-//          if (this.readyState == 4) {
-//            alert('Status: '+this.status+'\nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'\nBody: '+this.responseText);
-//          }
-//        };
-//        xhr.send("{\n    \"score\": 12\n}");
-//        
-//        // Retrieve current user
-//        var xhr = new XMLHttpRequest();
-//        xhr.open("GET", "http://private-anon-019bb2358-elearningapi.apiary-mock.com/api/v1/users/me/");
-//        xhr.onreadystatechange = function () {
-//          if (this.readyState == 4) {
-//            alert('Status: '+this.status+'\nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'\nBody: '+this.responseText);
-//          }
-//        };
-//        xhr.send(null);
+         // Retrieve current user
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "http://private-anon-019bb2358-elearningapi.apiary-mock.com/api/v1/users/me/");
+        xhr.onreadystatechange = function () {
+          if (this.readyState == 4) {
+              body = JSON.parse(JSON.stringify(this.responseText));
+              
+              username = body.username;
+              first_name = body.first_name;
+              last_name = body.last_name;
+              
+            alert('Status: '+this.status+'\nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'\nBody: '+this.responseText);
+          }
+        };
+        xhr.send(null);
+        
+        
+        // Retrieve highscore table
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "http://private-anon-298012bef-elearningapi.apiary-mock.com/api/v1/classroom/1/game/15/highscores/");
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4) {
+                body = JSON.parse(JSON.stringify(this.responseText));
+                
+                var max = 0;
+                for (x in body){
+                    if(body[x].username == username){
+                        score = body[x].score;
+                    }
+                    if(body[x].score > max){
+                        max = body[x].score;
+                    }
+                }
+                highScore = max;
+                
+                alert('Status: '+this.status+'\nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'\nBody: '+this.responseText);
+            }
+        };
+        xhr.send(null);
+        
+        
+        // Retrieve game properties
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "http://private-anon-019bb2358-elearningapi.apiary-mock.com/api/v1/classroom/1/game/15/");
+        xhr.onreadystatechange = function () {
+          if (this.readyState == 4) {
+              body = JSON.parse(JSON.stringify(this.responseText));
+              
+              name = body.name;
+              difficulty = body.difficulty;
+              time_limit = body.time_limit;
+              levels = body.levels;
+              retries_available = body.retries_available;
+              lang_code = body.lang_code;
+              resources = body.resources;
+              
+            alert('Status: '+this.status+'\nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'\nBody: '+this.responseText);
+          }
+        };
+        xhr.send(null);
+        
+        
+        
+        // Report user score
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://private-anon-019bb2358-elearningapi.apiary-mock.com/api/v1/classroom/1/game/15/score/");
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function () {
+          if (this.readyState == 4) {
+            alert('Status: '+this.status+'\nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'\nBody: '+this.responseText);
+          }
+        };
+        xhr.send("{\n    \"score\": 12\n}");
+        
+       
         
         obj = JSON.parse(JSON.stringify(generatedJSON));
         
-        resource = obj.resources;
-        for (x in resource){
-            if (resource[x].machine_name == 'logo' || resource[x].machine_name == 'preloadbar'){
-                this.load.image(resource[x].machine_name, resource[x].value);
+        resources = obj.resources;
+        for (x in resources){
+            if (resources[x].machine_name == 'logo' || resources[x].machine_name == 'preloadbar'){
+                this.load.image(resources[x].machine_name, resources[x].value);
             }
         }
         
@@ -958,12 +1006,12 @@ CatchMice.Preload.prototype = {
 
         var imageList = ['wood', 'wall', 'background_main', 'background_map', 'player', 'mouse', 'mouseHole', 'jabolko', 'hruska', 'banana', 'jagoda', 'ananas', 'drop_place'];
         var spritesheetList = ['button_play', 'button_back', 'button_map', 'button_level1', 'button_level2', 'button_level3'];
-        for (x in resource){
+        for (x in resources){
             var b = true;
             
             for (y in imageList){
-                if (resource[x].machine_name == imageList[y]){
-                    this.load.image(resource[x].machine_name, resource[x].value);
+                if (resources[x].machine_name == imageList[y]){
+                    this.load.image(resources[x].machine_name, resources[x].value);
                     b = false;
                     break;
                 }
@@ -971,16 +1019,16 @@ CatchMice.Preload.prototype = {
             
             if (b){
                 for (z in spritesheetList){
-                    if (resource[x].machine_name == spritesheetList[z]){
-                        this.load.spritesheet(resource[x].machine_name, resource[x].value, 193, 71);
+                    if (resources[x].machine_name == spritesheetList[z]){
+                        this.load.spritesheet(resources[x].machine_name, resources[x].value, 193, 71);
                         b = false;
                         break;
                     }
                 }
             }
             
-            if(resource[x].machine_name == 'collect'){
-                this.load.audio(resource[x].machine_name, resource[x].value);
+            if(resources[x].machine_name == 'collect'){
+                this.load.audio(resources[x].machine_name, resources[x].value);
             }
         }
         
