@@ -877,10 +877,9 @@ CatchMice.Boot.prototype = {
            
          // Retrieve current user
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", "http://private-anon-019bb2358-elearningapi.apiary-mock.com/api/v1/users/me/");
         xhr.onreadystatechange = function () {
           if (this.readyState == 4) {
-              body = JSON.parse(JSON.stringify(this.responseText));
+              body = JSON.parse(this.responseText);
               
               username = body.username;
               first_name = body.first_name;
@@ -889,6 +888,7 @@ CatchMice.Boot.prototype = {
             alert('Status: '+this.status+'\nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'\nBody: '+this.responseText);
           }
         };
+        xhr.open("GET", "http://private-anon-019bb2358-elearningapi.apiary-mock.com/api/v1/users/me/");
         xhr.send(null);
         
         
@@ -897,7 +897,7 @@ CatchMice.Boot.prototype = {
         xhr.open("GET", "http://private-anon-298012bef-elearningapi.apiary-mock.com/api/v1/classroom/1/game/15/highscores/");
         xhr.onreadystatechange = function () {
             if (this.readyState == 4) {
-                body = JSON.parse(JSON.stringify(this.responseText));
+                body = JSON.parse(this.responseText);
                 
                 var max = 0;
                 for (x in body){
@@ -921,7 +921,7 @@ CatchMice.Boot.prototype = {
         xhr.open("GET", "http://private-anon-019bb2358-elearningapi.apiary-mock.com/api/v1/classroom/1/game/15/");
         xhr.onreadystatechange = function () {
           if (this.readyState == 4) {
-              body = JSON.parse(JSON.stringify(this.responseText));
+              body = JSON.parse(this.responseText);
               
               name = body.name;
               difficulty = body.difficulty;
