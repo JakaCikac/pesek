@@ -24,29 +24,40 @@ SortingGame.Preload.prototype = {
     this.load.spritesheet('button_play',   'assets/images/button_play.png', 193, 71);
     this.load.spritesheet('button_back',   'assets/images/button_back.png', 193, 71);
     this.load.spritesheet('button_levels', 'assets/images/button_levels.png', 193, 71);
-    //this.load.spritesheet('button_easy',   'assets/iamges/button_easy.png', 193, 71);
+    this.load.spritesheet('button_easy',   'assets/iamges/button_easy.png', 193, 71);
     this.load.spritesheet('button_normal', 'assets/images/button_normal.png', 193, 71);
     this.load.spritesheet('button_hard',   'assets/images/button_hard.png', 193, 71);
     this.load.spritesheet('button_points', 'assets/images/button_points.png', 193, 71);
+    this.load.spritesheet('button_reload', 'assets/images/button_reload.png', 193, 71);
+    this.load.spritesheet('button_save',   'assets/images/button_save.png', 193, 71);
       // naredi in dodaj:
     //this.load.spritesheet('button_up', 'assets/images/arrow-button_up.png', 95, 112);
     //this.load.spritesheet('button_down', 'assets/iamges/arrow-button_down.png', 95, 112);
     //this.load.spritesheet('button_left', 'assets/iamges/arrow-button_left.png', 112, 95);
     //this.load.spritesheet('button_right', 'assets/images/arrow-button_right.png', 112, 95);
-    this.load.spritesheet('button_up',    'assets/images/arrow-button_up.png');
-    this.load.spritesheet('button_down',  'assets/iamges/arrow-button_down.png');
-    this.load.spritesheet('button_left',  'assets/iamges/arrow-button_left.png');
-    this.load.spritesheet('button_right', 'assets/images/arrow-button_right.png');
+    this.load.spritesheet('button_down',  'assets/iamges/arrow_button_down.png');
+    this.load.spritesheet('button_up',    'assets/images/arrow_button_up.png');
+    this.load.spritesheet('button_left',  'assets/iamges/arrow_button_left.png');
+    this.load.spritesheet('button_right', 'assets/images/arrow_button_right.png');
       
     // objekti:
-    this.load.image('player', 'assets/images/melon.png'); // premakni + dinamično
-    this.load.image('bigBasket', 'assets/images/basket4.png');
-    this.load.image('wallH', 'assets/images/wallHorizontal.png');
-    this.load.image('shelf', 'assets/images/woddenShelf.png');
-    this.load.image('basketSmall','assets/images/basket1.png');
+    this.load.image('player',      'assets/images/melon.png'); // premakni + dinamično
+    this.load.image('mice',        'assets/images/mouse.png'); // premakni + dinamično
+    this.load.image('bigBasket',   'assets/images/basket4.png');
+    this.load.image('wallH',       'assets/images/wallHorizontal.png');
+    this.load.image('shelf',       'assets/images/woddenShelf.png');
+    this.load.image('basketSmall', 'assets/images/basket1.png');
+      
+    // sadje:
+    //this.sadje = ['ananas', 'banana', 'hruska', 'jabolko', 'jagoda'];
+    this.load.image(SortingGame.sadje[0],  'assets/images/ananas.png');  
+    this.load.image(SortingGame.sadje[1],  'assets/images/banana.png');
+    this.load.image(SortingGame.sadje[2],  'assets/images/hruska.png');
+    this.load.image(SortingGame.sadje[3], 'assets/images/jabolko.png');
+    this.load.image(SortingGame.sadje[4],  'assets/images/jagoda.png');
       
     // zvok:
-    this.load.audio('collect', 'assets/audio/collect.ogg');
+    this.load.audio('collect',   'assets/audio/collect.ogg');
     this.load.audio('explosion', 'assets/audio/explosion.ogg');
       
     // 
