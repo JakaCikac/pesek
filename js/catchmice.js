@@ -738,14 +738,14 @@ var generatedJSON = {
             "id": 16,
             "machine_name": "player",
             "friendly_name": "Player",
-            "value": "assets/images/player.png",
+            "value": "assets/images/muca.svg",
             "parent": null
         },
 	{
             "id": 17,
             "machine_name": "mouse",
             "friendly_name": "Mouse",
-            "value": "assets/images/mouse.png",
+            "value": "assets/images/miska.svg",
             "parent": null
         },
 	{
@@ -855,6 +855,7 @@ var mouseHolesLocations = [[[230, 380, -90], [170, 380, -90], [50, 550, 0], [590
                            [[50, 50, 90], [410, 130, 90], [740, 130, 90], [490, 390, 0], [360, 530, 90]],
                            [[310, 140, 0], [130, 350, 0], [390, 50, 179], [740, 350, 179], [740, 540, -90]]];
 
+
 // FoodLocations: prvi nivo = level, drugi nivo = item, tretji nivo (prvi in drugi element) = koordinate
 // MouseHolesLocations: prvi nivo = level, drugi nivo = prvi element x, drugi element y, tretji element rotacija
 // Kar rabimo je hardcoded pot od vsake izmed mouseHolesLokactions na vsako foodLocations (5 x 5 = 25)
@@ -875,79 +876,79 @@ CatchMice.Boot.prototype = {
     preload: function() {
         
            
-         // Retrieve current user
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function () {
-          if (this.readyState == 4) {
-              body = JSON.parse(this.responseText);
-              
-              username = body.username;
-              first_name = body.first_name;
-              last_name = body.last_name;
-              
-            alert('Status: '+this.status+'\nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'\nBody: '+this.responseText);
-          }
-        };
-        xhr.open("GET", "http://private-anon-019bb2358-elearningapi.apiary-mock.com/api/v1/users/me/");
-        xhr.send(null);
-        
-        
-        // Retrieve highscore table
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", "http://private-anon-298012bef-elearningapi.apiary-mock.com/api/v1/classroom/1/game/15/highscores/");
-        xhr.onreadystatechange = function () {
-            if (this.readyState == 4) {
-                body = JSON.parse(this.responseText);
-                
-                var max = 0;
-                for (x in body){
-                    if(body[x].username == username){
-                        score = body[x].score;
-                    }
-                    if(body[x].score > max){
-                        max = body[x].score;
-                    }
-                }
-                highScore = max;
-                
-                alert('Status: '+this.status+'\nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'\nBody: '+this.responseText);
-            }
-        };
-        xhr.send(null);
-        
-        
-        // Retrieve game properties
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", "http://private-anon-019bb2358-elearningapi.apiary-mock.com/api/v1/classroom/1/game/15/");
-        xhr.onreadystatechange = function () {
-          if (this.readyState == 4) {
-              body = JSON.parse(this.responseText);
-              
-              name = body.name;
-              difficulty = body.difficulty;
-              time_limit = body.time_limit;
-              levels = body.levels;
-              retries_available = body.retries_available;
-              lang_code = body.lang_code;
-              resources = body.resources;
-              
-            alert('Status: '+this.status+'\nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'\nBody: '+this.responseText);
-          }
-        };
-        xhr.send(null);
-        
-        
-        
-        // Report user score
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://private-anon-019bb2358-elearningapi.apiary-mock.com/api/v1/classroom/1/game/15/score/");
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.onreadystatechange = function () {
-          if (this.readyState == 4) {
-            alert('Status: '+this.status+'\nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'\nBody: '+this.responseText);
-          }
-        };
-        xhr.send("{\n    \"score\": 12\n}");
+//         // Retrieve current user
+//        var xhr = new XMLHttpRequest();
+//        xhr.onreadystatechange = function () {
+//          if (this.readyState == 4) {
+//              body = JSON.parse(this.responseText);
+//              
+//              username = body.username;
+//              first_name = body.first_name;
+//              last_name = body.last_name;
+//              
+//            alert('Status: '+this.status+'\nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'\nBody: '+this.responseText);
+//          }
+//        };
+//        xhr.open("GET", "http://private-anon-019bb2358-elearningapi.apiary-mock.com/api/v1/users/me/");
+//        xhr.send(null);
+//        
+//        
+//        // Retrieve highscore table
+//        var xhr = new XMLHttpRequest();
+//        xhr.open("GET", "http://private-anon-298012bef-elearningapi.apiary-mock.com/api/v1/classroom/1/game/15/highscores/");
+//        xhr.onreadystatechange = function () {
+//            if (this.readyState == 4) {
+//                body = JSON.parse(this.responseText);
+//                
+//                var max = 0;
+//                for (x in body){
+//                    if(body[x].username == username){
+//                        score = body[x].score;
+//                    }
+//                    if(body[x].score > max){
+//                        max = body[x].score;
+//                    }
+//                }
+//                highScore = max;
+//                
+//                alert('Status: '+this.status+'\nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'\nBody: '+this.responseText);
+//            }
+//        };
+//        xhr.send(null);
+//        
+//        
+//        // Retrieve game properties
+//        var xhr = new XMLHttpRequest();
+//        xhr.open("GET", "http://private-anon-019bb2358-elearningapi.apiary-mock.com/api/v1/classroom/1/game/15/");
+//        xhr.onreadystatechange = function () {
+//          if (this.readyState == 4) {
+//              body = JSON.parse(this.responseText);
+//              
+//              name = body.name;
+//              difficulty = body.difficulty;
+//              time_limit = body.time_limit;
+//              levels = body.levels;
+//              retries_available = body.retries_available;
+//              lang_code = body.lang_code;
+//              resources = body.resources;
+//              
+//            alert('Status: '+this.status+'\nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'\nBody: '+this.responseText);
+//          }
+//        };
+//        xhr.send(null);
+//        
+//        
+//        
+//        // Report user score
+//        var xhr = new XMLHttpRequest();
+//        xhr.open("POST", "http://private-anon-019bb2358-elearningapi.apiary-mock.com/api/v1/classroom/1/game/15/score/");
+//        xhr.setRequestHeader("Content-Type", "application/json");
+//        xhr.onreadystatechange = function () {
+//          if (this.readyState == 4) {
+//            alert('Status: '+this.status+'\nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'\nBody: '+this.responseText);
+//          }
+//        };
+//        xhr.send("{\n    \"score\": 12\n}");
         
        
         
@@ -1186,7 +1187,7 @@ CatchMice.Game.prototype = {
 
         //create player
         this.player = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'player'); 
-        this.player.scale.setTo(0.15);
+        this.player.scale.setTo(0.3);
         this.player.anchor.setTo(0.5, 0.5);
 
         this.carry = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, foodList[0]);
@@ -1352,7 +1353,7 @@ CatchMice.Game.prototype = {
             mouse = this.game.add.sprite(holeForMap[i][0], holeForMap[i][1], 'mouse');
             mouse_tween = this.add.tween(mouse); // init tween for mousey
 
-            mouse.scale.setTo(0.4);
+            mouse.scale.setTo(0.5);
             mouse.anchor.setTo(0.5, 0.5);
             mouse.name = foodList[i];
             mouse.angle = holeForMap[i][2];
