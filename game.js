@@ -883,7 +883,7 @@ $(document).ready(
         
 		        // Retrieve highscore table
 		        var xhr = new XMLHttpRequest();
-		        xhr.open("GET", "http://localhost:8888/pesek/api/v1/classroom/1/game/15/highscores/");
+		        xhr.open("GET", "http://localhost:8888/pesek/api/v1/classroom/5/game/15/highscores/");
 		        xhr.onreadystatechange = function () {
 		            if (this.readyState == 4) {
 		                body = JSON.parse(this.responseText);
@@ -907,7 +907,7 @@ $(document).ready(
         
 		        // Retrieve game properties
 		        var xhr = new XMLHttpRequest();
-		        xhr.open("GET", "http://localhost:8888/pesek/api/v1/classroom/1/game/15/");
+		        xhr.open("GET", "http://localhost:8888/pesek/api/v1/classroom/5/game/15/");
 		        xhr.onreadystatechange = function () {
 		          if (this.readyState == 4) {
 		              body = JSON.parse(this.responseText);
@@ -929,7 +929,7 @@ $(document).ready(
         
 		        // Report user score
 		        var xhr = new XMLHttpRequest();
-		        xhr.open("POST", "http://localhost:8888/pesek/api/v1/classroom/1/game/15/score/");
+		        xhr.open("POST", "http://localhost:8888/pesek/api/v1/classroom/5/game/15/score/");
 		        xhr.setRequestHeader("Content-Type", "application/json");
 		        xhr.onreadystatechange = function () {
 		          if (this.readyState == 4) {
