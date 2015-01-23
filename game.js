@@ -868,7 +868,7 @@ $(document).ready(
 		        var xhr = new XMLHttpRequest();
 		        xhr.onreadystatechange = function () {
 		          if (this.readyState == 4) {
-		              body = JSON.parse(this.responseText);
+                      body = JSON.parse(this.responseText);
               
 		              username = body.username;
 		              first_name = body.first_name;
@@ -927,7 +927,7 @@ $(document).ready(
         
         
         
-		        // Report user score
+		        /*// Report user score
 		        var xhr = new XMLHttpRequest();
 		        xhr.open("POST", "http://localhost:8888/pesek/api/v1/classroom/5/game/15/score/");
 		        xhr.setRequestHeader("Content-Type", "application/json");
@@ -936,7 +936,7 @@ $(document).ready(
 		            alert('Status: '+this.status+'\nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'\nBody: '+this.responseText);
 		          }
 		        };
-		        xhr.send("{\n    \"score\": 12\n}");
+		        xhr.send("{\n    \"score\": 12\n}");*/
         
        
         
