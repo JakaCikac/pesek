@@ -821,6 +821,11 @@ $(document).ready(
 		var retries_available;
 		var lang_code;
 		var resources;
+var level1Mouse0To;
+var level1Mouse1To;
+var level1Mouse2To;
+var level1Mouse3To;
+var level1Mouse4To;
 
 		var obj;
 		var buttonL1, buttonL2, buttonL3;
@@ -831,6 +836,7 @@ $(document).ready(
 		var foodDrop;
 		var foodPick;
 		var foodToDrop = [];
+        var foods = [];
 		var holeForMap = [];
 		var foodList = ['jabolko', 'hruska', 'banana', 'jagoda', 'ananas'];
 		var foodLocations = [[[690, 130, 'jabolko'], [510, 130, 'hruska'], [50, 120, 'banana'], [50, 220, 'jagoda'], [660, 225, 'ananas']],
@@ -1177,7 +1183,7 @@ $(document).ready(
 
 		        //create player
 		        this.player = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'player'); 
-		        this.player.scale.setTo(0.15);
+		        this.player.scale.setTo(0.3);
 		        this.player.anchor.setTo(0.5, 0.5);
 
 		        this.carry = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, foodList[0]);
@@ -1226,7 +1232,8 @@ $(document).ready(
 		        }
 
 		        if(this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR , 1)) {
-		            console.log(mouses[mis].x+" "+mouses[mis].y+" "+mouses[mis].angle);
+		            //console.log(mouses[mis].x+" "+mouses[mis].y+" "+mouses[mis].angle);
+                    this.animirajMiske();
 		        }
         
 		    },
@@ -1376,7 +1383,7 @@ $(document).ready(
         
         var level1Mouse0ToJagoda = this.game.add.tween(mouses[0]).to({x: 230, y: 307, angle: -180}, 1000, Phaser.Easing.Linear.None).to({x: 64, y: 311, angle: -270}, 1000, Phaser.Easing.Linear.None).to({x: 75, y: 474, angle: -360}, 1000, Phaser.Easing.Linear.None).to({x: 320, y: 465, angle: -450}, 1000, Phaser.Easing.Linear.None).to({x: 320, y: 220, angle: -540}, 1000, Phaser.Easing.Linear.None).to({x: 50, y: 217, angle: -540}, 1000, Phaser.Easing.Linear.None);
         
-        var level1Mouse0To = [level1Mouse0ToJabolko, level1Mouse0ToHruska, level1Mouse0ToBanana, level1Mouse0ToJagoda, level1Mouse0ToAnanas];
+        level1Mouse0To = [level1Mouse0ToJabolko, level1Mouse0ToHruska, level1Mouse0ToBanana, level1Mouse0ToJagoda, level1Mouse0ToAnanas];
         
         // LEVEL 1, MOUSE 0 REVERSE
         var level1Mouse0ToAnanasToHole = this.game.add.tween(mouses[0])
@@ -1448,6 +1455,7 @@ $(document).ready(
         
         var level1Mouse0ToHole = [level1Mouse0ToJabolkoToHole, level1Mouse0ToHruskaToHole, level1Mouse0ToBananaToHole, level1Mouse0ToJagodaToHole, level1Mouse0ToAnanasToHole];
         
+            
         
         // LEVEL 1, MOUSE 1
         var level1Mouse1ToAnanas = this.game.add.tween(mouses[1]).to({x: 170, y: 305, angle: -180}, 1000, Phaser.Easing.Linear.None).to({x: 60, y: 312, angle: -270}, 1000, Phaser.Easing.Linear.None).to({x: 49, y: 466, angle: -360}, 1000, Phaser.Easing.Linear.None).to({x: 312, y: 467, angle: -450}, 1000, Phaser.Easing.Linear.None).to({x: 322, y: 228, angle: -360}, 1000, Phaser.Easing.Linear.None).to({x: 420, y: 229, angle: -270}, 1000, Phaser.Easing.Linear.None).to({x: 415, y: 309, angle: -360}, 1000, Phaser.Easing.Linear.None).to({x: 519, y: 311, angle: -450}, 1000, Phaser.Easing.Linear.None).to({x: 519, y: 134, angle: -360}, 1000, Phaser.Easing.Linear.None).to({x: 608, y: 133, angle: -270}, 1000, Phaser.Easing.Linear.None).to({x: 615, y: 224, angle: -360}, 1000, Phaser.Easing.Linear.None).to({x: 666, y: 229, angle: -360}, 1000, Phaser.Easing.Linear.None);
@@ -1460,7 +1468,7 @@ $(document).ready(
         
         var level1Mouse1ToJagoda = this.game.add.tween(mouses[1]).to({x: 171, y: 305, angle: -180}, 1000, Phaser.Easing.Linear.None).to({x: 61, y: 305, angle: -270}, 1000, Phaser.Easing.Linear.None).to({x: 72, y: 466, angle: -360}, 1000, Phaser.Easing.Linear.None).to({x: 319, y: 475, angle: -450}, 1000, Phaser.Easing.Linear.None).to({x: 323, y: 223, angle: -540}, 1000, Phaser.Easing.Linear.None).to({x: 52, y: 218, angle: -540}, 1000, Phaser.Easing.Linear.None);
         
-        var level1Mouse1To = [level1Mouse1ToJabolko, level1Mouse1ToHruska, level1Mouse1ToBanana, level1Mouse1ToJagoda, level1Mouse1ToAnanas];
+        level1Mouse1To = [level1Mouse1ToJabolko, level1Mouse1ToHruska, level1Mouse1ToBanana, level1Mouse1ToJagoda, level1Mouse1ToAnanas];
         
         
         // LEVEL 1, MOUSE 1 REVERSE
@@ -1544,7 +1552,7 @@ $(document).ready(
         
         var level1Mouse2ToJagoda = this.game.add.tween(mouses[2]).to({x: 506, y: 547, angle: -90}, 1000, Phaser.Easing.Linear.None).to({x: 509, y: 472, angle: -180}, 1000, Phaser.Easing.Linear.None).to({x: 410, y: 465, angle: -90}, 1000, Phaser.Easing.Linear.None).to({x: 409, y: 387, angle: 0}, 1000, Phaser.Easing.Linear.None).to({x: 668, y: 392, angle: -90}, 1000, Phaser.Easing.Linear.None).to({x: 665, y: 303, angle: -180}, 1000, Phaser.Easing.Linear.None).to({x: 413, y: 306, angle: -90}, 1000, Phaser.Easing.Linear.None).to({x: 404, y: 220, angle: -180}, 1000, Phaser.Easing.Linear.None).to({x: 48, y: 220, angle: -180}, 1000, Phaser.Easing.Linear.None);
         
-        var level1Mouse2To = [level1Mouse2ToJabolko, level1Mouse2ToHruska, level1Mouse2ToBanana, level1Mouse2ToJagoda, level1Mouse2ToAnanas];
+        level1Mouse2To = [level1Mouse2ToJabolko, level1Mouse2ToHruska, level1Mouse2ToBanana, level1Mouse2ToJagoda, level1Mouse2ToAnanas];
             
         // LEVEL 1, MOUSE 2 REVERSE
         var level1Mouse2ToAnanasToHole = this.game.add.tween(mouses[2])
@@ -1627,7 +1635,7 @@ $(document).ready(
         
         var level1mouse3ToJagoda = this.game.add.tween(mouses[3]).to({x: 590, y: 549, angle: 0}, 1000, Phaser.Easing.Linear.None).to({x: 673, y: 552, angle: -90}, 1000, Phaser.Easing.Linear.None).to({x: 660, y: 312, angle: -180}, 1000, Phaser.Easing.Linear.None).to({x: 412, y: 308, angle: -90}, 1000, Phaser.Easing.Linear.None).to({x: 409, y: 213, angle: -180}, 1000, Phaser.Easing.Linear.None).to({x: 48, y: 224, angle: -180}, 1000, Phaser.Easing.Linear.None);
         
-        var level1mouse3To = [level1mouse3ToJabolko, level1mouse3ToHruska, level1mouse3ToBanana, level1mouse3ToJagoda, level1mouse3ToAnanas];
+        level1Mouse3To = [level1mouse3ToJabolko, level1mouse3ToHruska, level1mouse3ToBanana, level1mouse3ToJagoda, level1mouse3ToAnanas];
         
         
         // LEVEL 1, MOUSE 3 REVERSE
@@ -1693,7 +1701,7 @@ $(document).ready(
         
         var level1mouse4ToJagoda = this.game.add.tween(mouses[4]).to({x: 56, y: 50, angle: 90}, 1000, Phaser.Easing.Linear.None).to({x: 54, y: 122, angle: 0}, 1000, Phaser.Easing.Linear.None).to({x: 431, y: 132, angle: 90}, 1000, Phaser.Easing.Linear.None).to({x: 422, y: 224, angle: 180}, 1000, Phaser.Easing.Linear.None).to({x: 52, y: 215, angle: 180}, 1000, Phaser.Easing.Linear.None);
         
-        var level1mouse4To = [level1mouse4ToJabolko, level1mouse4ToHruska, level1mouse4ToBanana, level1mouse4ToJagoda, level1mouse4ToAnanas];
+        level1Mouse4To = [level1mouse4ToJabolko, level1mouse4ToHruska, level1mouse4ToBanana, level1mouse4ToJagoda, level1mouse4ToAnanas];
         
         
         // LEVEL 1, MOUSE 4 REVERSE
@@ -2477,6 +2485,16 @@ $(document).ready(
 		    },
     
     
+            animirajMiske: function(){
+            
+                level1Mouse0To[0].start();
+                level1Mouse1To[1].start();
+                level1Mouse2To[2].start();
+                level1Mouse3To[3].start();
+                level1Mouse4To[4].start();
+                
+            },
+            
 		    dropFood: function(player, collectable) {
 
 		        var food;
