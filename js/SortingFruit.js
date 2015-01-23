@@ -5,8 +5,9 @@
 //        add JQUERY code:
 //----------------------------------------------------------------
 //----------------------------------------------------------------
+/*
 var xhr = new XMLHttpRequest();
-xhr.open('GET', 'http://private-anon-c3e21fef6-elearningapi.apiary-mock.com/api/v1/classroom/1/game/15/');
+xhr.open('GET', 'api/v1/classroom/1/game/15/');
 xhr.onreadystatechange = function () {
   if (this.readyState == 4) {
     if (typeof cb !== "undefined") {
@@ -18,6 +19,7 @@ xhr.onreadystatechange = function () {
   }
 };
 xhr.send(null);
+*/
 
 //----------------------------------------------------------------
 //----------------------------------------------------------------
@@ -143,7 +145,7 @@ SortingGame.Preload.prototype = {
     this.load.spritesheet('button_play',   'assets/images/button_play.png', 193, 71);
     this.load.spritesheet('button_back',   'assets/images/button_back.png', 193, 71);
     this.load.spritesheet('button_levels', 'assets/images/button_levels.png', 193, 71);
-    this.load.spritesheet('button_easy',   'assets/iamges/button_easy.png', 193, 71);
+    this.load.spritesheet('button_easy',   'assets/images/button_easy.png', 193, 71);
     this.load.spritesheet('button_normal', 'assets/images/button_normal.png', 193, 71);
     this.load.spritesheet('button_hard',   'assets/images/button_hard.png', 193, 71);
     this.load.spritesheet('button_points', 'assets/images/button_points.png', 193, 71);
@@ -151,12 +153,12 @@ SortingGame.Preload.prototype = {
     this.load.spritesheet('button_save',   'assets/images/button_save.png', 193, 71);
       // naredi in dodaj:
     //this.load.spritesheet('button_up', 'assets/images/arrow-button_up.png', 95, 112);
-    //this.load.spritesheet('button_down', 'assets/iamges/arrow-button_down.png', 95, 112);
-    //this.load.spritesheet('button_left', 'assets/iamges/arrow-button_left.png', 112, 95);
+    //this.load.spritesheet('button_down', 'assets/images/arrow-button_down.png', 95, 112);
+    //this.load.spritesheet('button_left', 'assets/images/arrow-button_left.png', 112, 95);
     //this.load.spritesheet('button_right', 'assets/images/arrow-button_right.png', 112, 95);
-    this.load.image('button_down',  'assets/iamges/arrow_button_down.png');
+    this.load.image('button_down',  'assets/images/arrow_button_down.png');
     this.load.image('button_up',    'assets/images/arrow_button_up.png');
-    this.load.image('button_left',  'assets/iamges/arrow_button_left.png');
+    this.load.image('button_left',  'assets/images/arrow_button_left.png');
     this.load.image('button_right', 'assets/images/arrow_button_right.png');
       
     // objekti:
