@@ -864,6 +864,8 @@ var level3Mouse2ToHole;
 var level3Mouse3ToHole;
 var level3Mouse4ToHole;
 
+        var pari = [];
+        var animate = false;
 		var obj;
 		var buttonL1, buttonL2, buttonL3;
 		var layer;
@@ -1164,11 +1166,7 @@ var level3Mouse4ToHole;
 		CatchMice.Game.prototype = {
     
 		    create: function() {
-		        //player initial score of zero
-		        this.playerScore = 0;
-		        //show score
-		        this.showLabels();
-
+		        
 		        foodToDrop = foodLocations[CatchMice.level];
 		        holeForMap = mouseHolesLocations[CatchMice.level];
         
@@ -1218,6 +1216,10 @@ var level3Mouse4ToHole;
 
 		        //sounds
 		        this.collectSound = this.game.add.audio('collect');
+                //player initial score of zero
+		        this.playerScore = 0;
+		        //show score
+		        this.showLabels();
 		    },
 
 		    update: function() {
@@ -1235,18 +1237,24 @@ var level3Mouse4ToHole;
 		            this.state.start('MainMenu');
 		        }
 
-		        //overlapping between player and collectables (not collision)
-		        if(this.game.input.keyboard.isDown(Phaser.Keyboard.S, 1)) {
-		            this.game.physics.arcade.overlap(this.player, foodDrop, this.dropFood, null, this);
-		        }
-		        if(this.game.input.keyboard.isDown(Phaser.Keyboard.D, 1)) {
-		            this.game.physics.arcade.overlap(this.player, foodPick, this.pickFood, null, this); 
-		        }
+                if(animate){
+                    for (x in pari){
+                        //this.game.physics.arcade.collide(pari[x][0], pari[x][1]);
+                        this.game.physics.arcade.overlap(pari[x][0], pari[x][1], this.mousePickFood, null, this);
+                    }
+                }else{
+                    //overlapping between player and collectables (not collision)
+                    if(this.game.input.keyboard.isDown(Phaser.Keyboard.S, 1)) {
+                        this.game.physics.arcade.overlap(this.player, foodDrop, this.dropFood, null, this);
+                    }
+                    if(this.game.input.keyboard.isDown(Phaser.Keyboard.D, 1)) {
+                        this.game.physics.arcade.overlap(this.player, foodPick, this.pickFood, null, this); 
+                    }
 
-		        if(this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR , 1)) {
-		            this.animirajMiske();
-		        }
-        
+                    if(this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR , 1)) {
+                        this.animirajMiske();
+                    }
+                }
 		    },
     
 		    // ----------------------------
@@ -1321,6 +1329,8 @@ var level3Mouse4ToHole;
                     mouse.anchor.setTo(0.5, 0.5);
                     mouse.name = foodList[i];
                     mouse.angle = holeForMap[i][2];
+                    this.game.physics.arcade.enable(mouse);
+		            mouse.body.collideWorldBounds = true;
 
                     food = this.game.add.sprite(holeForMap[i][0], holeForMap[i][1], foodList[i]);
                     food.scale.setTo(0.25);
@@ -1394,6 +1404,7 @@ var level3Mouse4ToHole;
 		    },
             
 		    animirajMiske: function(){
+                pari=[];
                 var otrok = foodPick.children
                 for (x in mouses){
                     for (y in otrok){
@@ -1401,11 +1412,22 @@ var level3Mouse4ToHole;
                             for (z in foodToDrop){
                                 if(otrok[y].x == foodToDrop[z][0] && otrok[y].y == foodToDrop[z][1]){
                                     level1Mouse[x][z].start();
+                                    pari.push([mouses[x], otrok[y], x, z]);
+                                    animate = true;
                                 }
                             }
                         }
                     }
                 }
+            },
+            
+            mousePickFood: function(mouse, food) {
+                for(x in pari){
+                    if( pari[x][0] == mouse ){
+                        level1MouseHole[pari[x][2]][pari[x][3]].start();
+                    }
+                }
+                food.destroy();
             },
             
 		    generateMouseAnimations: function() {
