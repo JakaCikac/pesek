@@ -878,7 +878,7 @@ var level3Mouse4ToHole;
 		var foodToDrop = [];
         var foods = [];
 		var holeForMap = [];
-		var foodList = ['jabolko', 'hruska', 'banana', 'jagoda', 'ananas'];
+		var foodList = [];
 		var foodListAll = ['jabolko', 'hruska', 'banana', 'jagoda', 'ananas'];
 		var foodLocations = [[[690, 130, 'jabolko'], [510, 130, 'hruska'], [50, 120, 'banana'], [50, 220, 'jagoda'], [660, 225, 'ananas']],
 		                     [[660, 460, 'jabolko'], [240, 320, 'hruska'], [160, 100, 'banana'], [100, 460, 'jagoda'], [560, 60, 'ananas']],
@@ -1255,6 +1255,10 @@ var level3Mouse4ToHole;
                         //this.game.physics.arcade.collide(pari[x][0], pari[x][1]);
                         this.game.physics.arcade.overlap(pari[x][0], pari[x][1], this.mousePickFood, null, this);
                     }
+                    
+                    if(this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR , 1)) {
+                        this.game.physics.arcade.overlap(this.player, mouses, this.playerCatchMouse, null, this);
+                    }
                 }else{
                     //overlapping between player and collectables (not collision)
                     if(this.game.input.keyboard.isDown(Phaser.Keyboard.S, 1)) {
@@ -1303,6 +1307,12 @@ var level3Mouse4ToHole;
 		        }
 		    },
     
+            playerCatchMouse: function(player, collectable){
+                this.playerScore= this.playerScore+10;
+		        this.scoreLabel.text = this.playerScore;
+                collectable.destroy();
+            },
+            
 		    generateFoods: function() {
 
 		        foodPick = this.game.add.group();
@@ -1369,8 +1379,13 @@ var level3Mouse4ToHole;
 		        //this.collectSound.play();
 
 		        //update score
-		        this.playerScore++;
-		        this.scoreLabel.text = this.playerScore;
+                if(this.carry.key == collectable.name){
+		          this.playerScore+=5;
+		          this.scoreLabel.text = this.playerScore;
+                }else{
+                    this.playerScore-=5;
+		          this.scoreLabel.text = this.playerScore;
+                }
 
 		        foodList.splice(foodList.indexOf(this.carry.key), 1);
         
@@ -1391,8 +1406,12 @@ var level3Mouse4ToHole;
                 food = foodDrop.create(collectable.x, collectable.y, 'drop_place');
 		        food.scale.setTo(0.3);
 		        food.anchor.setTo(0.5, 0.5);
-                food.name = collectable.key;
-		        //physics properties
+                for (x in foodToDrop){
+                    if(foodToDrop[x][0]==collectable.x && foodToDrop[x][1]==collectable.y){
+                        food.name = foodToDrop[x][2];
+                    }
+                }
+                //physics properties
 		        food.body.immovable = true;
 		        food.body.collideWorldBounds = true;
                 
@@ -1887,12 +1906,25 @@ var level3Mouse4ToHole;
 
 		    managePause: function() {
 		        this.game.paused = true;
-		        var pausedText = this.add.text(100, 250, "Game paused.\nTap anywhere to continue.", this._fontStyle);
-		        this.input.onDown.add(function(){
+		        var pausedText = this.add.text(this.game.width/2, this.game.height/2, "Game paused.\nTap anywhere to continue.", this._fontStyle);
+                
+		        var buttonPlay = this.game.add.button(this.game.width-193, 10, 'button_play', function(){
+		                                        pausedText.destroy();
+                    this.buttonPlay.destroy();
+                    
+		                                        this.game.paused = false;
+		                                        }, this, 1, 2, 0);
+
+		        //var buttonMap = this.game.add.button(this.game.width-193, 81, 'button_map', this.buttonMapEvent, this, 1, 2, 0);
+		        /*this.input.onDown.add(function(){
 		                                        pausedText.destroy();
 		                                        this.game.paused = false;
 		                                        }, this);
-		    },
+                this.input.keyboard.onDownCallback = function(){
+		                                        pausedText.destroy();
+		                                        this.game.paused = false;
+		                                        };
+*/		    },
 
 		    showLabels: function() {
 		        //score text
