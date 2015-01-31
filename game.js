@@ -616,7 +616,7 @@ $(document).ready(
     "id": 96,
     "name": "50",
     "difficulty": "ESY",
-    "time_limit": 999,
+    "time_limit": 90,
     "levels": 3,
     "retries_available": 3,
     "lang_code": "sl",
@@ -1250,7 +1250,7 @@ var razporejenoSadje = false;
 		        //show score
 		        this.showLabels();
                 
-                navodila = "Razporedi vso sadje na mesta z vprašajem.";
+                navodila = "Razporedi vse stvari na mesta z vprašajem.";
 		        var style = { font: "20px Arial", fill: "#fff", align: "center" };
 		        navodilaLabel = this.game.add.text(this.game.width/2, 10, navodila, style);
                 navodilaLabel.anchor.set(0.5);
@@ -1264,8 +1264,9 @@ var razporejenoSadje = false;
 		        this.scoreLabel = this.game.add.text( 20, 20, text, style);
 		        this.scoreLabel.fixedToCamera = true;
                 
-                this.labelTime  = this.game.add.text( 20, 45, 'Time: '+time_limit+'s', style);
-                //seconds = 0.0;
+                
+                seconds = time_limit;
+                this.labelTime  = this.game.add.text( 20, 45, 'Time: '+seconds+'s', style);
                 timer = this.game.time.create(false);
 				timer.loop(100, this.updateTimeEvents, this);
 				
@@ -1549,10 +1550,10 @@ var razporejenoSadje = false;
 				//if(this.game_state == 1){
 					//seconds+=0.1;
 					//seconds.toFixed(2);
-                time_limit-=0.1;
-					this.labelTime.text = "Time: " + time_limit.toFixed(1) + "s";
+                seconds-=0.1;
+					this.labelTime.text = "Time: " + seconds.toFixed(1) + "s";
 				//}
-                if(time_limit<0.1){
+                if(seconds<0.2){
                     this.gameOverCas();
                 }
 			},
