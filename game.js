@@ -895,9 +895,9 @@ var gameOverStatus = false;
 		                     [[660, 460, 'jabolko'], [240, 320, 'hruska'], [160, 100, 'banana'], [100, 460, 'jagoda'], [560, 60, 'ananas']],
 		                     [[360, 545, 'jabolko'], [645, 265, 'hruska'], [400, 390, 'banana'], [120, 180, 'jagoda'], [45, 45, 'ananas']]];
 		
-		var mouseHolesLocations = [[[230, 380, -90], [170, 380, -90], [50, 550, 0], [590, 470, 90], [750, 50, 179]],
-		                           [[50, 50, 90], [410, 130, 90], [740, 130, 90], [490, 390, 0], [360, 530, 90]],
-		                           [[310, 140, 0], [130, 350, 0], [390, 50, 179], [740, 350, 179], [740, 540, -90]]];
+		var mouseHolesLocations = [[[230, 380, -90, 'jabolko'], [170, 380, -90, 'hruska'], [50, 550, 0, 'banana'], [590, 470, 90, 'jagoda'], [750, 50, 179, 'ananas']],
+		                           [[50, 50, 90, 'jabolko'], [410, 130, 90, 'hruska'], [740, 130, 90, 'banana'], [490, 390, 0, 'jagoda'], [360, 530, 90, 'ananas']],
+		                           [[310, 140, 0, 'jabolko'], [130, 350, 0, 'hruska'], [390, 50, 179, 'banana'], [740, 350, 179, 'jagoda'], [740, 540, -90, 'ananas']]];
 
 		// FoodLocations: prvi nivo = level, drugi nivo = item, tretji nivo (prvi in drugi element) = koordinate
 		// MouseHolesLocations: prvi nivo = level, drugi nivo = prvi element x, drugi element y, tretji element rotacija
@@ -1190,6 +1190,7 @@ var gameOverStatus = false;
                 holeForMap = [];
                 foodList = [];
                 gameOverStatus = false;
+                pobralaFood = false;
                 
                 foodList = [].concat(foodListAll);
 		        foodToDrop = foodLocations[CatchMice.level];
@@ -1344,8 +1345,11 @@ var gameOverStatus = false;
             miskeNaCilju: function(){
                 for (x in pari){
                     for (y in holeForMap){
-                        if(pari[x][0].x == holeForMap[y][0] && pari[x][0].y == holeForMap[y][1])
-                            this.gameOverBad();
+                        if(pari[x][0].name == holeForMap[y][3]){
+                            if(pari[x][0].x == holeForMap[y][0] && pari[x][0].y == holeForMap[y][1]){
+                                this.gameOverBad();
+                            }
+                        }
                     }
                 }
                 
@@ -1552,7 +1556,7 @@ var gameOverStatus = false;
                 gameOverStatus = true;
                 timer.stop();
                 
-                var text = "Niste ujeli vseh miši!";
+                var text = "Ni ti uspelo, poskusi ponovno!";
 		        var style = { font: "30px Arial", fill: "#fff", align: "center" };
 		        var endLabel = this.game.add.text(this.game.width/2, this.game.height/2, text, style);
                 endLabel.anchor.set(0.5);
