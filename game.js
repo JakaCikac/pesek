@@ -879,6 +879,8 @@ var level3Mouse4ToHole;
 var timer;
 var pobralaFood = false;
 var gameOverStatus = false;
+var navodilaLabel;
+var razporejenoSadje = false;
 
 		var pari = [];
         var animate = false;
@@ -1191,6 +1193,7 @@ var gameOverStatus = false;
                 foodList = [];
                 gameOverStatus = false;
                 pobralaFood = false;
+                razporejenoSadje = false;
                 
                 foodList = [].concat(foodListAll);
 		        foodToDrop = foodLocations[CatchMice.level];
@@ -1247,6 +1250,11 @@ var gameOverStatus = false;
 		        //show score
 		        this.showLabels();
                 
+                navodila = "Razporedi vso sadje na mesta z vprašajem.";
+		        var style = { font: "20px Arial", fill: "#fff", align: "center" };
+		        navodilaLabel = this.game.add.text(this.game.width/2, 10, navodila, style);
+                navodilaLabel.anchor.set(0.5);
+                
 		    },
 
             showLabels: function() {
@@ -1256,11 +1264,11 @@ var gameOverStatus = false;
 		        this.scoreLabel = this.game.add.text( 20, 20, text, style);
 		        this.scoreLabel.fixedToCamera = true;
                 
-                this.labelTime  = this.game.add.text( 20, 45, 'Time: 0s', style);
-                seconds = 0.0;
+                this.labelTime  = this.game.add.text( 20, 45, 'Time: '+time_limit+'s', style);
+                //seconds = 0.0;
                 timer = this.game.time.create(false);
 				timer.loop(100, this.updateTimeEvents, this);
-				timer.start();
+				
 		    },
             
 		    update: function() {
@@ -1302,7 +1310,8 @@ var gameOverStatus = false;
                         this.game.physics.arcade.overlap(this.player, foodPick, this.pickFood, null, this); 
                     }
 
-                    if(this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR , 1)) {
+                    if(razporejenoSadje && this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR , 1)) {
+                        navodilaLabel.text = "Ulovi vse miši, z premikanjem mačke in pritiskom na \"SPACE\"!";
                         this.animirajMiske();
                     }
                 }
@@ -1317,16 +1326,25 @@ var gameOverStatus = false;
 		        if (this.cursor.left.isDown) {
 		            // Move the player to the left
 		            this.player.angle -= 4;
+                    if(timer.running == false){
+                        timer.start();
+                    }
 		        // If the right arrow key is pressed
 		        } else if (this.cursor.right.isDown) {
 		            // Move the player to the right
 		            this.player.angle += 4;
+                    if(timer.running == false){
+                        timer.start();
+                    }
 		        }
 
 		        // If the up arrow key
 		        if (this.cursor.up.isDown) { 
 		            // Move player up
 		            currentSpeed = 140;
+                    if(timer.running == false){
+                        timer.start();
+                    }
 		        } else if (currentSpeed > 4) {
 		            currentSpeed -= 4;
 		        } else {
@@ -1359,8 +1377,15 @@ var gameOverStatus = false;
                 this.playerScore= this.playerScore+10;
 		        this.scoreLabel.text = this.playerScore;
                 
+                for(x in pari){
+                    if( pari[x][0] == collectable ){
+                        levelMouseHole[CatchMice.level][pari[x][2]][pari[x][3]].pause();
+                    }
+                }
+                
                 var index = mouses.indexOf(collectable);
                 mouses.splice(index, 1);
+                collectable.kill();
                 collectable.destroy();
                 if(mouses.length == 0){
                     this.gameOverGood();
@@ -1449,7 +1474,10 @@ var gameOverStatus = false;
 		            this.carry = this.game.add.sprite(this.player.x, this.player.y, foodList[0]);
 		            this.carry.scale.setTo(0.25);
 		            this.carry.anchor.setTo(0.5, 0.5);
-		        }
+		        }else{
+                    navodilaLabel.text = "Za zagon miši pritisni \"SPACE\".";
+                    razporejenoSadje = true;
+                }
 		        collectable.destroy();
 
 		    },
@@ -1519,11 +1547,32 @@ var gameOverStatus = false;
             
             updateTimeEvents: function() {
 				//if(this.game_state == 1){
-					seconds+=0.1;
+					//seconds+=0.1;
 					//seconds.toFixed(2);
-					this.labelTime.text = "Time: " + seconds.toFixed(1) + "s";
+                time_limit-=0.1;
+					this.labelTime.text = "Time: " + time_limit.toFixed(1) + "s";
 				//}
+                if(time_limit<0.1){
+                    this.gameOverCas();
+                }
 			},
+            
+            gameOverCas: function() {    
+		        for (x in pari){
+                    levelMouseHole[CatchMice.level][pari[x][2]][pari[x][3]].pause();
+                }
+                gameOverStatus = true;
+                timer.stop();
+                
+                var text = "Zmanjkalo ti je časa, poskusi ponovno!";
+		        var style = { font: "30px Arial", fill: "#fff", align: "center" };
+		        var endLabel = this.game.add.text(this.game.width/2, this.game.height/2, text, style);
+                endLabel.anchor.set(0.5);
+                
+                var buttonPlay = this.game.add.button(this.game.width/2, (this.game.height/2)+70, 'button_play', this.buttonPlayAgainEvent, this, 1, 2, 0);
+		        buttonPlay.anchor.set(0.5);
+                foodList = foodListAll;
+		    },
             
             gameOverGood: function() {    
 		        //pass it the score as a parameter 
@@ -1561,7 +1610,7 @@ var gameOverStatus = false;
 		        var endLabel = this.game.add.text(this.game.width/2, this.game.height/2, text, style);
                 endLabel.anchor.set(0.5);
                 
-                var buttonPlay = this.game.add.button(this.game.width/2, (this.game.height/2)+50, 'button_play', this.buttonPlayAgainEvent, this, 1, 2, 0);
+                var buttonPlay = this.game.add.button(this.game.width/2, (this.game.height/2)+70, 'button_play', this.buttonPlayAgainEvent, this, 1, 2, 0);
 		        buttonPlay.anchor.set(0.5);
                 foodList = foodListAll;
 		    },
