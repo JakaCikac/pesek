@@ -774,6 +774,13 @@ $(document).ready(
             "friendly_name": "Drop_place",
             "value": "assets/images/drop_place.png",
             "parent": null
+    },
+        {
+            "id": 23,
+            "machine_name": "button_save",
+            "friendly_name": "button_save",
+            "value": "assets/images/button_save.png",
+            "parent": null
     }
     ]
 };
@@ -868,6 +875,10 @@ var level3Mouse4ToHole;
 		var buttonL1, buttonL2, buttonL3;
 		var layer;
 		var currentSpeed = 0;
+
+var timer;
+var pobralaFood = false;
+var gameOverStatus = false;
 
 		var pari = [];
         var animate = false;
@@ -1026,7 +1037,7 @@ var level3Mouse4ToHole;
 		        this.load.setPreloadSprite(this.preloadBar);
 
 		        var imageList = ['wood', 'wall', 'background_main', 'background_map', 'player', 'mouse', 'mouseHole', 'jabolko', 'hruska', 'banana', 'jagoda', 'ananas', 'drop_place'];
-		        var spritesheetList = ['button_play', 'button_back', 'button_map', 'button_level1', 'button_level2', 'button_level3'];
+		        var spritesheetList = ['button_play', 'button_back', 'button_map', 'button_level1', 'button_level2', 'button_level3', 'button_save'];
 		        for (x in resources){
 		            var b = true;
             
@@ -1178,8 +1189,9 @@ var level3Mouse4ToHole;
                 foods = [];
                 holeForMap = [];
                 foodList = [];
+                gameOverStatus = false;
                 
-                foodList = foodListAll;
+                foodList = [].concat(foodListAll);
 		        foodToDrop = foodLocations[CatchMice.level];
 		        holeForMap = mouseHolesLocations[CatchMice.level];
         
@@ -1233,10 +1245,26 @@ var level3Mouse4ToHole;
 		        this.playerScore = 0;
 		        //show score
 		        this.showLabels();
+                
 		    },
 
+            showLabels: function() {
+		        //score text
+		        var text = "Score: 0";
+		        var style = { font: "20px Arial", fill: "#fff", align: "center" };
+		        this.scoreLabel = this.game.add.text( 20, 20, text, style);
+		        this.scoreLabel.fixedToCamera = true;
+                
+                this.labelTime  = this.game.add.text( 20, 45, 'Time: 0s', style);
+                seconds = 0.0;
+                timer = this.game.time.create(false);
+				timer.loop(100, this.updateTimeEvents, this);
+				timer.start();
+		    },
+            
 		    update: function() {
         
+                if (gameOverStatus == false){
 		        this.movePlayer();
         
 		        this.game.physics.arcade.collide(this.player, this.layer);
@@ -1259,6 +1287,11 @@ var level3Mouse4ToHole;
                     if(this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR , 1)) {
                         this.game.physics.arcade.overlap(this.player, mouses, this.playerCatchMouse, null, this);
                     }
+                    
+                    if(pobralaFood){
+                        this.miskeNaCilju();
+                    }
+                    
                 }else{
                     //overlapping between player and collectables (not collision)
                     if(this.game.input.keyboard.isDown(Phaser.Keyboard.S, 1)) {
@@ -1271,6 +1304,7 @@ var level3Mouse4ToHole;
                     if(this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR , 1)) {
                         this.animirajMiske();
                     }
+                }
                 }
 		    },
     
@@ -1306,11 +1340,27 @@ var level3Mouse4ToHole;
 		            this.carry.rotation = this.player.rotation;
 		        }
 		    },
+            
+            miskeNaCilju: function(){
+                for (x in pari){
+                    for (y in holeForMap){
+                        if(pari[x][0].x == holeForMap[y][0] && pari[x][0].y == holeForMap[y][1])
+                            this.gameOverBad();
+                    }
+                }
+                
+            },
     
             playerCatchMouse: function(player, collectable){
                 this.playerScore= this.playerScore+10;
 		        this.scoreLabel.text = this.playerScore;
+                
+                var index = mouses.indexOf(collectable);
+                mouses.splice(index, 1);
                 collectable.destroy();
+                if(mouses.length == 0){
+                    this.gameOverGood();
+                }
             },
             
 		    generateFoods: function() {
@@ -1381,10 +1431,10 @@ var level3Mouse4ToHole;
 		        //update score
                 if(this.carry.key == collectable.name){
 		          this.playerScore+=5;
-		          this.scoreLabel.text = this.playerScore;
+		          this.scoreLabel.text = "Score: "+this.playerScore;
                 }else{
                     this.playerScore-=5;
-		          this.scoreLabel.text = this.playerScore;
+		          this.scoreLabel.text = "Score: "+this.playerScore;
                 }
 
 		        foodList.splice(foodList.indexOf(this.carry.key), 1);
@@ -1420,7 +1470,7 @@ var level3Mouse4ToHole;
 
 		        //update score
 		        this.playerScore--;
-		        this.scoreLabel.text = this.playerScore;
+		        this.scoreLabel.text = "Score: "+this.playerScore;
 
 		        foodList.push(collectable.key);
         
@@ -1460,7 +1510,107 @@ var level3Mouse4ToHole;
                     }
                 }
                 food.destroy();
+                pobralaFood = true;
             },
+            
+            updateTimeEvents: function() {
+				//if(this.game_state == 1){
+					seconds+=0.1;
+					//seconds.toFixed(2);
+					this.labelTime.text = "Time: " + seconds.toFixed(1) + "s";
+				//}
+			},
+            
+            gameOverGood: function() {    
+		        //pass it the score as a parameter 
+		        //this.game.state.start('MainMenu', true, false, this.playerScore);
+                
+                 for (x in pari){
+                    levelMouseHole[CatchMice.level][pari[x][2]][pari[x][3]].pause();
+                }
+                gameOverStatus = true;
+                timer.stop();
+                
+                var text = "Dosežene točke: "+this.playerScore;
+		        var style = { font: "30px Arial", fill: "#fff", align: "center" };
+		        var endLabel = this.game.add.text(this.game.width/2, this.game.height/2, text, style);
+                endLabel.anchor.set(0.5);
+                
+                var buttonPlay = this.game.add.button(this.game.width/2, (this.game.height/2)+70, 'button_play', this.buttonPlayNextEvent, this, 1, 2, 0);
+		        buttonPlay.anchor.set(0.5);
+                
+                var buttonSave = this.game.add.button(this.game.width/2, (this.game.height/2)+140, 'button_save', this.buttonSaveEvent, this, 1, 2, 0);
+		        buttonSave.anchor.set(0.5);
+                
+                foodList = foodListAll;
+		    },
+            
+            gameOverBad: function() {    
+		        for (x in pari){
+                    levelMouseHole[CatchMice.level][pari[x][2]][pari[x][3]].pause();
+                }
+                gameOverStatus = true;
+                timer.stop();
+                
+                var text = "Niste ujeli vseh miši!";
+		        var style = { font: "30px Arial", fill: "#fff", align: "center" };
+		        var endLabel = this.game.add.text(this.game.width/2, this.game.height/2, text, style);
+                endLabel.anchor.set(0.5);
+                
+                var buttonPlay = this.game.add.button(this.game.width/2, (this.game.height/2)+50, 'button_play', this.buttonPlayAgainEvent, this, 1, 2, 0);
+		        buttonPlay.anchor.set(0.5);
+                foodList = foodListAll;
+		    },
+            
+            buttonPlayNextEvent: function (btn){
+                CatchMice.level = (CatchMice.level+1) % levels;
+		        this.game.state.start('Game');
+		    },
+            
+            buttonSaveEvent: function (btn){
+                var ql = false;
+                var xhr = new XMLHttpRequest();
+		        xhr.open("POST", "http://localhost:8888/pesek/api/v1/classroom/5/game/15/score/");
+		        xhr.setRequestHeader("Content-Type", "application/json");
+		        xhr.onreadystatechange = function () {
+		          if (this.readyState == 4) {
+		            ql = true;
+		          }
+		        };
+		        xhr.send("{\n    \"score\": "+this.playerScore+"\n}");
+                if (ql){
+                var text = "Rezultat je bil shranjen.";
+		        var style = { font: "30px Arial", fill: "#fff", align: "center" };
+		        var endLabel = this.game.add.text(this.game.width/2, (this.game.height/2)+210, text, style);
+                endLabel.anchor.set(0.5);
+                }
+		    },
+            
+            buttonPlayAgainEvent: function (btn){
+		        this.game.state.start('Game');
+		    },
+
+		    buttonCallback: function (btn){
+		        btn.on = !btn.on;
+		        btn.setFrames(1, (btn.on)?0:2, 0);
+		        btn.frame = (btn.on)?0:2;
+		    },
+            
+            managePause: function() {
+		        this.game.paused = true;
+                var style = { font: "50px Arial", fill: "#fff", align: "center" };
+		        var pausedText = this.add.text(this.game.width/2, this.game.height/2, "Game paused.\nTap anywhere to continue.", style);
+                pausedText.anchor.set(0.5);
+                
+		        this.input.onDown.add(function(){
+		                                        pausedText.destroy();
+		                                        this.game.paused = false;
+		                                        }, this);
+                this.input.keyboard.onDownCallback = function(){
+		                                        pausedText.destroy();
+		                                        this.game.paused = false;
+		                                        };
+		    },
             
             generateMouseAnimations: function() {
 
@@ -1898,41 +2048,7 @@ var level3Mouse4ToHole;
             levelMouse = [level1Mouse, level2Mouse, level3Mouse];
             levelMouseHole = [level1MouseHole, level2MouseHole, level3MouseHole];
             },
-    
-            gameOver: function() {    
-		        //pass it the score as a parameter 
-		        this.game.state.start('MainMenu', true, false, this.playerScore);
-		    },
-
-		    managePause: function() {
-		        this.game.paused = true;
-		        var pausedText = this.add.text(this.game.width/2, this.game.height/2, "Game paused.\nTap anywhere to continue.", this._fontStyle);
-                
-		        var buttonPlay = this.game.add.button(this.game.width-193, 10, 'button_play', function(){
-		                                        pausedText.destroy();
-                    this.buttonPlay.destroy();
-                    
-		                                        this.game.paused = false;
-		                                        }, this, 1, 2, 0);
-
-		        //var buttonMap = this.game.add.button(this.game.width-193, 81, 'button_map', this.buttonMapEvent, this, 1, 2, 0);
-		        /*this.input.onDown.add(function(){
-		                                        pausedText.destroy();
-		                                        this.game.paused = false;
-		                                        }, this);
-                this.input.keyboard.onDownCallback = function(){
-		                                        pausedText.destroy();
-		                                        this.game.paused = false;
-		                                        };
-*/		    },
-
-		    showLabels: function() {
-		        //score text
-		        var text = "0";
-		        var style = { font: "20px Arial", fill: "#fff", align: "center" };
-		        this.scoreLabel = this.game.add.text(this.game.width-50, this.game.height - 50, text, style);
-		        this.scoreLabel.fixedToCamera = true;
-		    }
+    		    
 		};
 
 		CatchMice.game.state.add('Boot', CatchMice.Boot);
